@@ -8,3 +8,10 @@ $(() => {
     }
   });;
 });
+
+$(document).ready(function(){
+
+  // collapsible functionality for index
+  $('.collapsible').collapsible();
+
+});
