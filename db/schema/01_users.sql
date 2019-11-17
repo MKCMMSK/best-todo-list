@@ -68,7 +68,8 @@ CREATE TABLE books (
   id SERIAL PRIMARY KEY NOT NULL,
   todo_item_id INTEGER REFERENCES todo_items(id) ON DELETE CASCADE,
   author VARCHAR(50),
-  length INTEGER,
+  publication_date INTEGER,
+  page_length SMALLINT,
   genre VARCHAR(50)
 );
 
