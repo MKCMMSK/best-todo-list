@@ -50,7 +50,7 @@ CREATE TABLE to_do_user_specifics (
   note text,
   archived boolean NOT NULL DEFAULT false,
   position INTEGER NOT NULL,
-  last_visited date,
+  time_archived date,
   rate INTEGER,
   rating_comment text
 );

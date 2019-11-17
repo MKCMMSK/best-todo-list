@@ -14,7 +14,8 @@ VALUES ('book'),
 INSERT INTO todo_items (cat_id,title, description, url, img)
 VALUES (4,'Blue water cafe', 'Seafood baby', 'BlueWater.com', 'BlueWater.com/pic'),
 (1,'War and peace', 'fighting and no fighting', 'W&P.com', 'W&P.com/pic'),
-(2,'Game of Thrones', 'fighting and drama', 'GoT.com', 'GoT.com/pic');
+(2,'Game of Thrones', 'fighting and drama', 'GoT.com', 'GoT.com/pic'),
+(3, 'yeezes', 'freshes shoes in the whole damn game', 'kanye.com', 'kanye,con/yeezy');
 
 INSERT INTO preferences (user_id,cat_id, pref_order, position)
 VALUES (1, 1, 4,4), /* colin preferences */
@@ -30,7 +31,21 @@ VALUES (1, 1, 4,4), /* colin preferences */
 (3, 3, 1,1),
 (3, 4, 4,4)
 ;
---  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
---   cat_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
---   pref_order INTEGER NOT NULL,
---   position INTEGER
+
+
+INSERT INTO to_do_user_specifics (user_id, item_id, note, archived, position, time_archived, rate, rating_comment)
+VALUES (1, 3, 'cant wait to watch the terrible ending', 'false', '1', null, null, null),
+(2, 1, 'amazing seafood I hear', 'false', '1', null, null, null),
+(3, 2, 'amazing book I hear', 'true', '1', '2010-01-27', 5, 'GREAT BOOK');
+
+
+
+
+-- user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+--   item_id INTEGER REFERENCES todo_items(id) ON DELETE CASCADE,
+--   note text,
+--   archived boolean NOT NULL DEFAULT false,
+--   position INTEGER NOT NULL,
+--   last_visited date,
+--   rate INTEGER,
+--   rating_comment text
