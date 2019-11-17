@@ -48,7 +48,6 @@ const searchBooks = function(query) {
       length: res.items[0].volumeInfo.pageCount,
       genre: res.items[0].volumeInfo.categories[0]
     };
-    console.log(book);
   })
 };
 
