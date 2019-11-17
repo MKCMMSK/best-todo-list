@@ -48,12 +48,12 @@ CREATE TABLE to_do_user_specifics (
   id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   todo_item_id INTEGER REFERENCES todo_items(id) ON DELETE CASCADE,
-  note text,
-  archived boolean NOT NULL DEFAULT false,
+  note TEXT,
+  archived BOOLEAN NOT NULL DEFAULT false,
   position INTEGER NOT NULL,
-  time_archived date,
+  time_archived DATE,
   rate INTEGER,
-  rating_comment text
+  rating_comment TEXT
 );
 
 CREATE TABLE products (
@@ -61,7 +61,7 @@ CREATE TABLE products (
   todo_item_id INTEGER REFERENCES todo_items(id) ON DELETE CASCADE,
   brand VARCHAR(50),
   vendor VARCHAR(50),
-  cost money NOT NULL
+  cost MONEY NOT NULL
 );
 
 CREATE TABLE books (
@@ -77,8 +77,9 @@ CREATE TABLE movies_tv (
   id SERIAL PRIMARY KEY NOT NULL,
   todo_item_id INTEGER REFERENCES todo_items(id) ON DELETE CASCADE,
   director VARCHAR(50),
-  length time,
-  actors text,
+  year SMALLINT,
+  runtime SMALLINT,
+  actors VARCHAR(255),
   genre VARCHAR(50)
 );
 
