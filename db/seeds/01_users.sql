@@ -45,12 +45,7 @@ VALUES (4,'Blue water cafe', 'Seafood baby', 'BlueWater.com', 'BlueWater.com/pic
 (5, 'pen', 'writes on paper', 'stable.com', 'stable.com/pen'),
 (3, 'yeezes', 'freshes shoes in the whole damn game', 'kanye.com', 'kanye,con/yeezy');
 
-<<<<<<< HEAD
 INSERT INTO preferences (user_id, category_id, pref_order, position)
-=======
-
-INSERT INTO preferences (user_id,cat_id, pref_order, position)
->>>>>>> origin/MShaoK/populateDB
 VALUES (1, 1, 4,4), /* colin preferences */
 (1, 2, 3,3),
 (1, 3, 2,2),
@@ -75,7 +70,7 @@ INSERT INTO products (todo_item_id, brand, vendor, cost)
 VALUES (4, 'yeezy', 'adidas', 200.50);
 
 INSERT INTO books (todo_item_id, author, publication_date, page_length, genre)
-VALUES (2, 'Leo Tolstoy, 1869, 1225, 'historic drama');
+VALUES (2, 'Leo Tolstoy', 1869, 1225, 'historic drama');
 
 INSERT INTO movies_tv (todo_item_id, director, actors, genre)
 VALUES (3, 'P', 'Kid Herrington????', 'fantasy drama');
