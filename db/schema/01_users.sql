@@ -29,7 +29,7 @@ CREATE TABLE categories (
 CREATE TABLE todo_items (
   id SERIAL PRIMARY KEY NOT NULL,
   category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
-  title VARCHAR(20) NOT NULL,
+  title VARCHAR(50) NOT NULL,
   description TEXT,
   url TEXT,
   img TEXT
