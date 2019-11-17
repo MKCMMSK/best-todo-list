@@ -45,6 +45,7 @@ CREATE TABLE preferences (
 
 
 CREATE TABLE to_do_user_specifics (
+  id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   item_id INTEGER REFERENCES todo_items(id) ON DELETE CASCADE,
   note text,
@@ -56,6 +57,7 @@ CREATE TABLE to_do_user_specifics (
 );
 
 CREATE TABLE products (
+  id SERIAL PRIMARY KEY NOT NULL,
   item_id INTEGER REFERENCES todo_items(id) ON DELETE CASCADE,
   brand VARCHAR(50),
   vendor VARCHAR(50),
@@ -63,6 +65,7 @@ CREATE TABLE products (
 );
 
 CREATE TABLE books (
+  id SERIAL PRIMARY KEY NOT NULL,
   item_id INTEGER REFERENCES todo_items(id) ON DELETE CASCADE,
   author VARCHAR(50),
   length INTEGER,
@@ -70,6 +73,7 @@ CREATE TABLE books (
 );
 
 CREATE TABLE movies_tv (
+  id SERIAL PRIMARY KEY NOT NULL,
   item_id INTEGER REFERENCES todo_items(id),
   director VARCHAR(50),
   length time,
@@ -78,6 +82,7 @@ CREATE TABLE movies_tv (
 );
 
 CREATE TABLE restaurants (
+  id SERIAL PRIMARY KEY NOT NULL,
   item_id INTEGER REFERENCES todo_items(id),
   location VARCHAR(75),
   CUISINE VARCHAR(50)
