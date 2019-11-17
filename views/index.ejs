@@ -6,8 +6,8 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
     <!-- JS -->
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
@@ -19,8 +19,10 @@
     <nav>Navigation</nav>
 
     <div>
-      <textarea placeholder="Add new to-do"></textarea>
-      <button>Compose</button>
+      <form>
+        <textarea placeholder="Add new to-do"></textarea>
+        <button>Compose</button>
+      </form>
     </div>
 
     <ul class="collapsible popout">
@@ -28,29 +30,29 @@
         <div class="collapsible-header">To Read</div>
         <div class="collapsible-body">
           <ul class="collapsible popout">
-            <li>
-              <div class="collapsible-header">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-              <div class="collapsible-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+            <li class="item">
+              <form><input type="checkbox" class="checkbox" /></form><div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
             </li>
 
             <li>
-              <div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
-              <div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
             </li>
 
             <li>
-              <div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
-              <div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
             </li>
 
             <li>
-              <div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
-              <div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
             </li>
 
             <li>
-              <div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
-              <div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
             </li>
           </ul>
         </div>
@@ -61,28 +63,28 @@
         <div class="collapsible-body">
           <ul class="collapsible popout">
             <li>
-              <div class="collapsible-header">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-              <div class="collapsible-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-header">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
             </li>
 
             <li>
-              <div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
-              <div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
             </li>
 
             <li>
-              <div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
-              <div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
             </li>
 
             <li>
-              <div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
-              <div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
             </li>
 
             <li>
-              <div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
-              <div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
             </li>
           </ul>
         </div>
@@ -93,28 +95,28 @@
           <div class="collapsible-body">
             <ul class="collapsible popout">
               <li>
-                <div class="collapsible-header">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                <div class="collapsible-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                <form><input type="checkbox" /></form><div class="collapsible-header">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                <form><input type="checkbox" /></form><div class="collapsible-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
               </li>
 
               <li>
-                <div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
-                <div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
+                <form><input type="checkbox" /></form><div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
+                <form><input type="checkbox" /></form><div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
               </li>
 
               <li>
-                <div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
-                <div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
+                <form><input type="checkbox" /></form><div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
+                <form><input type="checkbox" /></form><div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
               </li>
 
               <li>
-                <div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
-                <div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
+                <form><input type="checkbox" /></form><div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
+                <form><input type="checkbox" /></form><div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
               </li>
 
               <li>
-                <div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
-                <div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
+                <form><input type="checkbox" /></form><div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
+                <form><input type="checkbox" /></form><div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
               </li>
             </ul>
           </div>
@@ -125,28 +127,28 @@
         <div class="collapsible-body">
           <ul class="collapsible popout">
             <li>
-              <div class="collapsible-header">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-              <div class="collapsible-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-header">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
             </li>
 
             <li>
-              <div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
-              <div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
             </li>
 
             <li>
-              <div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
-              <div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
             </li>
 
             <li>
-              <div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
-              <div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
             </li>
 
             <li>
-              <div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
-              <div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
             </li>
           </ul>
         </div>
@@ -157,28 +159,28 @@
         <div class="collapsible-body">
           <ul class="collapsible popout">
             <li>
-              <div class="collapsible-header">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-              <div class="collapsible-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-header">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
             </li>
 
             <li>
-              <div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
-              <div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
             </li>
 
             <li>
-              <div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
-              <div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form> <div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
             </li>
 
             <li>
-              <div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
-              <div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
             </li>
 
             <li>
-              <div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
-              <div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-header">In sed dolor ut elit congue venenatis.</div>
+              <form><input type="checkbox" /></form><div class="collapsible-body">In sed dolor ut elit congue venenatis.</div>
             </li>
           </ul>
         </div>
