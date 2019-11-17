@@ -28,7 +28,7 @@ CREATE TABLE categories (
 
 CREATE TABLE todo_items (
   id SERIAL PRIMARY KEY NOT NULL,
-  cat_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
+  category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
   title VARCHAR(20) NOT NULL,
   description TEXT,
   url TEXT,
@@ -38,7 +38,7 @@ CREATE TABLE todo_items (
 CREATE TABLE preferences (
   id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  cat_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
+  category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
   pref_order INTEGER NOT NULL,
   position INTEGER
 );
@@ -47,7 +47,7 @@ CREATE TABLE preferences (
 CREATE TABLE to_do_user_specifics (
   id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  item_id INTEGER REFERENCES todo_items(id) ON DELETE CASCADE,
+  todo_item_id INTEGER REFERENCES todo_items(id) ON DELETE CASCADE,
   note text,
   archived boolean NOT NULL DEFAULT false,
   position INTEGER NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE to_do_user_specifics (
 
 CREATE TABLE products (
   id SERIAL PRIMARY KEY NOT NULL,
-  item_id INTEGER REFERENCES todo_items(id) ON DELETE CASCADE,
+  todo_item_id INTEGER REFERENCES todo_items(id) ON DELETE CASCADE,
   brand VARCHAR(50),
   vendor VARCHAR(50),
   cost money NOT NULL
@@ -66,7 +66,7 @@ CREATE TABLE products (
 
 CREATE TABLE books (
   id SERIAL PRIMARY KEY NOT NULL,
-  item_id INTEGER REFERENCES todo_items(id) ON DELETE CASCADE,
+  todo_item_id INTEGER REFERENCES todo_items(id) ON DELETE CASCADE,
   author VARCHAR(50),
   length INTEGER,
   genre VARCHAR(50)
@@ -74,7 +74,7 @@ CREATE TABLE books (
 
 CREATE TABLE movies_tv (
   id SERIAL PRIMARY KEY NOT NULL,
-  item_id INTEGER REFERENCES todo_items(id),
+  todo_item_id INTEGER REFERENCES todo_items(id) ON DELETE CASCADE,
   director VARCHAR(50),
   length time,
   actors text,
@@ -83,7 +83,7 @@ CREATE TABLE movies_tv (
 
 CREATE TABLE restaurants (
   id SERIAL PRIMARY KEY NOT NULL,
-  item_id INTEGER REFERENCES todo_items(id),
+  todo_item_id INTEGER REFERENCES todo_items(id) ON DELETE CASCADE,
   location VARCHAR(75),
-  CUISINE VARCHAR(50)
+  cuisine VARCHAR(50)
 );
