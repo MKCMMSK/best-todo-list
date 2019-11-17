@@ -18,9 +18,11 @@ $(document).ready(function(){
     renderList(product);
   });
 
+  // submit form with ajax
   $('#newToDo').submit((event) => {
     event.preventDefault();
-  })
+    const query = $('#search').val();
+  });
 
   // collapsible functionality for index
   $('.collapsible').collapsible();
