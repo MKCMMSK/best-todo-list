@@ -2,7 +2,7 @@
 
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS categories CASCADE;
-DROP TABLE IF EXISTS todo_item CASCADE;
+DROP TABLE IF EXISTS todo_items CASCADE;
 DROP TABLE IF EXISTS preferences CASCADE;
 DROP TABLE IF EXISTS to_do_user_specifics CASCADE;
 DROP TABLE IF EXISTS products CASCADE;
@@ -26,7 +26,7 @@ CREATE TABLE categories (
   name VARCHAR(20) NOT NULL
 );
 
-CREATE TABLE todo_item (
+CREATE TABLE todo_items (
   id SERIAL PRIMARY KEY NOT NULL,
   cat_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
   title VARCHAR(20) NOT NULL,
@@ -45,40 +45,45 @@ CREATE TABLE preferences (
 
 
 CREATE TABLE to_do_user_specifics (
+  id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  item_id INTEGER REFERENCES todo_item(id) ON DELETE CASCADE,
+  item_id INTEGER REFERENCES todo_items(id) ON DELETE CASCADE,
   note text,
   archived boolean NOT NULL DEFAULT false,
   position INTEGER NOT NULL,
-  last_visited date,
+  time_archived date,
   rate INTEGER,
   rating_comment text
 );
 
 CREATE TABLE products (
-  item_id INTEGER REFERENCES todo_item(id) ON DELETE CASCADE,
-  brand VARCHAR(20),
-  vendor VARCHAR(20),
+  id SERIAL PRIMARY KEY NOT NULL,
+  item_id INTEGER REFERENCES todo_items(id) ON DELETE CASCADE,
+  brand VARCHAR(50),
+  vendor VARCHAR(50),
   cost money NOT NULL
 );
 
 CREATE TABLE books (
-  item_id INTEGER REFERENCES todo_item(id) ON DELETE CASCADE,
-  author VARCHAR(20),
+  id SERIAL PRIMARY KEY NOT NULL,
+  item_id INTEGER REFERENCES todo_items(id) ON DELETE CASCADE,
+  author VARCHAR(50),
   length INTEGER,
-  genre VARCHAR(25)
+  genre VARCHAR(50)
 );
 
 CREATE TABLE movies_tv (
-  item_id INTEGER REFERENCES todo_item(id),
-  director VARCHAR(20),
+  id SERIAL PRIMARY KEY NOT NULL,
+  item_id INTEGER REFERENCES todo_items(id),
+  director VARCHAR(50),
   length time,
   actors text,
-  genre VARCHAR(25)
+  genre VARCHAR(50)
 );
 
 CREATE TABLE restaurants (
-  item_id INTEGER REFERENCES todo_item(id),
+  id SERIAL PRIMARY KEY NOT NULL,
+  item_id INTEGER REFERENCES todo_items(id),
   location VARCHAR(75),
-  CUISINE VARCHAR(25)
+  CUISINE VARCHAR(50)
 );
