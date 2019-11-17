@@ -22,12 +22,24 @@ $(document).ready(function(){
   $('#newToDo').submit((event) => {
     event.preventDefault();
     const query = $('#search').val();
+    searchBooks(query);
   });
 
   // collapsible functionality for index
   $('.collapsible').collapsible();
 
 });
+
+const searchBooks = function(query) {
+  const formatted = query.replace(' ', '+');
+  $.ajax({
+    url: `https://www.googleapis.com/books/v1/volumes?q=${formatted}`,
+    method: 'GET'
+  })
+  .then((res) => {
+    console.log(res);
+  })
+};
 
 function createListElement(object) { //creates simple list item need to implement overload for different categories
   let item = `
