@@ -18,6 +18,9 @@ $(document).ready(function(){
     renderList(product);
   });
 
+  $('#newToDo').submit((event) => {
+    event.preventDefault();
+  })
 
   // collapsible functionality for index
   $('.collapsible').collapsible();
