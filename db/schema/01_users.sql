@@ -57,28 +57,28 @@ CREATE TABLE to_do_user_specifics (
 
 CREATE TABLE products (
   item_id INTEGER REFERENCES todo_items(id) ON DELETE CASCADE,
-  brand VARCHAR(20),
-  vendor VARCHAR(20),
+  brand VARCHAR(50),
+  vendor VARCHAR(50),
   cost money NOT NULL
 );
 
 CREATE TABLE books (
   item_id INTEGER REFERENCES todo_items(id) ON DELETE CASCADE,
-  author VARCHAR(20),
+  author VARCHAR(50),
   length INTEGER,
-  genre VARCHAR(25)
+  genre VARCHAR(50)
 );
 
 CREATE TABLE movies_tv (
   item_id INTEGER REFERENCES todo_items(id),
-  director VARCHAR(20),
+  director VARCHAR(50),
   length time,
   actors text,
-  genre VARCHAR(25)
+  genre VARCHAR(50)
 );
 
 CREATE TABLE restaurants (
   item_id INTEGER REFERENCES todo_items(id),
   location VARCHAR(75),
-  CUISINE VARCHAR(25)
+  CUISINE VARCHAR(50)
 );

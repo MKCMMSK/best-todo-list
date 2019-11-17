@@ -38,14 +38,17 @@ VALUES (1, 3, 'cant wait to watch the terrible ending', 'false', '1', null, null
 (2, 1, 'amazing seafood I hear', 'false', '1', null, null, null),
 (3, 2, 'amazing book I hear', 'true', '1', '2010-01-27', 5, 'GREAT BOOK');
 
+INSERT INTO products (item_id, brand, vendor, cost)
+VALUES (4, 'yeezy', 'adidas', 200.50);
 
+INSERT INTO books (item_id, author, length, genre)
+VALUES (2, 'writer of war and peace', 600, 'historic drama');
 
+INSERT INTO movies_tv (item_id, director, actors, genre)
+VALUES (3, 'P', 'Kid Herrington????', 'fantasy drama');
 
--- user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
---   item_id INTEGER REFERENCES todo_items(id) ON DELETE CASCADE,
---   note text,
---   archived boolean NOT NULL DEFAULT false,
---   position INTEGER NOT NULL,
---   last_visited date,
---   rate INTEGER,
---   rating_comment text
+INSERT INTO restaurants (item_id, location, cuisine)
+VALUES (1, 'Hamilton st. dt', 'Seafood');
+-- item_id INTEGER REFERENCES todo_items(id),
+--   location VARCHAR(75),
+--   CUISINE VARCHAR(25)
