@@ -62,8 +62,9 @@ VALUES (1, 1, 4,4), /* colin preferences */
 
 
 INSERT INTO to_do_user_specifics (user_id, todo_item_id, note, archived, position, date_archived, rate, rating_comment)
-VALUES (1, 3, 'cant wait to watch the terrible ending', 'false', '1', null, null, null),
-(2, 1, 'amazing seafood I hear', 'false', '1', null, null, null),
+VALUES (1, 9, 'cant wait to watch the terrible ending', 'false', 1, null, null, null),
+(1, 7, 'recommended by georgafina', 'true', '2', '2018-10-23', 4, 'the movie was better'),
+(2, 1, 'amazing seafood I hear', 'false', 1, null, null, null),
 (3, 2, 'amazing book I hear', 'true', '1', '2010-01-27', 5, 'GREAT BOOK');
 
 INSERT INTO products (todo_item_id, brand, vendor, cost)
