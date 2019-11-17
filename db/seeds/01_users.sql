@@ -65,16 +65,16 @@ VALUES (1, 9, 'cant wait to watch the terrible ending', 'false', 1, null, null, 
 (1, 12, 'favorite movie of all time', 'true', 1, '2018-12-28', 5, 'watch this again asap'),
 
 (1, 13, 'read when I have a week off', 'false', 1, null, null, null),
-(1, 3, 'recommended by georgafina', 'true', 2, '2018-10-23', 4, 'the movie was better'),
+(1, 3, 'recommended by georgafina', 'true', 1, '2018-10-23', 4, 'the movie was better'),
 
-(1, 10, 'need these', 'false', 2, null, null, null),
+(1, 10, 'need these', 'false', 1, null, null, null),
 (1, 6, 'for new phone', 'true', 1, '2019-07-13', 3, 'works'),
 
 (1, 1, 'amazing seafood I hear', 'false', 1, null, null, null),
 (1, 2, 'quick lunch for school days', 'true', 1, '2019-10-14', 4, 'long wait time from 12-2pm'),
 
-(1, 14, 'every Sunday!', 'false', 1, null, null, null),
-(1, 5, 'lessons in Deep Cove', 'false', 1, null, null, null),
+(1, 14, 'New Years Resolution: every Sunday this year!', 'false', 1, null, null, null),
+(1, 15, 'lessons in Deep Cove', 'true', 1, '2019-05-02', 4, 'lesson was great, weather was gross'),
 
 (2, 1, 'amazing seafood I hear', 'false', 1, null, null, null),
 (3, 2, 'amazing book I hear', 'true', 1, '2010-01-27', 5, 'GREAT BOOK');
@@ -94,6 +94,4 @@ VALUES (9, 'Alan Taylor', 2011, 57, 'Emilia Clarke, Peter Dinklage, Kit Harringt
 INSERT INTO restaurants (todo_item_id, street_address, city, province_state, country, google_map_url, cuisine)
 VALUES (1, 'Blue Water Cafe', 'Vancouver', 'BC', 'Canada', 'https://goo.gl/maps/FMbDEfj7uAAaYrhG8', 'Seafood restaurant'),
 (2, '108 W Hastings St', 'Vancouver', 'BC', 'Canada', 'https://goo.gl/maps/q6CwqpMqgMdGPtiz9', 'Asian fusion');
--- item_id INTEGER REFERENCES todo_items(id),
---   location VARCHAR(75),
---   CUISINE VARCHAR(25)
+
