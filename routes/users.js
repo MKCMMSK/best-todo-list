@@ -22,10 +22,10 @@ module.exports = (db) => {
     //   });
     db.query(`SELECT *
               FROM todo_items
-              WHERE id = 4;`)
+              ;`)
     .then(data => {
-      const product = data.rows[0];
-      res.json(product);
+      const items = data.rows;
+      res.json(items);
     })
   });
   return router;

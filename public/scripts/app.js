@@ -13,9 +13,9 @@ $(document).ready(function(){
 
   $.ajax({
     method: "GET",
-    url: "/product" //gets product in position 0 aka only item yeezy
+    url: "/items" //gets product in position 0 aka only item yeezy
   }).done((product) => {
-    $(".to_buy_list").prepend(createListElement(product)); //prepends item into the list with description
+    renderList(product);
   });
 
 
@@ -32,4 +32,26 @@ function createListElement(object) { //creates simple list item need to implemen
    </li>`;
 
   return item;
+}
+
+function renderList(arr) { //prepends the database so that the top is the newest
+  for (let item of arr) {
+    switch (item.cat_id) {
+      case 1:
+        $(".to_read_list").prepend(createListElement(item));
+        break;
+      case 2:
+        $(".to_watch_list").prepend(createListElement(item));
+        break;
+      case 3:
+        $(".to_eat_list").prepend(createListElement(item));
+        break;
+      case 4:
+        $(".to_buy_list").prepend(createListElement(item));
+        break;
+      case 5:
+        $(".misc_list").prepend(createListElement(item));
+    }
+
+  }
 }
