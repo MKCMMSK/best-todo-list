@@ -15,7 +15,7 @@ CREATE TABLE users (
   full_name VARCHAR (255) NOT NULL,
   email VARCHAR(255) NOT NULL,
   phone INTEGER,
-  img TEXT,
+  img VARCHAR(500),
   pw VARCHAR(75) NOT NULL,
   signup_date DATE NOT NULL,
   permissions BOOLEAN NOT NULL DEFAULT false
@@ -48,12 +48,12 @@ CREATE TABLE to_do_user_specifics (
   id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   todo_item_id INTEGER REFERENCES todo_items(id) ON DELETE CASCADE,
-  note TEXT,
+  note VARCHAR(1000),
   archived BOOLEAN NOT NULL DEFAULT false,
   position INTEGER NOT NULL,
-  time_archived DATE,
+  date_archived DATE,
   rate INTEGER,
-  rating_comment TEXT
+  rating_comment VARCHAR(1000)
 );
 
 CREATE TABLE products (
@@ -86,6 +86,6 @@ CREATE TABLE movies_tv (
 CREATE TABLE restaurants (
   id SERIAL PRIMARY KEY NOT NULL,
   todo_item_id INTEGER REFERENCES todo_items(id) ON DELETE CASCADE,
-  location VARCHAR(75),
+  location VARCHAR(500),
   cuisine VARCHAR(50)
 );
