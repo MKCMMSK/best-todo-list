@@ -12,27 +12,27 @@ DROP TABLE IF EXISTS restaurants CASCADE;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
-  full_name VARCHAR (50) NOT NULL,
-  email VARCHAR(40) NOT NULL,
+  full_name VARCHAR (255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
   phone INTEGER,
   img TEXT,
-  pw VARCHAR(25) NOT NULL,
+  pw VARCHAR(75) NOT NULL,
   signup_date DATE NOT NULL,
   permissions BOOLEAN NOT NULL DEFAULT false
 );
 
 CREATE TABLE categories (
   id SERIAL PRIMARY KEY NOT NULL,
-  name VARCHAR(20) NOT NULL
+  name VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE todo_items (
   id SERIAL PRIMARY KEY NOT NULL,
   category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
-  title VARCHAR(50) NOT NULL,
+  title VARCHAR(140) NOT NULL,
   description TEXT,
-  url TEXT,
-  img TEXT
+  url VARCHAR(500),
+  img VARCHAR(500)
 );
 
 CREATE TABLE preferences (
