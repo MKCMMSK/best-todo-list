@@ -86,6 +86,10 @@ CREATE TABLE movies_tv (
 CREATE TABLE restaurants (
   id SERIAL PRIMARY KEY NOT NULL,
   todo_item_id INTEGER REFERENCES todo_items(id) ON DELETE CASCADE,
-  location VARCHAR(500),
+  street_address VARCHAR(255),
+  city VARCHAR(255),
+  province_state VARCHAR(255),
+  country VARCHAR(255),
+  google_map_url VARCHAR(255),
   cuisine VARCHAR(50)
 );
