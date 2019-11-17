@@ -44,10 +44,10 @@ function renderList(arr) { //prepends the database so that the top is the newest
         $(".to_watch_list").prepend(createListElement(item));
         break;
       case 3:
-        $(".to_eat_list").prepend(createListElement(item));
-        break;
-      case 4:
         $(".to_buy_list").prepend(createListElement(item));
+        break;
+        case 4:
+            $(".to_eat_list").prepend(createListElement(item));
         break;
       case 5:
         $(".misc_list").prepend(createListElement(item));
