@@ -280,15 +280,30 @@ function getTvShow(query) { //pretty much identical code except for genres and f
 }
 
 // Map for ToEat lists, need a way to enter new entrys of lat and lng
-// <div id="map"></div>
-// <script>
-//   var map;
-//   function initMap() {
-//    map = new google.maps.Map(document.getElementById('map'), {
-//    center: {lat: -34.397, lng: 150.644},
-//   zoom: 8
-//   });
-//   }
-//   </script>
-//  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCz8KPGUWJzzmBPHXerTA9nDTS5ptGoQc&callback=initMap"
-//   type="text/javascript"></script>
+/* <div id="map"></div>
+<script>
+  var map;
+  function initMap() {
+   map = new google.maps.Map(document.getElementById('map'), {
+   center: {lat: -34.397, lng: 150.644},
+  zoom: 8
+  });
+  }
+  </script>
+ <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCz8KPGUWJzzmBPHXerTA9nDTS5ptGoQc&callback=initMap"
+  type="text/javascript"></script> */
+
+  // <!-- PLACES API -->
+
+  //  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCz8KPGUWJzzmBPHXerTA9nDTS5ptGoQc&libraries=places"></script>
+
+  //   <!-- GOOGLE MAP API-->
+  // <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCz8KPGUWJzzmBPHXerTA9nDTS5ptGoQc&callback=initMap"
+  //     type="text/javascript"></script>
+
+  // <style>
+  //   #map {
+  //   width: 500px;
+  //   height: 500px;
+  //    }
+  // </style>
