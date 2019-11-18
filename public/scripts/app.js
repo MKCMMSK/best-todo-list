@@ -77,9 +77,8 @@ const searchRestaurants = function(query) {
         city: res.businesses[0].location.city,
         province_state: res.businesses[0].location.state,
         country: res.businesses[0].location.country,
-        google_map_url: null
+        google_map_url: `https://www.google.com/maps/dir/?api=1&origin=${location}&destination=${res.businesses[0].coordinates.latitude},${res.businesses[0].coordinates.longitude}`
       }
-      console.log(restaurant);
     })
   });
 
