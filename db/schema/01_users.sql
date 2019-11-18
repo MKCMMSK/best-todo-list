@@ -90,6 +90,5 @@ CREATE TABLE restaurants (
   city VARCHAR(255),
   province_state VARCHAR(255),
   country VARCHAR(255),
-  google_map_url VARCHAR(255),
-  cuisine VARCHAR(50)
+  google_map_url VARCHAR(255)
 );

@@ -13,8 +13,8 @@ VALUES ('book'),
 ('misc');
 
 INSERT INTO todo_items (category_id, title, description, url, img)
-VALUES (4,'Blue water cafe', 'Seafood baby', 'https://www.bluewatercafe.net/', 'https://media-cdn.tripadvisor.com/media/photo-s/0a/5d/84/22/blue-water-cafe-dining.jpg'),
-(4,'noodle box', 'slurp slurp', 'http://www.noodlebox.ca/', 'https://images.squarespace-cdn.com/content/v1/573a10b34d088e2c9c1f932b/1465235422918-MVB0U88590GSO87D377G/ke17ZwdGBToddI8pDm48kFYH3uwMjP6R5AB4BbCPevB7gQa3H78H3Y0txjaiv_0f0RFAW16tgzDazO3NMD7c9sJ5_-acVIg1HRnHHMpKbMhwky-cxhVd6UQAcW2ca9mfeoqS5JAWrnb1436X_b_yVWxU0godxi02JM9uVemPLqyo4MZgSQAiIfMAFDQitfnlaaqqIPmPQuv4sK2Brh-aEw/NBX_BLACK_BEAN_GARLIC-1_crop.jpg?format=2500w'),
+VALUES (4,'Blue water cafe', 'Seafood restaurant', 'https://www.bluewatercafe.net/', 'https://media-cdn.tripadvisor.com/media/photo-s/0a/5d/84/22/blue-water-cafe-dining.jpg'),
+(4,'noodle box', 'Southeast Asian street food', 'http://www.noodlebox.ca/', 'https://images.squarespace-cdn.com/content/v1/573a10b34d088e2c9c1f932b/1465235422918-MVB0U88590GSO87D377G/ke17ZwdGBToddI8pDm48kFYH3uwMjP6R5AB4BbCPevB7gQa3H78H3Y0txjaiv_0f0RFAW16tgzDazO3NMD7c9sJ5_-acVIg1HRnHHMpKbMhwky-cxhVd6UQAcW2ca9mfeoqS5JAWrnb1436X_b_yVWxU0godxi02JM9uVemPLqyo4MZgSQAiIfMAFDQitfnlaaqqIPmPQuv4sK2Brh-aEw/NBX_BLACK_BEAN_GARLIC-1_crop.jpg?format=2500w'),
 (1,'War and peace', 'fighting and no fighting', 'https://books.google.ca/books/about/War_and_Peace.html?id=s-OQ2yHDIMQC&redir_esc=y', 'https://books.google.ca/books/content?id=5lpoAwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&imgtk=AFLRE70bYKGUz9gnbgP9ScqU4jWoFRRVovISjiSmnm65oY8UzirVXKYbc49LqSugQaJ1Le4I7p7lP-42UnORkuRfD5-W0g_QqaisvVtcU7cMUsRWMh8IyFRpwe4LogCOnHo0rMDxvakp'),
 (1, 'lord of the rings: twin towers', 'fantasy book', 'https://books.google.ca/books?id=_FjrugAACAAJ&dq=lord+of+the+rings+two+towers&hl=en&sa=X&ved=0ahUKEwi6h5ufgPLlAhWXrZ4KHR_BAwQQ6AEINzAC', 'https://books.google.ca/books/content?id=_FjrugAACAAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE72F5Wd3dc7M7dY936jZWoHkSo0tg6yjDGnEsz36spYSxC46jhT332R5_eq1ZQcQL0YaEGG935_JX94zQ_ilphkz_hVNqdvXyzCxEouARregM25N8Ma_bTyXtf9eySwseb3Mjoeh'),
 (3, 'ink cartridge', 'printer ink', 'https://www.staples.ca/products/1017452-en-epson-252xl-black-ink-cartridge-high-capacity-t252xl120', 'https://cdn.shopify.com/s/files/1/0036/4806/1509/products/s0831495_7bf79037-2ee6-4b50-9128-180bdf828a60_1000x1000@2x.jpg?v=1573725220'),
@@ -91,7 +91,7 @@ INSERT INTO movies_tv (todo_item_id, director, year, runtime, actors, genre)
 VALUES (9, 'Alan Taylor', 2011, 57, 'Emilia Clarke, Peter Dinklage, Kit Harrington', 'fantasy drama'),
 (12, 'James Camero', 2009, 162, 'Sam Worthington, Zoe Saldana', 'fantasy');
 
-INSERT INTO restaurants (todo_item_id, street_address, city, province_state, country, google_map_url, cuisine)
-VALUES (1, 'Blue Water Cafe', 'Vancouver', 'BC', 'Canada', 'https://goo.gl/maps/FMbDEfj7uAAaYrhG8', 'Seafood restaurant'),
-(2, '108 W Hastings St', 'Vancouver', 'BC', 'Canada', 'https://goo.gl/maps/q6CwqpMqgMdGPtiz9', 'Asian fusion');
+INSERT INTO restaurants (todo_item_id, street_address, city, province_state, country, google_map_url)
+VALUES (1, 'Blue Water Cafe', 'Vancouver', 'BC', 'Canada', 'https://goo.gl/maps/FMbDEfj7uAAaYrhG8'),
+(2, '108 W Hastings St', 'Vancouver', 'BC', 'Canada', 'https://goo.gl/maps/q6CwqpMqgMdGPtiz9');
 
