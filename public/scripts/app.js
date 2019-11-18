@@ -51,6 +51,18 @@ const searchBooks = function(query) {
   })
 };
 
+const searchRestaurants = function(query) {
+  const formatted = query.replace(' ', '+');
+  // const location =
+  $.ajax({
+    url: `https://api.yelp.com/v3/businesses/search?location=${location}&term=${formatted}`,
+    method: 'GET'
+  })
+  .then((res) => {
+    console.log(res);
+  })
+};
+
 function createListElement(object) { //creates simple list item need to implement overload for different categories
   let item = `
    <li>
