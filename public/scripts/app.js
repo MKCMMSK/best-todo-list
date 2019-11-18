@@ -31,6 +31,16 @@ function createListElement(object) { //creates simple list item need to implemen
   return item;
 }
 
+function createToEatElement(object) { //creates simple list item need to implement overload for different categories
+  let item = `
+   <li>
+      <div class="collapsible-header">${object.title}</div>
+      <div class="collapsible-body">${object.description}</div>
+   </li>`;
+
+  return item;
+}
+
 function renderList(arr) { //prepends the database so that the top is the newest
   for (let item of arr) {
     switch (item.cat_id) {
@@ -265,9 +275,20 @@ function getTvShow(query) { //pretty much identical code except for genres and f
       genre: movieGenre,
       img: `https://image.tmdb.org/t/p/w154/${item.poster_path}`
      }
-     console.log(item, 'inside ajax');
    return media;
   });
 }
 
-
+// Map for ToEat lists, need a way to enter new entrys of lat and lng
+// <div id="map"></div>
+// <script>
+//   var map;
+//   function initMap() {
+//    map = new google.maps.Map(document.getElementById('map'), {
+//    center: {lat: -34.397, lng: 150.644},
+//   zoom: 8
+//   });
+//   }
+//   </script>
+//  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCz8KPGUWJzzmBPHXerTA9nDTS5ptGoQc&callback=initMap"
+//   type="text/javascript"></script>

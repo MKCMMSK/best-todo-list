@@ -2,7 +2,12 @@
 <html lang="en">
   <head>
     <title>Home Page</title>
-
+    <style>
+     #map {
+        width: 500px;
+        height: 500px;
+      }
+      </style>
     <!-- CSS -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
@@ -13,9 +18,15 @@
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <!-- Google maps api with key-->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBU-uM_p4IVagmw668o7aFq58TZ3k-0G_w&callback=initMap"
-    type="text/javascript"></script>
+
+    <!-- PLACES API -->
+
+    <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCz8KPGUWJzzmBPHXerTA9nDTS5ptGoQc&libraries=places"></script> -->
+
+    <!-- GOOGLE MAP API-->
+    <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCz8KPGUWJzzmBPHXerTA9nDTS5ptGoQc&callback=initMap"
+     type="text/javascript"></script> -->
+
   </head>
 
   <body>
@@ -47,19 +58,19 @@
       </li>
 
       <li>
-          <div class="collapsible-header">To Eat</div>
-          <div class="collapsible-body">
-            <ul class="collapsible popout to_eat_list">
-
-            </ul>
+        <div class="collapsible-header">To Eat</div>
+        <div class="collapsible-body">
+          <ul class="collapsible popout to_eat_list">
+              <li>
+                </li>
+                </ul>
           </div>
-      </li>
+        </li>
 
-      <li class>
+        <li class>
         <div class="collapsible-header">To Buy</div>
         <div class="collapsible-body">
           <ul class="collapsible popout to_buy_list">
-
           </ul>
         </div>
       </li>
