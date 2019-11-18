@@ -38,7 +38,7 @@ const searchBooks = function(query) {
       img: res.items[0].volumeInfo.imageLinks.smallThumbnail,
       author: res.items[0].volumeInfo.authors[0],
       publication_date: Number(res.items[0].volumeInfo.publishedDate.slice(0, 4)),
-      length: res.items[0].volumeInfo.pageCount,
+      page_length: res.items[0].volumeInfo.pageCount,
       genre: res.items[0].volumeInfo.categories[0]
     };
   })
