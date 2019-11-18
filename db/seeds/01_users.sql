@@ -45,12 +45,12 @@ VALUES (4,'Blue water cafe', 'Seafood baby', 'https://www.bluewatercafe.net/', '
 (3, 'yeezes', 'freshes shoes in the whole damn game', 'kanye.com', 'kanye,con/yeezy');
 
 INSERT INTO preferences (user_id, category_id, pref_order, position)
-VALUES (1, 1, 4,4), /* colin preferences */
-(1, 2, 3,3),
+VALUES (1, 1, 4,3), /* colin preferences */
+(1, 2, 3, 4),
 (1, 3, 2,2),
 (1, 4, 1,1),
-(2, 1, 2,2), /* Vanessa preferences */
-(2, 2, 1,1),
+(2, 1, 2,1), /* Vanessa preferences */
+(2, 2, 1,2),
 (2, 3, 4,4),
 (2, 4, 3,3),
 (3, 1, 2,2),/* Michelle preferences */
