@@ -1,4 +1,4 @@
---  All return first 3 records in a user's current list of todo items
+--  Return first 3 records in a user's current list of todo items
 -- (archived and active) that match a user's search for a new item
 -- to add to their list
 
