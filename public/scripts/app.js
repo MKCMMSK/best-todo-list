@@ -67,7 +67,19 @@ const searchRestaurants = function(query) {
       }
     })
     .then((res) => {
-      console.log(res);
+      const restaurant = {
+        category_id: 4,
+        title: res.businesses[0].name,
+        description: res.businesses[0].categories[0].title,
+        url: res.businesses[0].url,
+        img: res.businesses[0].image_url,
+        street_address: res.businesses[0].location.address1,
+        city: res.businesses[0].location.city,
+        province_state: res.businesses[0].location.state,
+        country: res.businesses[0].location.country,
+        google_map_url: null
+      }
+      console.log(restaurant);
     })
   });
 
