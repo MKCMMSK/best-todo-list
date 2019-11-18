@@ -22,7 +22,8 @@ $(document).ready(function(){
   $('#newToDo').submit((event) => {
     event.preventDefault();
     const query = $('#search').val();
-    searchBooks(query);
+    // searchBooks(query);
+    searchRestaurants(query);
   });
 
   // collapsible functionality for index
@@ -50,6 +51,39 @@ const searchBooks = function(query) {
     };
   })
 };
+
+const searchRestaurants = function(query) {
+  const term = query.replace(' ', '+');
+
+  navigator.geolocation.getCurrentPosition(function(position) {
+    const location = `${position.coords.latitude},${position.coords.longitude}`;
+
+    $.ajax({
+      url: `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=${location}&term=${term}`,
+      method: 'GET',
+      crossDomain: true,
+      headers: {
+        'Authorization': 'Bearer OF_s3CBJs9ncteh3m4vRN4PicqhnbmNjmJwgt9xkn-d2F2b3v4QZTH0HH22CQ2EmlWPAXjA2jfmOE6R9fZG-IASfcW0lzFC1YTwVt-Gh_L3lrDxwlOY7LvAh4OTSXXYx'
+      }
+    })
+    .then((res) => {
+      const restaurant = {
+        category_id: 4,
+        title: res.businesses[0].name,
+        description: res.businesses[0].categories[0].title,
+        url: res.businesses[0].url,
+        img: res.businesses[0].image_url,
+        street_address: res.businesses[0].location.address1,
+        city: res.businesses[0].location.city,
+        province_state: res.businesses[0].location.state,
+        country: res.businesses[0].location.country,
+        google_map_url: `https://www.google.com/maps/dir/?api=1&origin=${location}&destination=${res.businesses[0].coordinates.latitude},${res.businesses[0].coordinates.longitude}`
+      }
+    })
+  });
+
+};
+
 
 function createListElement(object) { //creates simple list item need to implement overload for different categories
   let item = `
