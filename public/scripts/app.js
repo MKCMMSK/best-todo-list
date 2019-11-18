@@ -22,12 +22,34 @@ $(document).ready(function(){
   $('#newToDo').submit((event) => {
     event.preventDefault();
     const query = $('#search').val();
+    searchBooks(query);
   });
 
   // collapsible functionality for index
   $('.collapsible').collapsible();
 
 });
+
+const searchBooks = function(query) {
+  const formatted = query.replace(' ', '+');
+  $.ajax({
+    url: `https://www.googleapis.com/books/v1/volumes?q=${formatted}`,
+    method: 'GET'
+  })
+  .then((res) => {
+    const book = {
+      category_id: 1,
+      title: res.items[0].volumeInfo.title,
+      description: res.items[0].searchInfo.textSnippet,
+      url: res.items[0].volumeInfo.infoLink,
+      img: res.items[0].volumeInfo.imageLinks.smallThumbnail,
+      author: res.items[0].volumeInfo.authors[0],
+      publication_date: Number(res.items[0].volumeInfo.publishedDate.slice(0, 4)),
+      length: res.items[0].volumeInfo.pageCount,
+      genre: res.items[0].volumeInfo.categories[0]
+    };
+  })
+};
 
 function createListElement(object) { //creates simple list item need to implement overload for different categories
   let item = `
