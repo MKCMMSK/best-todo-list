@@ -16,7 +16,7 @@ $(document).ready(function(){
   // collapsible functionality for index
   $('.collapsible').collapsible();
 
-  getTvShow('Vikings').then((media) => { //media is the structured object we created
+  getMovie('Vikings').then((media) => { //media is the structured object we created
     console.log(media);
   });
 });
@@ -145,13 +145,8 @@ function getMovie(query) { //ajax returns promise, use .then((media)=> {}) to gr
     }
   ];
   let movieGenre = '';
-  for (let i = 0; i <  query.length; i++) {
-    if (query.charAt(i) === ' '){
-      queryParsed += '%20';
-    } else {
-      queryParsed += query.charAt(i);
-    }
-  }
+
+  queryParsed = query.replace(' ', '%20');
 
   return $.ajax({
     method: 'GET',
@@ -247,13 +242,7 @@ function getTvShow(query) { //pretty much identical code except for genres and f
     }
   ];
 
-  for (let i = 0; i <  query.length; i++) {
-    if (query.charAt(i) === ' '){
-      queryParsed += '%20';
-    } else {
-      queryParsed += query.charAt(i);
-    }
-  }
+  queryParsed = query.replace(' ', '%20');
 
   return $.ajax({
     method: 'GET',
@@ -278,32 +267,3 @@ function getTvShow(query) { //pretty much identical code except for genres and f
    return media;
   });
 }
-
-// Map for ToEat lists, need a way to enter new entrys of lat and lng
-/* <div id="map"></div>
-<script>
-  var map;
-  function initMap() {
-   map = new google.maps.Map(document.getElementById('map'), {
-   center: {lat: -34.397, lng: 150.644},
-  zoom: 8
-  });
-  }
-  </script>
- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCz8KPGUWJzzmBPHXerTA9nDTS5ptGoQc&callback=initMap"
-  type="text/javascript"></script> */
-
-  // <!-- PLACES API -->
-
-  //  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCz8KPGUWJzzmBPHXerTA9nDTS5ptGoQc&libraries=places"></script>
-
-  //   <!-- GOOGLE MAP API-->
-  // <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCz8KPGUWJzzmBPHXerTA9nDTS5ptGoQc&callback=initMap"
-  //     type="text/javascript"></script>
-
-  // <style>
-  //   #map {
-  //   width: 500px;
-  //   height: 500px;
-  //    }
-  // </style>
