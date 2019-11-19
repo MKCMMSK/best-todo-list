@@ -7,6 +7,7 @@
 
 const express = require('express');
 const router = express.Router();
+const { getBooks, getRestaurants, getMovie, getTvShow } = require('../lib/util/api_helpers');
 
 module.exports = (helpers) => {
   // router.get("/", (req, res) => {
@@ -21,18 +22,9 @@ module.exports = (helpers) => {
 
   router.post('/', (req, res) => {
     const query = req.body.todo;
-    const obj = {
-      category_id: 1,
-      title: 'harry potter',
-      description: 'desc',
-      url: 'url',
-      img: 'image',
-      author: 'jk rowling',
-      publication_date: 1111,
-      page_length: 11,
-      genre: 'genre'
-    }
-    helpers.addBook(obj);
+    getBooks(query, (err, book) => {
+      helpers.addBook(book);
+    });
     res.json(query);
   });
 
