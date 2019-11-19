@@ -25,6 +25,5 @@ module.exports = (db) {
   }
 
   return { addBook };
-
 };
 
