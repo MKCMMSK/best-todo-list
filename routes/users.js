@@ -20,9 +20,11 @@ module.exports = (db) => {
   });
 
   router.post('/', (req, res) => {
+    const query = req.body.todo;
     // api call, formats book in object
-    // addbook
-    res.send('server received');
+    // addbook sql, returning *
+    //res.rows
+    res.json(query);
   });
 
   return router;

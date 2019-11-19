@@ -1,6 +1,7 @@
 
 $(document).ready(function(){
 
+
   $.ajax({
     method: "GET",
     url: "/items" //gets product in position 0 aka only item yeezy
@@ -15,7 +16,7 @@ $(document).ready(function(){
     $.ajax({
       url: '/items',
       method: 'POST',
-      data: $(this).serialize(),
+      data: {todo: query},
       success: function(res) {
         console.log(res);
       }
