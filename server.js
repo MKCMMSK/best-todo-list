@@ -68,4 +68,4 @@ app.listen(PORT, () => {
 // searchBooks('Song of ice and fire', (err, book) => {console.log(book)});
 
 // searchRestaurants('miku');
-// get49.2812368,-123.1171883
+// getRestaurants('49.2812368,-123.1171883');
