@@ -10,6 +10,7 @@ const sass       = require("node-sass-middleware");
 const app        = express();
 const morgan     = require('morgan');
 
+const { searchBooks, searchRestaurants, getMovie, getTvShow } = require("./lib/util/api_helpers.js");
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
@@ -54,3 +55,9 @@ app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
 
+
+// getTvShow('Vikings', (err, media)=> {console.log(media)});
+
+// searchBooks('Song of ice and fire', (err, book) => {console.log(book)});
+
+// searchRestaurants('miku');

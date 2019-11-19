@@ -11,7 +11,8 @@ const router = express.Router();
 module.exports = (db) => {
   router.get("/", (req, res) => {
     db.query(`SELECT *
-              FROM todo_items
+              FROM to_do_user_specifics
+              WHERE user_id = 1
               ;`)
       .then(data => {
         const items = data.rows;
