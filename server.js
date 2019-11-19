@@ -56,8 +56,16 @@ app.listen(PORT, () => {
 });
 
 
-// getTvShow('Vikings', (err, media)=> {console.log(media)});
+
+
+
+/////////////////////////////////////////////----TESTS----/////////////////////////////////////////////////////////////////
+
+// getTvShow('Vikings', (err, media)=> {
+//   console.log(media)
+// });
 
 // searchBooks('Song of ice and fire', (err, book) => {console.log(book)});
 
 // searchRestaurants('miku');
+// get49.2812368,-123.1171883
