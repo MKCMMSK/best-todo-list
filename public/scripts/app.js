@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 $(document).ready(function(){
 
@@ -8,22 +9,26 @@ $(document).ready(function(){
     console.log(product);
     renderList(product);
   });
+=======
+$(document).ready(function () {
+>>>>>>> 272d6ba1765ec624b6328a9d0017127b6f57a3d9
 
   // submit form with ajax
   $('#newToDo').submit((event) => {
     event.preventDefault();
     const query = $('#search').val();
     // searchBooks(query);
-    searchRestaurants(query);
+    api_helpers.searchRestaurants(query);
   });
 
   // collapsible functionality for index
   $('.collapsible').collapsible();
 
-  getTvShow('Vikings').then((media) => { //media is the structured object we created
+  api_helpers.getTvShow('Vikings').then((media) => { //media is the structured object we created
     console.log(media);
   });
 });
+<<<<<<< HEAD
 
 const searchBooks = function(query) {
   const formatted = query.replace(' ', '+');
@@ -347,3 +352,5 @@ function getProduct (query) {
     return product;
   })
 }
+=======
+>>>>>>> 272d6ba1765ec624b6328a9d0017127b6f57a3d9
