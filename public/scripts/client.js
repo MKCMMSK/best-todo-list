@@ -16,7 +16,7 @@ const createListElement = function(object) { //creates simple list item need to 
 
 const renderList = function(arr) { //prepends the database so that the top is the newest
   for (let item of arr) {
-    switch (item.cat_id) {
+    switch (item.category_id) {
     case 1:
       $(".to_read_list").prepend(createListElement(item));
       break;
