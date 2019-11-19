@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // $(() => {
 //   $.ajax({
 //     method: "GET",
@@ -10,10 +9,7 @@
 //   });;
 // });
 
-$(document).ready(function() {
-=======
-$(document).ready(function(){
->>>>>>> 8e6284d18fe259331e4c80e7bb2886badf3d548f
+$(document).ready(function () {
 
   $.ajax({
     method: "GET",
@@ -38,7 +34,7 @@ $(document).ready(function(){
   });
 });
 
-const searchBooks = function(query) {
+const searchBooks = function (query) {
   const formatted = query.replace(' ', '+');
   $.ajax({
     url: `https://www.googleapis.com/books/v1/volumes?q=${formatted}`,
@@ -59,10 +55,10 @@ const searchBooks = function(query) {
     });
 };
 
-const searchRestaurants = function(query) {
+const searchRestaurants = function (query) {
   const term = query.replace(' ', '+');
 
-  navigator.geolocation.getCurrentPosition(function(position) {
+  navigator.geolocation.getCurrentPosition(function (position) {
     const location = `${position.coords.latitude},${position.coords.longitude}`;
 
     $.ajax({
@@ -92,7 +88,7 @@ const searchRestaurants = function(query) {
 };
 
 
-const createListElement = function(object) { //creates simple list item need to implement overload for different categories
+const createListElement = function (object) { //creates simple list item need to implement overload for different categories
   let item = `
    <li>
       <div class="collapsible-header">${object.title}</div>
@@ -102,8 +98,7 @@ const createListElement = function(object) { //creates simple list item need to 
   return item;
 };
 
-<<<<<<< HEAD
-const renderList = function(arr) { //prepends the database so that the top is the newest
+const renderList = function (arr) { //prepends the database so that the top is the newest
   for (let item of arr) {
     switch (item.cat_id) {
     case 1:
@@ -120,40 +115,11 @@ const renderList = function(arr) { //prepends the database so that the top is th
       break;
     case 5:
       $(".misc_list").prepend(createListElement(item));
-=======
-function createToEatElement(object) { //creates simple list item need to implement overload for different categories
-  let item = `
-   <li>
-      <div class="collapsible-header">${object.title}</div>
-      <div class="collapsible-body">${object.description}</div>
-   </li>`;
-
-  return item;
-}
-
-function renderList(arr) { //prepends the database so that the top is the newest
-  for (let item of arr) {
-    switch (item.cat_id) {
-      case 1:
-        $(".to_read_list").prepend(createListElement(item));
-        break;
-      case 2:
-        $(".to_watch_list").prepend(createListElement(item));
-        break;
-      case 3:
-        $(".to_eat_list").prepend(createListElement(item));
-        break;
-      case 4:
-        $(".to_buy_list").prepend(createListElement(item));
-        break;
-      case 5:
-        $(".misc_list").prepend(createListElement(item));
->>>>>>> 8e6284d18fe259331e4c80e7bb2886badf3d548f
     }
   }
-}
+};
 
-function getMovie(query) { //ajax returns promise, use .then((media)=> {}) to grab media to manipulate
+const getMovie = function(query) { //ajax returns promise, use .then((media)=> {}) to grab media to manipulate
   let apiKey = '21db764af2f1a3095fa9ef7cc96fef08';
   let queryParsed = '';
   let media;
@@ -236,8 +202,8 @@ function getMovie(query) { //ajax returns promise, use .then((media)=> {}) to gr
     }
   ];
   let movieGenre = '';
-  for (let i = 0; i <  query.length; i++) {
-    if (query.charAt(i) === ' '){
+  for (let i = 0; i < query.length; i++) {
+    if (query.charAt(i) === ' ') {
       queryParsed += '%20';
     } else {
       queryParsed += query.charAt(i);
@@ -248,7 +214,7 @@ function getMovie(query) { //ajax returns promise, use .then((media)=> {}) to gr
     method: 'GET',
     url: `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${queryParsed}`
 
-  }).then((options)=> {
+  }).then((options) => {
     let item = options.results[0];
     movieGenre = item.genre_ids[0];
     for (let genre of genres) {
@@ -257,21 +223,21 @@ function getMovie(query) { //ajax returns promise, use .then((media)=> {}) to gr
         break;
       }
     }
-      media = {
-        category_id:2,
-        title: item.title,
-        description: item.overview,
-        genre: movieGenre,
-        img: `https://image.tmdb.org/t/p/w154/${item.poster_path}`
-       }
-     return media;
+    media = {
+      category_id: 2,
+      title: item.title,
+      description: item.overview,
+      genre: movieGenre,
+      img: `https://image.tmdb.org/t/p/w154/${item.poster_path}`
+    };
+    return media;
   });
-}
+};
 
-function getTvShow(query) { //pretty much identical code except for genres and for slight api url path. should we merge and add format to function so we only have 1 function for media?
+const getTvShow = function(query) { //pretty much identical code except for genres and for slight api url path. should we merge and add format to function so we only have 1 function for media?
   let apiKey = '21db764af2f1a3095fa9ef7cc96fef08';
   let queryParsed = '';
-  let genres= [
+  let genres = [
     {
       "id": 10759,
       "name": "Action & Adventure"
@@ -338,67 +304,11 @@ function getTvShow(query) { //pretty much identical code except for genres and f
     }
   ];
 
-  for (let i = 0; i <  query.length; i++) {
-    if (query.charAt(i) === ' '){
+  for (let i = 0; i < query.length; i++) {
+    if (query.charAt(i) === ' ') {
       queryParsed += '%20';
     } else {
       queryParsed += query.charAt(i);
     }
   }
-<<<<<<< HEAD
 };
-=======
-
-  return $.ajax({
-    method: 'GET',
-    url: `https://api.themoviedb.org/3/search/tv?api_key=${apiKey}&language=en-US&query=${queryParsed}`
-
-  }).then((options)=> {
-    let item = options.results[0];
-    movieGenre = item.genre_ids[0];
-    for (let genre of genres) {
-      if (genre.id === movieGenre) {
-        movieGenre = genre.name;
-        break;
-      }
-    }
-    media = {
-      category_id:2,
-      title: item.original_name,
-      description: item.overview,
-      genre: movieGenre,
-      img: `https://image.tmdb.org/t/p/w154/${item.poster_path}`
-     }
-   return media;
-  });
-}
-
-// Map for ToEat lists, need a way to enter new entrys of lat and lng
-/* <div id="map"></div>
-<script>
-  var map;
-  function initMap() {
-   map = new google.maps.Map(document.getElementById('map'), {
-   center: {lat: -34.397, lng: 150.644},
-  zoom: 8
-  });
-  }
-  </script>
- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCz8KPGUWJzzmBPHXerTA9nDTS5ptGoQc&callback=initMap"
-  type="text/javascript"></script> */
-
-  // <!-- PLACES API -->
-
-  //  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCz8KPGUWJzzmBPHXerTA9nDTS5ptGoQc&libraries=places"></script>
-
-  //   <!-- GOOGLE MAP API-->
-  // <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCz8KPGUWJzzmBPHXerTA9nDTS5ptGoQc&callback=initMap"
-  //     type="text/javascript"></script>
-
-  // <style>
-  //   #map {
-  //   width: 500px;
-  //   height: 500px;
-  //    }
-  // </style>
->>>>>>> 8e6284d18fe259331e4c80e7bb2886badf3d548f
