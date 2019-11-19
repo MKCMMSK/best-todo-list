@@ -7,24 +7,24 @@
 
 const express = require('express');
 const router = express.Router();
+const { getBooks, getRestaurants, getMovie, getTvShow } = require('../lib/util/api_helpers');
 
-module.exports = (db) => {
-  router.get("/", (req, res) => {
-    db.query(`SELECT *
-              FROM to_do_user_specifics
-              WHERE user_id = 1
-              ;`)
-      .then(data => {
-        const items = data.rows;
-        res.json(items);
-      });
-  });
+module.exports = (helpers) => {
+  // router.get("/", (req, res) => {
+  //   db.query(`SELECT *
+  //             FROM todo_items
+  //             ;`)
+  //     .then(data => {
+  //       const items = data.rows;
+  //       res.json(items);
+  //     });
+  // });
 
   router.post('/', (req, res) => {
     const query = req.body.todo;
-    // api call, formats book in object
-    // addbook sql, returning *
-    //res.rows
+    getBooks(query, (err, book) => {
+      helpers.addBook(book);
+    });
     res.json(query);
   });
 
