@@ -1,9 +1,11 @@
+
 $(document).ready(function(){
 
   $.ajax({
     method: "GET",
     url: "/items" //gets product in position 0 aka only item yeezy
   }).done((product) => {
+    console.log(product);
     renderList(product);
   });
 
@@ -21,8 +23,6 @@ $(document).ready(function(){
   getTvShow('Vikings').then((media) => { //media is the structured object we created
     console.log(media);
   });
-
-
 });
 
 const searchBooks = function(query) {
@@ -89,19 +89,10 @@ function createListElement(object) { //creates simple list item need to implemen
   return item;
 }
 
-function createToEatElement(object) { //creates simple list item need to implement overload for different categories
-  let item = `
-   <li>
-      <div class="collapsible-header">${object.title}</div>
-      <div class="collapsible-body">${object.description}</div>
-   </li>`;
-
-  return item;
-}
 
 function renderList(arr) { //prepends the database so that the top is the newest
   for (let item of arr) {
-    switch (item.cat_id) {
+    switch (item.category_id) {
       case 1:
         $(".to_read_list").prepend(createListElement(item));
         break;
@@ -236,7 +227,7 @@ function getMovie(query) { //ajax returns promise, use .then((media)=> {}) to gr
 }
 
 function getTvShow(query) { //pretty much identical code except for genres and for slight api url path. should we merge and add format to function so we only have 1 function for media?
-  let apiKey = process.env.mediaKey;
+  let apiKey = '21db764af2f1a3095fa9ef7cc96fef08';
   let queryParsed = '';
   let genres= [
     {
@@ -337,23 +328,22 @@ function getTvShow(query) { //pretty much identical code except for genres and f
   });
 }
 
-
 function getProduct (query) {
   let API_token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlc3JucjJ3Mjd0YXNhMXd5Nm5iaGRwMjZkYnhpZDBzZiIsImlzcyI6ImRhdGFmaW5pdGkuY28ifQ.sHCtoqLdEWCXnFKCshSzd2UjrSFNHftAMTpZ20KXYgcAixWTZd-djGatj-rgxNtx0izMC4wIRm1-ZJKpI2e7M_xrVKuQGMepz3NYCzQVB9DIm_axsxYjbxNeLDfNZudOSjvBxEIN3d3Y9evjK9TG0ILzTNN_oDEWUys-5VWnVB08CJNgf436l8UScDe7dkySl5xRk2Mt58bdCFakPJfiMCqM4x4zD23XTeKu50tAkS7pXBWpBebp6vET_w9CJqqY7sLtvfACachnDHFt4ljLCS8kDDP0k7FsSmAfd4gnp-qa9fmA_2Cg_yobQxlarvr6beJ6jlzqN-n9PfsMLQLrZtdlr5RAqbSWAYwwZLqiSGJnu4tPQCw0HNK9LW_jIcJJh_uHocshsVh9xsHHFrGQucROWVsMjiwNE2KULZtkay35nr-sg_syMMOq4loHA8viPwDOlJ-Nwksa-h5VIIULKCoz-HDUs3T2z1jZbdCMuas4wtveo8t5tDvTYJmpDKdbCfdGvs4RoHZ_hsPEkuWmyR5SaFsVCPWk1t4ziL6Ews_OoDvVhumCGp1SCrSIUY-zFsrmJ6iw0fZuGmrB1Auwjb6UJOBjepuAs0Y0UtK6LIsabGLwvT7Y9sMbRXMshykI-Ek0n__m2QiLw6G-pxoRxcaLTEDtGdaH1c_vwpcnTQ8';
   return $.ajax({
     method: 'POST',
     url: 'https://api.datafiniti.co/v4/products/search',
-    json: {
+    data: JSON.stringify({
       'query': query,
       'format': 'JSON',
       'num_records': 1,
       'download': false
-    },
+    }),
     headers: {
       'Authorization': 'Bearer ' + API_token,
       'Content-Type': 'application/json'
     }
   }).then((product) => {
-    console.log(product);
+    return product;
   })
 }
