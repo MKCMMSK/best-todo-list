@@ -18,6 +18,11 @@ module.exports = (db) => {
         res.json(items);
       });
   });
+
+  router.post('/', (req, res) => {
+    res.send(req.body);
+  });
+
   return router;
 };
 
