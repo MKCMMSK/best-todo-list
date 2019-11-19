@@ -8,22 +8,31 @@
 const express = require('express');
 const router = express.Router();
 
-module.exports = (db) => {
-  router.get("/", (req, res) => {
-    db.query(`SELECT *
-              FROM todo_items
-              ;`)
-      .then(data => {
-        const items = data.rows;
-        res.json(items);
-      });
-  });
+module.exports = (helpers) => {
+  // router.get("/", (req, res) => {
+  //   db.query(`SELECT *
+  //             FROM todo_items
+  //             ;`)
+  //     .then(data => {
+  //       const items = data.rows;
+  //       res.json(items);
+  //     });
+  // });
 
   router.post('/', (req, res) => {
     const query = req.body.todo;
-    // api call, formats book in object
-    // addbook sql, returning *
-    //res.rows
+    const obj = {
+      category_id: 1,
+      title: 'harry potter',
+      description: 'desc',
+      url: 'url',
+      img: 'image',
+      author: 'jk rowling',
+      publication_date: 1111,
+      page_length: 11,
+      genre: 'genre'
+    }
+    helpers.addBook(obj);
     res.json(query);
   });
 
