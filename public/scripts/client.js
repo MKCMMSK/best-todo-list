@@ -1,6 +1,7 @@
 
 $(document).ready(function(){
 
+
   $.ajax({
     method: "GET",
     url: "/items" //gets product in position 0 aka only item yeezy
@@ -10,8 +11,17 @@ $(document).ready(function(){
 
   // submit form with ajax
   $('#newToDo').submit((event) => {
+    const query = $('#compose').val();
     event.preventDefault();
-    const query = $('#search').val();
+    $.ajax({
+      url: '/items',
+      method: 'POST',
+      data: {todo: query},
+      success: function(res) {
+        console.log(res);
+      }
+    })
+    // .then(console.log(query));
   });
 
   // collapsible functionality for index

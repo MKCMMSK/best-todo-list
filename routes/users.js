@@ -19,6 +19,15 @@ module.exports = (db) => {
         res.json(items);
       });
   });
+
+  router.post('/', (req, res) => {
+    const query = req.body.todo;
+    // api call, formats book in object
+    // addbook sql, returning *
+    //res.rows
+    res.json(query);
+  });
+
   return router;
 };
 
