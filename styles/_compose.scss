@@ -1,0 +1,16 @@
+form {
+  width: 80%;
+  margin: 15px auto;
+}
+
+#compose {
+  background-color: #FFF;
+  resize: none;
+  border: 1px solid $medium;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+#newToDo button {
+  background-color: $medium-dark;
+}

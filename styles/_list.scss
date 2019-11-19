@@ -1,0 +1,14 @@
+.collapsible * {
+  border-radius: 10px;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+.collapsible.popout>li {
+  margin-bottom: 7px;
+  background-color: $light;
+}
+
+.collapsible.popout>li.active {
+  background-color: $light;
+}
