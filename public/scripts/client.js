@@ -10,7 +10,7 @@ $(document).ready(function(){
 
   // submit form with ajax
   $('#newToDo').submit((event) => {
-    event.preventDefault();
+    // event.preventDefault();
     const query = $('#search').val();
   });
 
