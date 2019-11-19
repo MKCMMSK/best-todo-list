@@ -20,7 +20,7 @@ module.exports = (db) => {
   });
 
   router.post('/', (req, res) => {
-    res.send(req.body);
+    res.send(req.body.compose);
   });
 
   return router;
