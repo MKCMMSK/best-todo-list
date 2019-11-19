@@ -20,7 +20,9 @@ module.exports = (db) => {
   });
 
   router.post('/', (req, res) => {
-    res.send(req.body.compose);
+    // api call, formats book in object
+    // addbook
+    res.send('server received');
   });
 
   return router;

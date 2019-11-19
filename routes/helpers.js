@@ -15,7 +15,7 @@ module.exports = (db) {
     SELECT $10, (SELECT id FROM new_todo)
     WHERE EXISTS (SELECT * FROM new_todo);`;
 
-    return pool
+    return db
     .query(newBook, [book.category_id, `${book.title}`, `${book.description}`, `${book.url}`, `${book.img}`, `${book.author}`, `${book.publication_date}`, book.page_length, `${book.genre}`, userId])
     .then(res => res.rows)
     .catch((err) => {
@@ -24,6 +24,6 @@ module.exports = (db) {
 
   }
 
-  return { addBook };
+  // return { addBook };
 };
 

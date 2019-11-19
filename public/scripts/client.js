@@ -10,8 +10,17 @@ $(document).ready(function(){
 
   // submit form with ajax
   $('#newToDo').submit((event) => {
-    // event.preventDefault();
-    const query = $('#search').val();
+    const query = $('#compose').val();
+    event.preventDefault();
+    $.ajax({
+      url: '/items',
+      method: 'POST',
+      data: $(this).serialize(),
+      success: function(res) {
+        console.log(res);
+      }
+    })
+    // .then(console.log(query));
   });
 
   // collapsible functionality for index
