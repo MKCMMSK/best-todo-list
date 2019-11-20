@@ -33,10 +33,6 @@ $(document).ready(function(){
   // collapsible functionality for index
   $('.collapsible').collapsible();
 
-  getMovie('Vikings').then((media) => { //media is the structured object we created
-    console.log(media);
-  });
-
 
 });
 
@@ -47,6 +43,9 @@ function createListElement(object) { //creates simple list item need to implemen
       <div class="collapsible-body">
       <a href=${object.url} target=_blank><img src=${object.img}></a>
       <p>${object.description}</p>
+      `
+  item += `
+      <p>${object.note}</p>
       </div>
    </li>`;
 
