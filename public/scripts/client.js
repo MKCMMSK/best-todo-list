@@ -1,19 +1,23 @@
+$(document).ready(function(){
 
-$(document).ready(function () {
   loadItems();
 
   // submit form with ajax
-  $(function() {
-    $('#newToDo').submit((event) => {
-      const query = $('#compose').val();
-      event.preventDefault();
-      $.ajax({
+  $('#newToDo').submit((event) => {
+    event.preventDefault();
+    const query = $('#compose').val();
+    getPosition()
+    .then((latlong) => {
+      return $.ajax({
         url: '/',
         method: 'POST',
-        data: { todo: query }
+        data: {
+          todo: query,
+          location: latlong
+        }
       })
-        .then(loadItems);
-    });
+    })
+    .then(loadItems);
   });
 
   // submit logout with ajax
@@ -22,7 +26,7 @@ $(document).ready(function () {
       $.ajax({
         method: "POST",
         url: "/logout",
-      })
+      });
     });
   });
 
@@ -32,6 +36,8 @@ $(document).ready(function () {
   getMovie('Vikings').then((media) => { //media is the structured object we created
     console.log(media);
   });
+
+
 });
 
 function createListElement(object) { //creates simple list item need to implement overload for different categories
@@ -76,4 +82,12 @@ const loadItems = function () {
   }).done((product) => {
     renderList(product);
   });
-}
+};
+
+const getPosition = function() {
+  return new Promise (function(resolve, reject){
+    navigator.geolocation.getCurrentPosition(function (position) {
+      resolve(`${position.coords.latitude},${position.coords.longitude}`);
+    });
+  });
+};

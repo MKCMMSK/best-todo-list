@@ -36,6 +36,26 @@ module.exports = (db) => {
 
   }
 
-  return { addBook, getItems };
-};
+  const addRestaurant = function(restaurant) {
+    const newRestaurant = `
+    WITH new_todo AS (
+      INSERT INTO todo_items (category_id, title, description, url, img)
+      SELECT $1, $2, $3, $4, $5
+      WHERE NOT EXISTS (SELECT * FROM todo_items WHERE url = $4::varchar)
+      RETURNING id
+    )
+    INSERT INTO restaurants (todo_item_id, street_address, city, province_state, country, google_map_url)
+    SELECT (SELECT id FROM new_todo), $6, $7, $8, $9, $10
+    WHERE EXISTS (SELECT * FROM new_todo)
+    ;`;
 
+    return db
+    .query(newRestaurant, [restaurant.category_id, `${restaurant.title}`, `${restaurant.description}`, `${restaurant.url}`, `${restaurant.img}`, `${restaurant.street_address}`, `${restaurant.city}`, `${restaurant.province_state}`, `${restaurant.country}`, `${restaurant.google_map_url}`])
+    .then(res => res.rows[0])
+    .catch((err) => {
+      console.error(err);
+    })
+  }
+
+  return { addBook, getItems, addRestaurant };
+};
