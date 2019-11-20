@@ -32,7 +32,7 @@ $(document).ready(function(){
     $.ajax({
       url: '/',
       method: 'PUT',
-      data: { todo: todoId }
+      data: { archiveId: todoId }
     })
     .then(loadItems);
 

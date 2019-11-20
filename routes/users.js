@@ -30,8 +30,9 @@ module.exports = (helpers) => {
     })
   });
 
-  router.put('/', (req,res) => {
-    //
+  router.put('/', (req, res) => {
+    const todo = req.body.archiveId;
+    helpers.archiveItem(todo)
   })
 
   return router;
