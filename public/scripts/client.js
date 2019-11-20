@@ -69,3 +69,8 @@ const loadItems = function() {
     renderList(product);
   });
 }
+
+const getPosition = function() {
+  navigator.geolocation.getCurrentPosition(function (position) {
+  return `${position.coords.latitude},${position.coords.longitude}`;
+}
