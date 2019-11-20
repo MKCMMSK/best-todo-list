@@ -40,7 +40,7 @@ const helpers = require('./routes/helpers')(db);
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/items", usersRoutes(helpers));
+app.use("/", usersRoutes(helpers));
 app.use("/api/widgets", widgetsRoutes(db));
 // Note: mount other resources here, using the same pattern above
 

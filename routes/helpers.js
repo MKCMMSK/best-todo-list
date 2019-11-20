@@ -1,4 +1,16 @@
 module.exports = (db) => {
+  const getItems = function() {
+    const allItems =
+    `SELECT * FROM todo_items;`;
+
+    return db
+    .query(allItems)
+    .then(res => res.rows)
+    .catch((err) => {
+      console.error(err);
+    });
+  };
+
   const addBook = function(book) {
     const newBook = `
     WITH new_todo AS (
@@ -22,6 +34,6 @@ module.exports = (db) => {
 
   }
 
-  return { addBook };
+  return { addBook, getItems };
 };
 

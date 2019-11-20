@@ -7,22 +7,19 @@
 
 const express = require('express');
 const router = express.Router();
-const { getBooks, getRestaurants, getMovie, getTvShow } = require('../lib/util/api_helpers');
+const { getBook, getRestaurants, getMovie, getTvShow } = require('../lib/util/api_helpers');
 
 module.exports = (helpers) => {
-  // router.get("/", (req, res) => {
-  //   db.query(`SELECT *
-  //             FROM todo_items
-  //             ;`)
-  //     .then(data => {
-  //       const items = data.rows;
-  //       res.json(items);
-  //     });
-  // });
+  router.get('/items', (req, res) => {
+    helpers.getItems()
+    .then((products) => {
+      res.send(products)
+    })
+  });
 
   router.post('/', (req, res) => {
     const query = req.body.todo;
-    getBooks(query, (err, book) => {
+    getBook(query, (err, book) => {
       helpers.addBook(book);
     });
     res.json(query);
