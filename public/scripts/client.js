@@ -1,24 +1,24 @@
-
 $(document).ready(function(){
 
   loadItems();
 
   // submit form with ajax
-  $(function() {
-    $('#newToDo').submit((event) => {
-      event.preventDefault();
-      const query = $('#compose').val();
-      $.ajax({
+  $('#newToDo').submit((event) => {
+    event.preventDefault();
+    const query = $('#compose').val();
+    getPosition()
+    .then((latlong) => {
+      return $.ajax({
         url: '/',
         method: 'POST',
         data: {
           todo: query,
-          location: getPosition()
+          location: latlong
         }
       })
-      .then(loadItems);
-    });
-  })
+    })
+    .then(loadItems);
+  });
 
   // collapsible functionality for index
   $('.collapsible').collapsible();

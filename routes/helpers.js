@@ -3,8 +3,7 @@ module.exports = (db) => {
     const allItems =
     `
     SELECT * FROM todo_items
-    JOIN to_do_user_specifics ON todo_items.id = user_id
-    WHERE user_id = 2;`;
+    ;`;
 
     return db
     .query(allItems)
