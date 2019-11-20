@@ -47,8 +47,15 @@ module.exports = (db) => {
     INSERT INTO restaurants (todo_item_id, street_address, city, province_state, country, google_map_url)
     SELECT (SELECT id FROM new_todo), $6, $7, $8, $9, $10
     WHERE EXISTS (SELECT * FROM new_todo)
-    ;`
+    ;`;
+
+    return db
+    .query(newRestaurant, [restaurant.category_id, `${restaurant.title}`, `${restaurant.description}`, `${restaurant.url}`, `${restaurant.img}`, `${restaurant.street_address}`, `${restaurant.city}`, `${restaurant.province_state}`, `${restaurant.country}`, `${restaurant.google_map_url}`])
+    .then(res => res.rows[0])
+    .catch((err) => {
+      console.error(err);
+    })
   }
 
-  return { addBook, getItems };
+  return { addBook, getItems, addRestaurant };
 };
