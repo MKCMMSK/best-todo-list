@@ -14,7 +14,7 @@ $(document).ready(function(){
     const query = $('#compose').val();
     event.preventDefault();
     $.ajax({
-      url: '/items',
+      url: '/',
       method: 'POST',
       data: {todo: query},
       success: function(res) {
