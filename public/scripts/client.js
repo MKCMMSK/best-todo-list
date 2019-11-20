@@ -10,7 +10,10 @@ $(document).ready(function(){
       $.ajax({
         url: '/',
         method: 'POST',
-        data: {todo: query}
+        data: {
+          todo: query,
+          location: getPosition()
+        }
       })
       .then(loadItems);
     });
@@ -71,6 +74,10 @@ const loadItems = function() {
 }
 
 const getPosition = function() {
+  let location = '';
   navigator.geolocation.getCurrentPosition(function (position) {
-  return `${position.coords.latitude},${position.coords.longitude}`;
-}
+  location = `${position.coords.latitude},${position.coords.longitude}`
+  })
+  console.log(location)
+  return location;
+};
