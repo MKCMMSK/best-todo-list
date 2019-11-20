@@ -13,6 +13,15 @@ module.exports = (db) => {
     });
   };
 
+  const archiveItem = function(item) {
+    const archive = `
+    UPDATE archived FROM to_do_user_specifics
+    JOIN to_do_user_specifics ON todo_items.id = todo_item_id
+    SET archived = true
+    WHERE user_id = $1 AND to_do_user_specifics.id = $2
+    `
+  }
+
   const addBook = function(book) {
     const newBook = `
     WITH new_todo AS (

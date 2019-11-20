@@ -23,15 +23,18 @@ $(document).ready(function(){
   // collapsible functionality for index
   $('.collapsible').collapsible();
 
-  // prevents checkbox click from expanding/collapsing item header
+  // on click of item checkbox
   $('div.checkbox').click(function(event) {
     event.stopPropagation();
     alert('checkbox was clicked');
     // ajax request to archive item
+    const todoId = $('li.active').attr('id')
     $.ajax({
       url: '/',
-      method: 'UPDATE'
+      method: 'PUT',
+      data: { todo: todoId }
     })
+    .then(loadItems);
 
   });
 
@@ -44,8 +47,8 @@ $(document).ready(function(){
 
 function createListElement(object) { //creates simple list item need to implement overload for different categories
   let item = `
-   <li>
-      <div class="collapsible-header item">
+   <li id=${object.to_do_user_specifics.id}>
+      <div class="collapsible-header">
 
         <div class="checkbox" style="border: 1px solid red"><label><input type="checkbox"><span></span></label></div>
 
