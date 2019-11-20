@@ -20,6 +20,16 @@ $(document).ready(function(){
     .then(loadItems);
   });
 
+  // submit logout with ajax
+  $(function () {
+    $('.logout').submit((event) => {
+      $.ajax({
+        method: "POST",
+        url: "/logout",
+      });
+    });
+  });
+
   // collapsible functionality for index
   $('.collapsible').collapsible();
 
@@ -65,14 +75,14 @@ function renderList(arr) { //prepends the database so that the top is the newest
 }
 
 
-const loadItems = function() {
+const loadItems = function () {
   $.ajax({
     method: "GET",
     url: "/items"
   }).done((product) => {
     renderList(product);
   });
-}
+};
 
 const getPosition = function() {
   return new Promise (function(resolve, reject){
@@ -80,4 +90,4 @@ const getPosition = function() {
       resolve(`${position.coords.latitude},${position.coords.longitude}`);
     });
   });
-}
+};
