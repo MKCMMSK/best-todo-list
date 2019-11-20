@@ -1,27 +1,33 @@
-
 $(document).ready(function(){
 
-
-  $.ajax({
-    method: "GET",
-    url: "/items" //gets product in position 0 aka only item yeezy
-  }).done((product) => {
-    renderList(product);
-  });
+  loadItems();
 
   // submit form with ajax
   $('#newToDo').submit((event) => {
-    const query = $('#compose').val();
     event.preventDefault();
-    $.ajax({
-      url: '/',
-      method: 'POST',
-      data: {todo: query},
-      success: function(res) {
-        console.log(res);
-      }
+    const query = $('#compose').val();
+    getPosition()
+    .then((latlong) => {
+      return $.ajax({
+        url: '/',
+        method: 'POST',
+        data: {
+          todo: query,
+          location: latlong
+        }
+      })
     })
-    // .then(console.log(query));
+    .then(loadItems);
+  });
+
+  // submit logout with ajax
+  $(function () {
+    $('.logout').submit((event) => {
+      $.ajax({
+        method: "POST",
+        url: "/logout",
+      });
+    });
   });
 
   // collapsible functionality for index
@@ -38,7 +44,10 @@ function createListElement(object) { //creates simple list item need to implemen
   let item = `
    <li>
       <div class="collapsible-header">${object.title}</div>
-      <div class="collapsible-body">${object.description}</div>
+      <div class="collapsible-body">
+      <a href=${object.url} target=_blank><img src=${object.img}></a>
+      <p>${object.description}</p>
+      </div>
    </li>`;
 
   return item;
@@ -66,3 +75,19 @@ function renderList(arr) { //prepends the database so that the top is the newest
 }
 
 
+const loadItems = function () {
+  $.ajax({
+    method: "GET",
+    url: "/items"
+  }).done((product) => {
+    renderList(product);
+  });
+};
+
+const getPosition = function() {
+  return new Promise (function(resolve, reject){
+    navigator.geolocation.getCurrentPosition(function (position) {
+      resolve(`${position.coords.latitude},${position.coords.longitude}`);
+    });
+  });
+};

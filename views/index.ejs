@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
     <!-- JS -->
@@ -17,12 +18,20 @@
   </head>
 
   <body>
-    <nav>Navigation</nav>
+    <nav><i class="material-icons">list</i> To-do List
+    <% if(locals.user) { %>
+      <form action="/logout" method="POST">
+        <button type="submit" class="logout btn-floating btn-large waves-effect waves-light" name="logout" value="<%= user %>">
+          <i class="material-icons">
+          Logout</i></button>
+      </form>
+    <% }; %>
+    </nav>
 
     <div>
       <form id="newToDo">
         <textarea name="compose" id="compose" placeholder="Add new to-do"></textarea>
-        <button type="submit">Compose</button>
+        <button type="submit" class="btn-floating btn-large waves-effect waves-light"><i class="material-icons">add</i></button>
       </form>
     </div>
 
@@ -54,7 +63,7 @@
           </div>
         </li>
 
-        <li class>
+        <li>
         <div class="collapsible-header">To Buy</div>
         <div class="collapsible-body">
           <ul class="collapsible popout to_buy_list">
