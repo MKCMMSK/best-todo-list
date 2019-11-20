@@ -22,8 +22,8 @@ module.exports = (helpers) => {
     const query = req.body.todo;
     getBook(query, (err, book) => {
       helpers.addBook(book);
+      res.json(query);
     });
-    res.json(query);
   });
 
   return router;
