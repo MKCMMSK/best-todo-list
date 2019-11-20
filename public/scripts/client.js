@@ -28,7 +28,7 @@ $(document).ready(function(){
     event.stopPropagation();
     alert('checkbox was clicked');
     // ajax request to archive item
-    const todoId = $('li.active').attr('id')
+    const todoId = $(this).parent().parent().attr('id')
     $.ajax({
       url: '/',
       method: 'PUT',
