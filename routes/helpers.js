@@ -36,5 +36,19 @@ module.exports = (db) => {
 
   }
 
+  const addRestaurant = function(restaurant) {
+    const newRestaurant = `
+    WITH new_todo AS (
+      INSERT INTO todo_items (category_id, title, description, url, img)
+      SELECT $1, $2, $3, $4, $5
+      WHERE NOT EXISTS (SELECT * FROM todo_items WHERE url = $4::varchar)
+      RETURNING id
+    )
+    INSERT INTO restaurants (todo_item_id, street_address, city, province_state, country, google_map_url)
+    SELECT (SELECT id FROM new_todo), $6, $7, $8, $9, $10
+    WHERE EXISTS (SELECT * FROM new_todo)
+    ;`
+  }
+
   return { addBook, getItems };
 };
