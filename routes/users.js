@@ -22,7 +22,7 @@ module.exports = (helpers) => {
       })
   });
 
-  router.get("/:id", (req, res) => {
+  router.get("/users/:id", (req, res) => {
     const userID = req.params.id;
     // set session cookie
     req.session.user_id = userID;

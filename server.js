@@ -11,7 +11,7 @@ const sass       = require("node-sass-middleware");
 const app        = express();
 const morgan     = require('morgan');
 
-const { getBook, getRestaurant, getMovie, getTvShow, getProduct } = require("./lib/util/api_helpers.js");
+const { getAPIToDo } = require("./lib/util/api_helpers.js");
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
@@ -62,3 +62,7 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
+
+// getToDo('harry potter', (err, endProduct)=>{console.log(endProduct)});
+getAPIToDo('happiness advantage',"49.2812368,-123.1171883", (err,loc,toDo) => {console.log(toDo)});
