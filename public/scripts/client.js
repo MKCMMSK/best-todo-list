@@ -4,7 +4,7 @@ $(document).ready(function(){
 
   $.ajax({
     method: "GET",
-    url: "/" //gets product in position 0 aka only item yeezy
+    url: "/items" //gets product in position 0 aka only item yeezy
   }).done((product) => {
     renderList(product);
   });
@@ -30,6 +30,8 @@ $(document).ready(function(){
   getMovie('Vikings').then((media) => { //media is the structured object we created
     console.log(media);
   });
+
+
 });
 
 function createListElement(object) { //creates simple list item need to implement overload for different categories
