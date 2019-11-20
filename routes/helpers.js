@@ -1,7 +1,9 @@
 module.exports = (db) => {
-  const getItems = function() {
+  const getItems = function(user) {
     const allItems =
-    `SELECT * FROM todo_items;`;
+    `SELECT * FROM todo_items
+     JOIN to_do_user_specifics ON todo_items.id = todo_item_id
+     WHERE user_id = ${user};`;
 
     return db
     .query(allItems)

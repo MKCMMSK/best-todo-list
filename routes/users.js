@@ -13,7 +13,7 @@ module.exports = (helpers) => {
   router.get('/items', (req, res) => {
     const currentUser = req.session.user_id;
     console.log(`current user: ${currentUser}`);
-    helpers.getItems()
+    helpers.getItems(currentUser)
       .then((products) => {
         res.send(products)
       })
