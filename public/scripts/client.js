@@ -1,21 +1,24 @@
-
 $(document).ready(function(){
-  
+
   loadItems();
 
   // submit form with ajax
-  $(function() {
-    $('#newToDo').submit((event) => {
-      const query = $('#compose').val();
-      event.preventDefault();
-      $.ajax({
+  $('#newToDo').submit((event) => {
+    event.preventDefault();
+    const query = $('#compose').val();
+    getPosition()
+    .then((latlong) => {
+      return $.ajax({
         url: '/',
         method: 'POST',
-        data: {todo: query}
+        data: {
+          todo: query,
+          location: latlong
+        }
       })
-      .then(loadItems);
-    });
-  })
+    })
+    .then(loadItems);
+  });
 
   // collapsible functionality for index
   $('.collapsible').collapsible();
@@ -68,5 +71,13 @@ const loadItems = function() {
     url: "/items"
   }).done((product) => {
     renderList(product);
+  });
+}
+
+const getPosition = function() {
+  return new Promise (function(resolve, reject){
+    navigator.geolocation.getCurrentPosition(function (position) {
+      resolve(`${position.coords.latitude},${position.coords.longitude}`);
+    });
   });
 }
