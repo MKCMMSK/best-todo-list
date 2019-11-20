@@ -1,0 +1,22 @@
+// See: https://sass-lang.com/
+// https://coolors.co/333533-fbf2c0-656256-b6c8a9-f5f8de
+
+// declare variables
+$light: #F5F8DE;
+$medium-light: #FBF2C0;
+$medium: #B6C8A9;
+$medium-dark: #656256;
+$dark: #333533;
+
+
+body {
+  background-color: $medium;
+
+  h1 {
+    color: #244751;
+  }
+}
+
+@import 'nav';
+@import 'compose';
+@import 'list';
