@@ -1,6 +1,9 @@
 form {
   width: 80%;
   margin: 15px auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 #compose {
@@ -9,6 +12,8 @@ form {
   border: 1px solid $medium;
   border-radius: 10px;
   padding: 12px;
+  width: 85%;
+  margin: auto
 }
 
 #newToDo button {
