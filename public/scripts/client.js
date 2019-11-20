@@ -4,7 +4,7 @@ $(document).ready(function(){
 
   $.ajax({
     method: "GET",
-    url: "/" //gets product in position 0 aka only item yeezy
+    url: "/items" //gets product in position 0 aka only item yeezy
   }).done((product) => {
     renderList(product);
   });
