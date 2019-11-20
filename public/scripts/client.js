@@ -1,12 +1,13 @@
 
 $(document).ready(function(){
+
   loadItems();
 
   // submit form with ajax
   $(function() {
     $('#newToDo').submit((event) => {
-      const query = $('#compose').val();
       event.preventDefault();
+      const query = $('#compose').val();
       $.ajax({
         url: '/',
         method: 'POST',
@@ -74,10 +75,9 @@ const loadItems = function() {
 }
 
 const getPosition = function() {
-  let location = '';
-  navigator.geolocation.getCurrentPosition(function (position) {
-  location = `${position.coords.latitude},${position.coords.longitude}`
-  })
-  console.log(location)
-  return location;
-};
+  return new Promise (function(resolve, reject){
+    navigator.geolocation.getCurrentPosition(function (position) {
+      resolve(`${position.coords.latitude},${position.coords.longitude}`);
+    });
+  });
+}
