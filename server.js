@@ -57,3 +57,6 @@ app.listen(PORT, () => {
 });
 
 
+getRestaurant('Minami', '49.2823766,-123.1153151', (err, loc, rest) => {
+  console.log(rest);
+})
