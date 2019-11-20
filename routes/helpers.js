@@ -1,9 +1,9 @@
 module.exports = (db) => {
-  const getItems = function() {
+  const getItems = function(user) {
     const allItems =
-    `
-    SELECT * FROM todo_items
-    ;`;
+    `SELECT * FROM todo_items
+     JOIN to_do_user_specifics ON todo_items.id = todo_item_id
+     WHERE user_id = ${user};`;
 
     return db
     .query(allItems)
@@ -19,7 +19,7 @@ module.exports = (db) => {
     JOIN to_do_user_specifics ON todo_items.id = todo_item_id
     SET archived = true
     WHERE to_do_user_specifics.id = $1
-    `;
+    ;`;
 
     return db
     .query(archive, [todo])

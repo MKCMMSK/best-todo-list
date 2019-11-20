@@ -20,23 +20,25 @@ $(document).ready(function(){
     .then(loadItems);
   });
 
+  // submit logout with ajax
+  $(function () {
+    $('.logout').submit((event) => {
+      $.ajax({
+        method: "POST",
+        url: "/logout",
+      });
+    });
+  });
+
   // collapsible functionality for index
   $('.collapsible').collapsible();
 
-  // on click of item checkbox
-  $('div.checkbox').click(function(event) {
-    event.stopPropagation();
-    alert('checkbox was clicked');
-    // ajax request to archive item
-    const todoId = $(this).parent().parent().attr('id')
-    $.ajax({
-      url: '/',
-      method: 'PUT',
-      data: { archiveId: todoId }
-    })
-    .then(loadItems);
+  console.log("hello");
+  const myBoxes = $('div.checkbox');
+  console.log(myBoxes.length);
 
-  });
+  // on click of item checkbox
+  // $('div.checkbox input').on('click', checkboxClickHandler);
 
   getMovie('Vikings').then((media) => { //media is the structured object we created
     console.log(media);
@@ -47,15 +49,15 @@ $(document).ready(function(){
 
 function createListElement(object) { //creates simple list item need to implement overload for different categories
   let item = `
-   <li id=${object.to_do_user_specifics.id}>
+    <li id=${object.id}>
       <div class="collapsible-header">
 
-        <div class="checkbox" style="border: 1px solid red"><label><input type="checkbox"><span></span></label></div>
+        <div class="checkbox" style="border: 1px solid red"><label><input type="checkbox"><span ></span></label></div>
 
         ${object.title}
       </div>
       <div class="collapsible-body">
-      <a href=${object.url} target=_blank><img src=${object.img}></a>
+      <a href="${object.url}" target=_blank><img src="${object.img}"></a>
       <p>${object.description}</p>
       </div>
    </li>`;
@@ -63,7 +65,20 @@ function createListElement(object) { //creates simple list item need to implemen
   return item;
 }
 
+function checkboxClickHandler(event) {
+  // ajax request to archive item
+  const todoId = $(this).parent().parent().parent().parent().attr('id')
+  $.ajax({
+    url: '/',
+    method: 'PUT',
+    data: { archiveId: todoId }
+  })
+  .then(loadItems);
+
+}
+
 function renderList(arr) { //prepends the database so that the top is the newest
+  // TODO: clean out the old maybe-wrong data (before filling in new)
   for (let item of arr) {
     switch (item.category_id) {
       case 1:
@@ -82,17 +97,19 @@ function renderList(arr) { //prepends the database so that the top is the newest
         $(".misc_list").prepend(createListElement(item));
     }
   }
+  $('div.checkbox input').on('click', checkboxClickHandler);
 }
 
 
-const loadItems = function() {
+const loadItems = function () {
+  console.log("doing loadItems");
   $.ajax({
     method: "GET",
     url: "/items"
-  }).done((product) => {
-    renderList(product);
+  }).done((itemList) => {
+    renderList(itemList);
   });
-}
+};
 
 const getPosition = function() {
   return new Promise (function(resolve, reject){
@@ -100,4 +117,4 @@ const getPosition = function() {
       resolve(`${position.coords.latitude},${position.coords.longitude}`);
     });
   });
-}
+};
