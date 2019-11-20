@@ -24,8 +24,15 @@ $(document).ready(function(){
   $('.collapsible').collapsible();
 
   // prevents checkbox click from expanding/collapsing item header
-  $('.checkbox').click(function(e) {
+  $('div.checkbox').click(function(event) {
     event.stopPropagation();
+    alert('checkbox was clicked');
+    // ajax request to archive item
+    $.ajax({
+      url: '/',
+      method: 'UPDATE'
+    })
+
   });
 
   getMovie('Vikings').then((media) => { //media is the structured object we created
@@ -39,7 +46,9 @@ function createListElement(object) { //creates simple list item need to implemen
   let item = `
    <li>
       <div class="collapsible-header item">
-        <label class="checkbox"><input type="checkbox"><span></span></label>
+
+        <div class="checkbox" style="border: 1px solid red"><label><input type="checkbox"><span></span></label></div>
+
         ${object.title}
       </div>
       <div class="collapsible-body">
