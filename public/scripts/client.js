@@ -64,7 +64,6 @@ const loadItems = function() {
     method: "GET",
     url: "/items"
   }).done((product) => {
-    console.log(product.length)
     renderList(product);
   });
 }
