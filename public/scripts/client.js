@@ -4,7 +4,7 @@ $(document).ready(function(){
 
   $.ajax({
     method: "GET",
-    url: "/items" //gets product in position 0 aka only item yeezy
+    url: "/" //gets product in position 0 aka only item yeezy
   }).done((product) => {
     renderList(product);
   });
@@ -14,7 +14,7 @@ $(document).ready(function(){
     const query = $('#compose').val();
     event.preventDefault();
     $.ajax({
-      url: '/items',
+      url: '/',
       method: 'POST',
       data: {todo: query},
       success: function(res) {
