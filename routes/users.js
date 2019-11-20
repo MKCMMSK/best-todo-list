@@ -7,12 +7,15 @@
 
 const express = require('express');
 const router = express.Router();
-const { getItems, getBook, getRestaurants, getMovie, getTvShow } = require('../lib/util/api_helpers');
+const { getBook, getRestaurants, getMovie, getTvShow } = require('../lib/util/api_helpers');
 
 module.exports = (helpers) => {
-  router.get("/", (req, res) => {
-    getItems();
-  });
+  // router.get('/', (req, res) => {
+  //   helpers.getItems()
+  //   .then((products) => {
+  //     res.send(products)
+  //   })
+  // });
 
   router.post('/', (req, res) => {
     const query = req.body.todo;
