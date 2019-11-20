@@ -11,8 +11,11 @@ const { getBook, getRestaurants, getMovie, getTvShow } = require('../lib/util/ap
 
 module.exports = (helpers) => {
   router.get('/items', (req, res) => {
-    const currentUser = req.session.user_id;
-    console.log(`current user: ${currentUser}`);
+    let currentUser = null;
+    if (req.session.user_id) {
+      currentUser = req.session.user_id;
+    };
+    //console.log(`current user: ${currentUser}`);
     helpers.getItems(currentUser)
       .then((products) => {
         res.send(products)
@@ -21,8 +24,8 @@ module.exports = (helpers) => {
 
   router.get("/:id", (req, res) => {
     const userID = req.params.id;
-      // set session cookie
-      req.session.user_id = userID;
+    // set session cookie
+    req.session.user_id = userID;
     res.redirect('/');
   });
 
