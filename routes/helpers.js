@@ -13,13 +13,20 @@ module.exports = (db) => {
     });
   };
 
-  const archiveItem = function(item) {
+  const archiveItem = function(todo) {
     const archive = `
     UPDATE archived FROM to_do_user_specifics
     JOIN to_do_user_specifics ON todo_items.id = todo_item_id
     SET archived = true
-    WHERE user_id = $1 AND to_do_user_specifics.id = $2
-    `
+    WHERE to_do_user_specifics.id = $1
+    `;
+
+    return db
+    .query(archive, [todo])
+    .then(res => res.rows)
+    .catch((err) => {
+      console.error(err);
+    });
   }
 
   const addBook = function(book) {
@@ -66,5 +73,5 @@ module.exports = (db) => {
     })
   }
 
-  return { addBook, getItems, addRestaurant };
+  return { addBook, getItems, addRestaurant, archiveItem };
 };
