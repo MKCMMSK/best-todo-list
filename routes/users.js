@@ -11,6 +11,8 @@ const { getBook, getRestaurants, getMovie, getTvShow } = require('../lib/util/ap
 
 module.exports = (helpers) => {
   router.get('/items', (req, res) => {
+    const currentUser = req.session.user_id;
+    console.log(`current user: ${currentUser}`);
     helpers.getItems()
       .then((products) => {
         res.send(products)
