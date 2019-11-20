@@ -20,9 +20,9 @@ module.exports = (helpers) => {
   router.post('/', (req, res) => {
     const query = req.body.todo;
     getBook(query, (err, book) => {
-      helpers.addBook(book);
-    });
-    res.json(query);
+      helpers.addBook(book)
+      .then(() => { res.json(query) });
+    })
   });
 
   return router;
