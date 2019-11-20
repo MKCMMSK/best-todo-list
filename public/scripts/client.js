@@ -36,7 +36,10 @@ function createListElement(object) { //creates simple list item need to implemen
   let item = `
    <li>
       <div class="collapsible-header">${object.title}</div>
-      <div class="collapsible-body">${object.description}</div>
+      <div class="collapsible-body">
+      <a href=${object.url} target=_blank><img src=${object.img}></a>
+      ${object.description}
+      </div>
    </li>`;
 
   return item;
