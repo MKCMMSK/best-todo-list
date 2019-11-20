@@ -5,10 +5,19 @@
 }
 
 .collapsible.popout>li {
+  display: block;
+  overflow: auto;
   margin-bottom: 7px;
   background-color: $light;
+  .active {
+    background-color: $light;
+  }
+  img {
+    float: left;
+    max-height: 140px;
+  }
 }
 
-.collapsible.popout>li.active {
-  background-color: $light;
+.collapsible-body {
+  border: none;
 }

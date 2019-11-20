@@ -1,28 +1,20 @@
 
 $(document).ready(function(){
-
-
-  $.ajax({
-    method: "GET",
-    url: "/items" //gets product in position 0 aka only item yeezy
-  }).done((product) => {
-    renderList(product);
-  });
+  loadItems();
 
   // submit form with ajax
-  $('#newToDo').submit((event) => {
-    const query = $('#compose').val();
-    event.preventDefault();
-    $.ajax({
-      url: '/',
-      method: 'POST',
-      data: {todo: query},
-      success: function(res) {
-        console.log(res);
-      }
-    })
-    // .then(console.log(query));
-  });
+  $(function() {
+    $('#newToDo').submit((event) => {
+      const query = $('#compose').val();
+      event.preventDefault();
+      $.ajax({
+        url: '/',
+        method: 'POST',
+        data: {todo: query}
+      })
+      .then(loadItems);
+    });
+  })
 
   // collapsible functionality for index
   $('.collapsible').collapsible();
@@ -38,7 +30,7 @@ function createListElement(object) { //creates simple list item need to implemen
       <div class="collapsible-header">${object.title}</div>
       <div class="collapsible-body">
       <a href=${object.url} target=_blank><img src=${object.img}></a>
-      ${object.description}
+      <p>${object.description}</p>
       </div>
    </li>`;
 
@@ -67,3 +59,12 @@ function renderList(arr) { //prepends the database so that the top is the newest
 }
 
 
+const loadItems = function() {
+  $.ajax({
+    method: "GET",
+    url: "/items"
+  }).done((product) => {
+    console.log(product.length)
+    renderList(product);
+  });
+}
