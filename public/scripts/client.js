@@ -33,7 +33,11 @@ $(document).ready(function(){
 function createListElement(object) { //creates simple list item need to implement overload for different categories
   let item = `
    <li>
-      <div class="collapsible-header">${object.title}</div>
+      <div class="collapsible-header item">
+        <label><input type="checkbox">
+        <span>${object.title}</span>
+        </label>
+      </div>
       <div class="collapsible-body">
       <a href=${object.url} target=_blank><img src=${object.img}></a>
       <p>${object.description}</p>
