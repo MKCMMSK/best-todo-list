@@ -12,16 +12,23 @@ const { getBook, getRestaurants, getMovie, getTvShow } = require('../lib/util/ap
 module.exports = (helpers) => {
   router.get('/items', (req, res) => {
     helpers.getItems()
-    .then((products) => {
-      res.send(products)
-    })
+      .then((products) => {
+        res.send(products)
+      })
+  });
+
+  router.get("/:id", (req, res) => {
+    const userID = req.params.id;
+      // set session cookie
+      req.session.user_id = userID;
+    res.redirect('/');
   });
 
   router.post('/', (req, res) => {
     const query = req.body.todo;
     getBook(query, (err, book) => {
       helpers.addBook(book)
-      .then(() => { res.json(query) });
+        .then(() => { res.json(query) });
     })
   });
 
