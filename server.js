@@ -55,8 +55,3 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
-
-
-getRestaurant('Minami', '49.2823766,-123.1153151', (err, loc, rest) => {
-  console.log(rest);
-})
