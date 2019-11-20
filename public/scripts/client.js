@@ -1,5 +1,6 @@
 
 $(document).ready(function(){
+  
   loadItems();
 
   // submit form with ajax
@@ -22,6 +23,8 @@ $(document).ready(function(){
   getMovie('Vikings').then((media) => { //media is the structured object we created
     console.log(media);
   });
+
+
 });
 
 function createListElement(object) { //creates simple list item need to implement overload for different categories
