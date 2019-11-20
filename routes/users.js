@@ -37,6 +37,11 @@ module.exports = (helpers) => {
     })
   });
 
+  router.post('/logout', (req, res) => {
+    req.session.user_id = null;
+    res.redirect('/');
+  });
+
   return router;
 };
 

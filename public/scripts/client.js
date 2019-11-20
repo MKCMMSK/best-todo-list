@@ -1,5 +1,5 @@
 
-$(document).ready(function(){
+$(document).ready(function () {
   loadItems();
 
   // submit form with ajax
@@ -10,11 +10,21 @@ $(document).ready(function(){
       $.ajax({
         url: '/',
         method: 'POST',
-        data: {todo: query}
+        data: { todo: query }
       })
-      .then(loadItems);
+        .then(loadItems);
     });
-  })
+  });
+
+  // submit logout with ajax
+  $(function () {
+    $('.logout').submit((event) => {
+      $.ajax({
+        method: "POST",
+        url: "/logout",
+      })
+    });
+  });
 
   // collapsible functionality for index
   $('.collapsible').collapsible();
@@ -59,7 +69,7 @@ function renderList(arr) { //prepends the database so that the top is the newest
 }
 
 
-const loadItems = function() {
+const loadItems = function () {
   $.ajax({
     method: "GET",
     url: "/items"
