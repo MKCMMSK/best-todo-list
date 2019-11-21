@@ -38,15 +38,26 @@ $(document).ready(function(){
   $('.collapsible').collapsible();
 
 
-  // archive view
-  $('select').formSelect();
+  // view completed items
+  // li class selected
+  $('#views')
+  .formSelect()
+  .change(function() {
+    let view = '';
+    $('#views option:selected').each(function() {
+      view += $(this).text();
+      if (view === 'To-do') {
+        alert('To-do items');
+      } else if (view === 'Completed') {
+        alert('completed items');
+      }
+    })
+  })
 
-  // on click of item checkbox
-  // $('div.checkbox input').on('click', checkboxClickHandler);
-
-  getMovie('Vikings').then((media) => { //media is the structured object we created
-    console.log(media);
-  });
+  // $.ajax({
+  //   method: 'GET',
+  //   url: '/completed'
+  // })
 
 
 });
