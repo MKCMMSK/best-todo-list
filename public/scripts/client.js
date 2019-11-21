@@ -203,9 +203,15 @@ const loadCompleted = function() {
   .then((itemList) => {
     renderList(itemList);
   })
-  .then(() => $('input[type=checkbox]').prop('checked', true))
-  .then(() => $('li.item').addClass('completed'))
-  .then(() => $('div.checkbox input').on('click', checkToDo));
+  .then(() => {
+    $('input[type=checkbox]').prop('checked', true)
+    $('li.item').addClass('completed')
+    $('#read').text('Read')
+    $('#watch').text('Watched')
+    $('#eat').text('Ate')
+    $('#buy').text('Bought')
+    $('div.checkbox input').on('click', checkToDo)
+  })
 }
 
 
