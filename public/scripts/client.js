@@ -46,6 +46,10 @@ $(document).ready(function(){
     $('#views option:selected').each(function() {
       view += $(this).text();
       if (view === 'To-do') {
+        $('#read').text('To Read')
+        $('#watch').text('To Watch')
+        $('#eat').text('To Eat')
+        $('#buy').text('To Buy')
         loadItems();
       } else if (view === 'Completed') {
         loadCompleted();
