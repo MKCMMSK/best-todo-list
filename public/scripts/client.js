@@ -60,7 +60,6 @@ function createListElement(object) {
   const top = `
     <li class="item" id=${object.user_specific_item_id}>
       <div class="collapsible-header">
-
         <div class="checkbox"><label><input type="checkbox"><span></span></label></div>
 
         ${object.title}
@@ -182,7 +181,6 @@ const renderList = function(arr) {
         $(".misc_list").prepend(createMiscSection(wrapAround));
     }
   }
-  $('div.checkbox input').on('click', checkCompleted);
 }
 
 
@@ -191,8 +189,11 @@ const loadItems = function() {
     method: "GET",
     url: "/items"
   })
-  .done((itemList) => {
+  .then((itemList) => {
     renderList(itemList);
+  })
+  .then(() => {
+    return $('div.checkbox input').on('click', checkCompleted);
   });
 };
 
@@ -201,9 +202,11 @@ const loadCompleted = function() {
     method: 'GET',
     url: '/completed'
   })
-  .done((itemList) => {
+  .then((itemList) => {
     renderList(itemList);
-  });
+  })
+  .then(() => $('input[type=checkbox]').prop('checked', true))
+  .then(() => $('li.item').addClass('completed'));
 }
 
 
