@@ -8,7 +8,7 @@ $(document).ready(function(){
 
   // submit form with ajax
   $('#newToDo').submit((event) => {
-    event.preventDefault();
+    // event.preventDefault();
     const query = $('#compose').val();
     getPosition()
     .then((latlong) => {
@@ -38,8 +38,7 @@ $(document).ready(function(){
   $('.collapsible').collapsible();
 
 
-  // view completed items
-  // li class selected
+  // view todo/completed items
   $('#views')
   .formSelect()
   .change(function() {

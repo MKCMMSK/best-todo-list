@@ -42,6 +42,21 @@ module.exports = (db) => {
     });
   }
 
+  const unarchiveItem = function(user, todo) {
+    const archive = `
+    UPDATE to_do_user_specifics
+    SET archived = false
+    WHERE user_id = $1 AND id = $2
+    ;`;
+
+    return db
+    .query(archive, [user, todo])
+    .then(res => res.rows)
+    .catch((err) => {
+      console.error(err);
+    });
+  }
+
   const addBook = function(book) {
     const newBook = `
     WITH new_todo AS (
@@ -86,5 +101,5 @@ module.exports = (db) => {
     })
   }
 
-  return { addBook, getItems, addRestaurant, archiveItem, getCompleted };
+  return { addBook, getItems, addRestaurant, archiveItem, getCompleted, unarchiveItem };
 };
