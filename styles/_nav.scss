@@ -2,4 +2,10 @@ nav {
   background-color: $dark;
   display: flex;
   justify-content: center;
+  .logout {
+    background-color: $medium-dark;
+  }
+  .logout:hover {
+    background-color: $medium;
+  }
 }

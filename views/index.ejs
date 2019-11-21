@@ -21,9 +21,9 @@
     <nav><i class="material-icons">list</i> To-do List
     <% if(locals.user) { %>
       <form action="/logout" method="POST">
-        <button type="submit" class="logout btn-floating btn-large waves-effect waves-light" name="logout" value="<%= user %>">
-          <i class="material-icons">
-          Logout</i></button>
+        <button type="submit" class="logout waves-effect waves-light btn" name="logout" value="<%= user %>">
+          Logout
+        </button>
       </form>
     <% }; %>
     </nav>
