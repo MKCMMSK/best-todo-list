@@ -139,7 +139,6 @@ const createMiscSection = function(wrap) {
 
 // ajax request to archive item
 const checkCompleted = function(event) {
-  event.stopPropagation();
   const todoId = $(this).parent().parent().parent().parent().attr('id')
   $.ajax({
     url: '/',
@@ -154,7 +153,8 @@ const checkToDo = function(event) {
   const todoId = $(this).parent().parent().parent().parent().attr('id')
   $.ajax({
     url: '/completed',
-    method: 'PUT'
+    method: 'PUT',
+    data: { archiveId: todoId }
   })
   .then(setTimeout(() => { loadCompleted(), 500}))
 }
@@ -192,9 +192,7 @@ const loadItems = function() {
   .then((itemList) => {
     renderList(itemList);
   })
-  .then(() => {
-    return $('div.checkbox input').on('click', checkCompleted);
-  });
+  .then(() => $('div.checkbox input').on('click', checkCompleted));
 };
 
 const loadCompleted = function() {
@@ -206,7 +204,8 @@ const loadCompleted = function() {
     renderList(itemList);
   })
   .then(() => $('input[type=checkbox]').prop('checked', true))
-  .then(() => $('li.item').addClass('completed'));
+  .then(() => $('li.item').addClass('completed'))
+  .then(() => $('div.checkbox input').on('click', checkToDo));
 }
 
 
