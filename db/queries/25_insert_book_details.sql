@@ -6,7 +6,7 @@ WITH new_todo AS (
   WHERE NOT EXISTS (SELECT * FROM todo_items WHERE url = 'www.cathat3.com')
   RETURNING id
 )
-INSERT INTO books (todo_item_id, author, publication_date, page_length, genre)
+INSERT INTO books (todo_item_id, author, publication_date, page_length, movietv_genre)
 SELECT (SELECT id FROM new_todo), 'Dr. Seuss', '1234', '123', 'Childrens book'
 WHERE EXISTS (SELECT * FROM new_todo)
 
