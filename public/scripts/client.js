@@ -73,9 +73,9 @@ function createListElement(object) { //creates simple list item need to implemen
   return item;
 }
 
-function checkboxClickHandler(event) {
+// ajax request to archive item
+const checkCompleted = function(event) {
   event.stopPropagation();
-  // ajax request to archive item
   const todoId = $(this).parent().parent().parent().parent().attr('id')
   $.ajax({
     url: '/',
@@ -83,6 +83,14 @@ function checkboxClickHandler(event) {
     data: { archiveId: todoId }
   })
   .then(setTimeout(() => { loadItems() }, 500))
+}
+
+// ajax request to unarchive item
+const checkToDo = function(event) {
+  const todoId = $(this).parent().parent().parent().parent().attr('id')
+  $.ajax({
+    url: ''
+  })
 }
 
 function renderList(arr) { //prepends the database so that the top is the newest
@@ -105,7 +113,7 @@ function renderList(arr) { //prepends the database so that the top is the newest
         $(".misc_list").prepend(createListElement(item));
     }
   }
-  $('div.checkbox input').on('click', checkboxClickHandler);
+  $('div.checkbox input').on('click', checkCompleted);
 }
 
 
