@@ -46,8 +46,8 @@ $easing: cubic-bezier(.25,1.7,.35,.8);
 .left-bar {
   position: absolute;
   background-color: transparent;
-  top: 20px;
-  left: -9px;
+  top: 15px;
+  left: -8px;
   width: 35px;
   height: 5px;
   display: block;
@@ -57,8 +57,8 @@ $easing: cubic-bezier(.25,1.7,.35,.8);
   &:after {
     content:"";
     background-color: $medium-dark;
-    width: 35px;
-    height: 7px;
+    width: 25px;
+    height: 3px;
     display: block;
     float: right;
     border-radius: 6px 10px 10px 6px;
@@ -70,8 +70,8 @@ $easing: cubic-bezier(.25,1.7,.35,.8);
 .right-bar {
   position: absolute;
   background-color: transparent;
-  top: 20px;
-  left: 14px;
+  top: 21px;
+  left: 12px;
   width: 35px;
   height: 5px;
   display: block;
@@ -81,8 +81,8 @@ $easing: cubic-bezier(.25,1.7,.35,.8);
   &:after {
     content:"";
     background-color: $medium-dark;
-    width: 35px;
-    height: 7px;
+    width: 25px;
+    height: 3px;
     display: block;
     float: right;
     border-radius: 10px 6px 6px 10px;
