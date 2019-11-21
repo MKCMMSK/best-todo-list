@@ -38,10 +38,10 @@ $(document).ready(function(){
 //creates simple list item need to implement overload for different categories
 function createListElement(object) {
   const top = `
-    <li class="item" id=${object.id}>
+    <li class="item" id=${object.user_specific_item_id}>
       <div class="collapsible-header">
 
-        <div class="checkbox" style="border: 1px solid red"><label><input type="checkbox"><span ></span></label></div>
+        <div class="checkbox"><label><input type="checkbox"><span></span></label></div>
 
         ${object.title}
       </div>
@@ -150,8 +150,8 @@ const renderList = function(arr) {
         break;
       case 5:
         $(".misc_list").prepend(createMiscSection(wrapAround));
-    };
-  };
+    }
+  }
   $('div.checkbox input').on('click', checkboxClickHandler);
 };
 
