@@ -23,6 +23,17 @@ module.exports = (helpers) => {
       })
   });
 
+  router.get('/completed', (req, res) => {
+    let currentUser = null;
+    if (req.session.user_id) {
+      currentUser = req.session.user_id;
+    }
+    helpers.getCompleted(currentUser)
+      .then((products) => {
+        res.send(products)
+      })
+  });
+
 
   router.get("/users/:id", (req, res) => {
 
