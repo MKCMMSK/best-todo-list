@@ -226,3 +226,11 @@ const getPosition = function() {
     });
   });
 };
+
+const register = function() {
+  $.ajax({
+    url: '/register',
+    method: 'POST',
+    data: form.serialize()
+  })
+}
