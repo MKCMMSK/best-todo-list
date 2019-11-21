@@ -45,7 +45,7 @@ const createBookSection = function(object) {
   <span class="genre">${object.books_genre}, </span>
   <span class="page_length">${object.page_length} pages</span>
   </p>
-  `
+  `;
   return bookDetails;
 };
 
@@ -59,26 +59,33 @@ const createMediaSection = function(object) {
   <span class="director">Director: ${object.director}</span> </br>
   <span class="actors">Actors: ${object.actors}</span>
   </p>
-  `
+  `;
   return mediaDetails;
 };
 
 // create the product-specific elements of the listElement
 const createProductSection = function(object) {
-  const createProductSection = `
+  const productDetails = `
   <p>
   <span class="brand">${object.brand}</span></br>
   <span class="cost">${object.cost} at </span>
   <a href=${object.url} class="vendor" target=_blank>${object.vendor}</a>
   </p>
-  `
-  return createProductSection;
+  `;
+  return productDetails;
 
 };
 
 // create the restaurant-specific elements of the listElement
 const createRestaurantSection = function(object) {
+  const restaurantDetails = `
+  <p>
+  <span class="address">${object.street_address}<br>${object.city}, ${object.province_state} ${object.country}</span> </br>
+  <a href=${object.google_map_url} class="get_directions" target=_blank>Get Directions</a>
+  </p>
+  `;
 
+  return restaurantDetails;
 };
 
 function createListElement(object) { //creates simple list item need to implement overload for different categories
