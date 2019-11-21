@@ -53,7 +53,7 @@ function createListElement(object) { //creates simple list item need to implemen
     <li class="item" id=${object.id}>
       <div class="collapsible-header">
 
-        <div class="checkbox" style="border: 1px solid red"><label><input type="checkbox"><span ></span></label></div>
+        <div class="checkbox"><label><input type="checkbox"><span ></span></label></div>
 
         ${object.title}
       </div>
