@@ -22,7 +22,7 @@ module.exports = (helpers) => {
       })
   });
 
-  router.get("/:id", (req, res) => {
+  router.get("/users/:id", (req, res) => {
     const userID = req.params.id;
     // set session cookie
     req.session.user_id = userID;
@@ -32,15 +32,15 @@ module.exports = (helpers) => {
   router.post('/', (req, res) => {
     const query = req.body.todo;
     const location = req.body.location;
-    console.log('query', query, 'locatin', location);
+    console.log('query', query, 'location', location);
     getBook(query, (err, book) => {
       helpers.addBook(book)
         .then(() => { res.json(query) });
     })
-    getRestaurant(query, location, (a, b, restaurant) => {
-      helpers.addRestaurant(restaurant)
-      .then(() => { res.json(query) });
-    })
+    // getRestaurant(query, location, (a, b, restaurant) => {
+    //   helpers.addRestaurant(restaurant)
+    //   .then(() => { res.json(query) });
+    // })
   });
 
   router.post('/logout', (req, res) => {
