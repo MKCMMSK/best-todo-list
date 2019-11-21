@@ -70,12 +70,11 @@ function checkboxClickHandler(event) {
     method: 'PUT',
     data: { archiveId: todoId }
   })
-  .then(console.log('successm'));
-
+  .then(setTimeout(() => { loadItems() }, 500))
 }
 
 function renderList(arr) { //prepends the database so that the top is the newest
-  // TODO: clean out the old maybe-wrong data (before filling in new)
+  $('li.item').remove()
   for (let item of arr) {
     switch (item.category_id) {
       case 1:
@@ -103,7 +102,6 @@ const loadItems = function () {
     method: "GET",
     url: "/items"
   })
-  .then($('li.item').remove())
   .done((itemList) => {
     renderList(itemList);
   });

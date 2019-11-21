@@ -59,6 +59,7 @@ module.exports = (helpers) => {
       res.send('400');
     }
     helpers.archiveItem(userId, todo)
+    .then(() => { res.send('deleted') })
   })
 
   router.post('/logout', (req, res) => {
