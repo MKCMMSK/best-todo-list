@@ -8,7 +8,7 @@ $(document).ready(function(){
 
   // submit form with ajax
   $('#newToDo').submit((event) => {
-    event.preventDefault();
+    // event.preventDefault();
     const query = $('#compose').val();
     getPosition()
     .then((latlong) => {
@@ -38,13 +38,20 @@ $(document).ready(function(){
   $('.collapsible').collapsible();
 
 
-  // on click of item checkbox
-  // $('div.checkbox input').on('click', checkboxClickHandler);
-
-  getMovie('Vikings').then((media) => { //media is the structured object we created
-    console.log(media);
-  });
-
+  // view todo/completed items
+  $('#views')
+  .formSelect()
+  .change(function() {
+    let view = '';
+    $('#views option:selected').each(function() {
+      view += $(this).text();
+      if (view === 'To-do') {
+        loadItems();
+      } else if (view === 'Completed') {
+        loadCompleted();
+      }
+    })
+  })
 
 });
 
@@ -66,9 +73,9 @@ function createListElement(object) { //creates simple list item need to implemen
   return item;
 }
 
-function checkboxClickHandler(event) {
+// ajax request to archive item
+const checkCompleted = function(event) {
   event.stopPropagation();
-  // ajax request to archive item
   const todoId = $(this).parent().parent().parent().parent().attr('id')
   $.ajax({
     url: '/',
@@ -76,6 +83,16 @@ function checkboxClickHandler(event) {
     data: { archiveId: todoId }
   })
   .then(setTimeout(() => { loadItems() }, 500))
+}
+
+// ajax request to unarchive item
+const checkToDo = function(event) {
+  const todoId = $(this).parent().parent().parent().parent().attr('id')
+  $.ajax({
+    url: '/completed',
+    method: 'PUT'
+  })
+  .then(setTimeout(() => { loadCompleted(), 500}))
 }
 
 function renderList(arr) { //prepends the database so that the top is the newest
@@ -98,7 +115,7 @@ function renderList(arr) { //prepends the database so that the top is the newest
         $(".misc_list").prepend(createListElement(item));
     }
   }
-  $('div.checkbox input').on('click', checkboxClickHandler);
+  $('div.checkbox input').on('click', checkCompleted);
 }
 
 
@@ -111,6 +128,17 @@ const loadItems = function () {
     renderList(itemList);
   });
 };
+
+const loadCompleted = function() {
+  $.ajax({
+    method: 'GET',
+    url: '/completed'
+  })
+  .done((itemList) => {
+    renderList(itemList);
+  });
+}
+
 
 const getPosition = function() {
   return new Promise (function(resolve, reject){
