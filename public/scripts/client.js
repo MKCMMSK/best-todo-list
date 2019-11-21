@@ -2,8 +2,8 @@ $(document).ready(function(){
 
   loadItems();
 
-  $('.collapsible-header').click(function() {
-    $(this).children('.arrow-icon').toggleClass("open");
+  $('li').click(function() {
+    $(this).children('.collapsible-header').children('.arrow-icon').toggleClass("open");
   });
 
   // submit form with ajax
@@ -67,6 +67,7 @@ function createListElement(object) { //creates simple list item need to implemen
 }
 
 function checkboxClickHandler(event) {
+  event.stopPropagation();
   // ajax request to archive item
   const todoId = $(this).parent().parent().parent().parent().attr('id')
   $.ajax({

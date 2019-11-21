@@ -8,21 +8,27 @@
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
     <!-- JS -->
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script type="text/javascript" src="/scripts/client.js"></script>
-
   </head>
 
   <body>
-    <nav><i class="material-icons">list</i> To-do List
+    <nav><i class="fas fa-check-circle"></i> To-do List
     <% if(locals.user) { %>
       <form action="/logout" method="POST">
         <button type="submit" class="logout waves-effect waves-light btn" name="logout" value="<%= user %>">
           Logout
+        </button>
+      </form>
+    <% } else { %>
+      <form>
+        <button type="submit" class="logout waves-effect waves-light btn">
+          Log In
         </button>
       </form>
     <% }; %>
@@ -37,8 +43,8 @@
 
     <ul class="collapsible popout">
       <li>
-        <div class="collapsible-header">
-          <h6>To Read</h6>
+        <div class="collapsible-header category">
+          <h2><i class="fa fa-glasses"></i><i class="fas fa-book-open"></i>To Read</h2>
             <a class="arrow-icon">
               <span class="left-bar"></span>
               <span class="right-bar"></span>
@@ -51,8 +57,8 @@
       </li>
 
       <li>
-        <div class="collapsible-header">
-          <h6>To Watch</h6>
+        <div class="collapsible-header category">
+          <h2><i class="fas fa-desktop"></i>To Watch</h2>
           <a class="arrow-icon">
             <span class="left-bar"></span>
             <span class="right-bar"></span>
@@ -66,8 +72,8 @@
       </li>
 
       <li>
-        <div class="collapsible-header">
-          <h6>To Eat</h6>
+        <div class="collapsible-header category">
+          <h2><i class="fas fa-utensils"></i>To Eat</h2>
           <a class="arrow-icon">
             <span class="left-bar"></span>
             <span class="right-bar"></span>
@@ -82,8 +88,8 @@
         </li>
 
         <li>
-        <div class="collapsible-header">
-          <h6>To Buy</h6>
+        <div class="collapsible-header category">
+          <h2><i class="fas fa-shopping-bag"></i>To Buy</h2>
           <a class="arrow-icon">
             <span class="left-bar"></span>
             <span class="right-bar"></span>
@@ -96,8 +102,8 @@
       </li>
 
       <li>
-        <div class="collapsible-header">
-          <h6>Miscellaneous</h6>
+        <div class="collapsible-header category">
+          <h2>Miscellaneous</h2>
           <a class="arrow-icon">
             <span class="left-bar"></span>
             <span class="right-bar"></span>
