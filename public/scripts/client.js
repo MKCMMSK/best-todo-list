@@ -33,16 +33,20 @@ $(document).ready(function(){
   // collapsible functionality for index
   $('.collapsible').collapsible();
 
-
 });
 
 //creates simple list item need to implement overload for different categories
 function createListElement(object) {
   const top = `
-   <li>
-      <div class="collapsible-header">${object.title}</div>
+    <li class="item" id=${object.id}>
+      <div class="collapsible-header">
+
+        <div class="checkbox" style="border: 1px solid red"><label><input type="checkbox"><span ></span></label></div>
+
+        ${object.title}
+      </div>
       <div class="collapsible-body">
-      <a href=${object.url} target=_blank><img src=${object.img}></a>
+      <a href="${object.url}" target=_blank><img src="${object.img}"></a>
       <p>${object.description}</p>
       `;
   const bottom = `
@@ -114,8 +118,21 @@ const createMiscSection = function(wrap) {
   return misc;
 };
 
+
+const checkboxClickHandler = function(event) {
+  // ajax request to archive item
+  const todoId = $(this).parent().parent().parent().parent().attr('id')
+  $.ajax({
+    url: '/',
+    method: 'PUT',
+    data: { archiveId: todoId }
+  })
+  .then(setTimeout(() => { loadItems() }, 500))
+};
+
 //prepends the database so that the top is the newest
-function renderList(arr) {
+const renderList = function(arr) {
+  $('li.item').remove()
   for (let item of arr) {
     let wrapAround = createListElement(item);
     switch (item.category_id) {
@@ -135,6 +152,7 @@ function renderList(arr) {
         $(".misc_list").prepend(createMiscSection(wrapAround));
     };
   };
+  $('div.checkbox input').on('click', checkboxClickHandler);
 };
 
 
@@ -142,8 +160,9 @@ const loadItems = function() {
   $.ajax({
     method: "GET",
     url: "/items"
-  }).done((product) => {
-    renderList(product);
+  })
+  .done((itemList) => {
+    renderList(itemList);
   });
 };
 

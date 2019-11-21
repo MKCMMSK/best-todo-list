@@ -9,8 +9,8 @@ const getItems = function(user) {
      LEFT OUTER JOIN restaurants ON todo_items.id = restaurants.todo_item_id
      LEFT OUTER JOIN products ON todo_items.id = products.todo_item_id
      LEFT OUTER JOIN books ON todo_items.id = books.todo_item_id
-     WHERE user_id = ${user};
-  `;
+     WHERE user_id = ${user} AND NOT to_do_user_specifics.archived;
+     `;
 
     return db
     .query(allItems)
@@ -19,6 +19,21 @@ const getItems = function(user) {
       console.error(err);
     });
   };
+
+  const archiveItem = function(user, todo) {
+    const archive = `
+    UPDATE to_do_user_specifics
+    SET archived = true, date_archived = now()::date
+    WHERE user_id = $1 AND id = $2
+    ;`;
+
+    return db
+    .query(archive, [user, todo])
+    .then(res => res.rows)
+    .catch((err) => {
+      console.error(err);
+    });
+  }
 
   const addBook = function(book) {
     const newBook = `
@@ -64,5 +79,5 @@ const getItems = function(user) {
     })
   }
 
-  return { addBook, getItems, addRestaurant };
+  return { addBook, getItems, addRestaurant, archiveItem };
 };

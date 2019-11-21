@@ -11,7 +11,7 @@ const sass       = require("node-sass-middleware");
 const app        = express();
 const morgan     = require('morgan');
 
-const { getBook, getRestaurant, getMovie, getTvShow, getProduct } = require("./lib/util/api_helpers.js");
+const { getAPIToDo } = require("./lib/util/api_helpers.js");
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
