@@ -1,9 +1,11 @@
 $(document).ready(function(){
 
   loadItems();
+
   $('.collapsible-header').click(function() {
-    $('.arrow-icon').toggleClass("open");
+    $(this).children('.arrow-icon').toggleClass("open");
   });
+
   // submit form with ajax
   $('#newToDo').submit((event) => {
     event.preventDefault();
