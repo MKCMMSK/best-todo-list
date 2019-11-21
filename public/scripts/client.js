@@ -2,6 +2,10 @@ $(document).ready(function(){
 
   loadItems();
 
+  $('li').click(function() {
+    $(this).children('.collapsible-header').children('.arrow-icon').toggleClass("open");
+  });
+
   // submit form with ajax
   $('#newToDo').submit((event) => {
     event.preventDefault();
@@ -49,7 +53,7 @@ function createListElement(object) { //creates simple list item need to implemen
     <li class="item" id=${object.id}>
       <div class="collapsible-header">
 
-        <div class="checkbox" style="border: 1px solid red"><label><input type="checkbox"><span ></span></label></div>
+        <div class="checkbox"><label><input type="checkbox"><span ></span></label></div>
 
         ${object.title}
       </div>
@@ -63,6 +67,7 @@ function createListElement(object) { //creates simple list item need to implemen
 }
 
 function checkboxClickHandler(event) {
+  event.stopPropagation();
   // ajax request to archive item
   const todoId = $(this).parent().parent().parent().parent().attr('id')
   $.ajax({
