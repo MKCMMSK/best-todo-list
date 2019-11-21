@@ -4,6 +4,11 @@
   -webkit-box-shadow: none;
 }
 
+.collapsible-header {
+  display: flex;
+  justify-content: space-between;
+}
+
 .collapsible.popout>li {
   display: block;
   overflow: auto;
@@ -20,4 +25,80 @@
 
 .collapsible-body {
   border: none;
+}
+
+$duration: 0.5s;
+$easing: cubic-bezier(.25,1.7,.35,.8);
+
+.arrow-icon {
+  position: relative;
+  left: -15px;
+  height: 2.8em;
+  width: 2.8em;
+  display: block;
+  padding: 0.5em;
+  // margin: 1em auto;
+  position: relative;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.left-bar {
+  position: absolute;
+  background-color: transparent;
+  top: 20px;
+  left: -9px;
+  width: 35px;
+  height: 5px;
+  display: block;
+  transform: rotate(35deg);
+  float: right;
+  border-radius: 2px;
+  &:after {
+    content:"";
+    background-color: $medium-dark;
+    width: 35px;
+    height: 7px;
+    display: block;
+    float: right;
+    border-radius: 6px 10px 10px 6px;
+    transition: all $duration $easing;
+    z-index: -1;
+  }
+}
+
+.right-bar {
+  position: absolute;
+  background-color: transparent;
+  top: 20px;
+  left: 14px;
+  width: 35px;
+  height: 5px;
+  display: block;
+  transform: rotate(-35deg);
+  float: right;
+  border-radius: 2px;
+  &:after {
+    content:"";
+    background-color: $medium-dark;
+    width: 35px;
+    height: 7px;
+    display: block;
+    float: right;
+    border-radius: 10px 6px 6px 10px;
+    transition: all $duration $easing;
+    z-index: -1;
+  }
+}
+
+.open {
+    .left-bar:after {
+    transform-origin: center center;
+    transform: rotate(-70deg);
+  }
+  .right-bar:after {
+    transform-origin: center center;
+    transform: rotate(70deg);
+  }
+
 }
