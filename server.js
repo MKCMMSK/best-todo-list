@@ -11,7 +11,6 @@ const sass       = require("node-sass-middleware");
 const app        = express();
 const morgan     = require('morgan');
 
-const { getAPIToDo } = require("./lib/util/api_helpers.js");
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
@@ -42,6 +41,7 @@ app.use(express.static("public"));
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
 const helpers = require('./routes/helpers')(db);
+const getAPIToDo = require("./lib/util/api_helpers.js")(helpers);
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -61,5 +61,17 @@ app.get("/", (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
+});
+
+// getAPIToDo.getBook("war and peace", (search,objObj) => {
+//   let book = {};
+//   book.book = objObj;
+//   console.log(book.book, " this it the book");
+// });
+
+
+getAPIToDo.getAPIToDo("war and peace", "13.233,-123.213", (search, location,objObj)=> {
+
+  getAPIToDo.addToDB(search, objObj);
 });
 

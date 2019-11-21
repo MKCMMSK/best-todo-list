@@ -1,7 +1,6 @@
 module.exports = (db) => {
   const getItems = function(user) {
     const allItems =
-<<<<<<< HEAD
     `SELECT *
     FROM todo_items
     JOIN to_do_user_specifics ON todo_items.id = todo_item_id
@@ -10,11 +9,6 @@ module.exports = (db) => {
     LEFT OUTER JOIN products ON todo_items.id = products.todo_item_id
     LEFT OUTER JOIN books ON todo_items.id = books.todo_item_id
     WHERE user_id = ${user}`;
-=======
-    `SELECT * FROM todo_items
-     JOIN to_do_user_specifics ON todo_items.id = todo_item_id
-     WHERE user_id = ${user} AND NOT to_do_user_specifics.archived;`;
->>>>>>> 11d6e63fdc66a56123334debc16bd9010714acf4
 
     return db
     .query(allItems)
@@ -23,11 +17,7 @@ module.exports = (db) => {
       console.error(err);
     });
   };
-  const checkItem(query) {
 
-<<<<<<< HEAD
-  }
-=======
   const archiveItem = function(user, todo) {
     const archive = `
     UPDATE to_do_user_specifics
@@ -43,7 +33,6 @@ module.exports = (db) => {
     });
   }
 
->>>>>>> 11d6e63fdc66a56123334debc16bd9010714acf4
   const addBook = function(book) {
     const newBook = `
     WITH new_todo AS (
@@ -52,14 +41,14 @@ module.exports = (db) => {
       WHERE NOT EXISTS (SELECT * FROM todo_items WHERE url = $4::varchar)
       RETURNING id
     )
-    INSERT INTO books (todo_item_id, author, publication_date, page_length, genre)
+    INSERT INTO books (todo_item_id, author, publication_date, page_length, book_genre)
     SELECT (SELECT id FROM new_todo), $6, $7, $8, $9
     WHERE EXISTS (SELECT * FROM new_todo)
 
     ;`;
 
     return db
-    .query(newBook, [book.category_id, `${book.title}`, `${book.description}`, `${book.url}`, `${book.img}`, `${book.author}`, `${book.publication_date}`, book.page_length, `${book.genre}`])
+    .query(newBook, [book.category_id, `${book.title}`, `${book.description}`, `${book.url}`, `${book.img}`, `${book.author}`, `${book.publication_date}`, book.page_length, `${book.book_genre}`])
     .then(res => res.rows[0])
     .catch((err) => {
       console.error(err);
@@ -97,11 +86,11 @@ module.exports = (db) => {
       RETURNING id
     )
     INSERT INTO movies_tv (todo_item_id, movietv_genre, year)
-    SELECT (SELECT id FROM new_todo), $6, $7, $8
+    SELECT (SELECT id FROM new_todo), $6, $7
     WHERE EXISTS (SELECT * FROM new_todo)
     ;`;
     return db
-    .query(newMovie, [movie.category_id, `${movie.title}`, `${movie.description}`, `${movie.url}`, `${movie.img}`, `${movie.movietv_genre}`, `${movie.year}`])
+    .query(newMovie, [movie.category_id, `${movie.title}`, `${movie.description}`, `${movie.url}`, `${movie.img}`, `${movie.movietv_genre}`, movie.year])
     .then(res => res.rows[0])
     .catch((err) => {
       console.error(err);
@@ -117,11 +106,11 @@ module.exports = (db) => {
       RETURNING id
     )
     INSERT INTO movies_tv (todo_item_id, movietv_genre, year)
-    SELECT (SELECT id FROM new_todo), $6, $7, $8
+    SELECT (SELECT id FROM new_todo), $6, $7
     WHERE EXISTS (SELECT * FROM new_todo)
     ;`;
     return db
-    .query(newTvShow, [tv.category_id, `${tv.title}`, `${tv.description}`, `${tv.url}`, `${tv.img}`, `${tv.movietv_genre}`, `${tv.year}`])
+    .query(newTvShow, [tv.category_id, `${tv.title}`, `${tv.description}`, `${tv.url}`, `${tv.img}`, `${tv.movietv_genre}`, tv.year])
     .then(res => res.rows[0])
     .catch((err) => {
       console.error(err);
@@ -137,11 +126,11 @@ module.exports = (db) => {
       RETURNING id
     )
     INSERT INTO products (todo_item_id, cost, brand)
-    SELECT (SELECT id FROM new_todo), $6, $7, $8
+    SELECT (SELECT id FROM new_todo), $6, $7
     WHERE EXISTS (SELECT * FROM new_todo)
     ;`;
     return db
-    .query(newProduct, [product.category_id, `${product.title}`, `${product.description}`, `${product.url}`, `${product.img}`, `${product.cost}`, `${product.brand}`])
+    .query(newProduct, [product.category_id, `${product.title}`, `${product.description}`, `${product.url}`, `${product.img}`, product.cost, `${product.brand}`])
     .then(res => res.rows[0])
     .catch((err) => {
       console.error(err);
@@ -149,4 +138,5 @@ module.exports = (db) => {
   }
 
   return { addBook, getItems, addRestaurant, addMovie, addTvShow, addProduct };
+
 };
