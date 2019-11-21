@@ -36,6 +36,43 @@ $(document).ready(function(){
 
 });
 
+// create the book-specific elements of the listElement
+const createBookSection = function(object) {
+  const bookDetails = `
+  <p>
+  Author: <span class="author">${object.author}</span> </br>
+  <span class="publication_date">Published: ${object.publication_date} </span> </br>
+  <span class="genre">${object.books_genre}, </span>
+  <span class="page_length">${object.page_length} pages</span>
+  </p>
+  `
+  return bookDetails;
+};
+
+// create the tv/movie-specific elements of the listElement
+const createMediaSection = function(object) {
+  const mediaDetails = `
+  <p>
+  <span class="year">${object.year}</span> </br>
+  <span class="genre">${object.movietv_genre}, </span>
+  <span class="runtime">${object.runtime} minutes</span> </br>
+  <span class="director">Director: ${object.director}</span> </br>
+  <span class="actors">Actors: ${object.actors}</span>
+  </p>
+  `
+  return mediaDetails;
+};
+
+// create the product-specific elements of the listElement
+const createProductSection = function(object) {
+
+};
+
+// create the restaurant-specific elements of the listElement
+const createRestaurantSection = function(object) {
+
+};
+
 function createListElement(object) { //creates simple list item need to implement overload for different categories
   let item = `
    <li>
@@ -44,13 +81,29 @@ function createListElement(object) { //creates simple list item need to implemen
       <a href=${object.url} target=_blank><img src=${object.img}></a>
       <p>${object.description}</p>
       `
+  switch (object.category_id) {
+    case 1:
+      item += createBookSection(object);
+      break;
+    case 2:
+      item += createMediaSection(object);
+      break;
+    case 3:
+      item += createProductSection(object);
+    case 4:
+      item += createRestaurantSection(object);
+  };
+
   item += `
-      <p>${object.note}</p>
+      <p>Note: <span class="note">${object.note}</span></p>
       </div>
    </li>`;
 
   return item;
 }
+
+
+
 
 function renderList(arr) { //prepends the database so that the top is the newest
   for (let item of arr) {
