@@ -1,13 +1,16 @@
 module.exports = (db) => {
 const getItems = function(user) {
   const allItems =
-  `SELECT * FROM todo_items
+  `
+  SELECT *
+     FROM todo_items
      JOIN to_do_user_specifics ON todo_items.id = todo_item_id
      LEFT OUTER JOIN movies_tv ON todo_items.id = movies_tv.todo_item_id
      LEFT OUTER JOIN restaurants ON todo_items.id = restaurants.todo_item_id
      LEFT OUTER JOIN products ON todo_items.id = products.todo_item_id
      LEFT OUTER JOIN books ON todo_items.id = books.todo_item_id
-     WHERE user_id = ${user};`;
+     WHERE user_id = ${user};
+  `;
 
     return db
     .query(allItems)
