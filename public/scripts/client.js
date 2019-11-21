@@ -38,6 +38,9 @@ $(document).ready(function(){
   $('.collapsible').collapsible();
 
 
+  // archive view
+  $('select').formSelect();
+
   // on click of item checkbox
   // $('div.checkbox input').on('click', checkboxClickHandler);
 
