@@ -1,6 +1,38 @@
 module.exports = (db) => {
-  const getItems = function(user) {
+const getItems = function(user) {
+  const allItems =
+  `
+  SELECT
+  to_do_user_specifics.user_id AS userid, todo_items.id AS todo_id, todo_items.category_id, to_do_user_specifics.id AS user_specific_item_id,
+  to_do_user_specifics.position AS user_specified_position, to_do_user_specifics.archived,
+  todo_items.title, todo_items.description, todo_items.url, todo_items.img,
+  products.id AS product_id, products.brand, products.vendor, products.cost,
+  books.id AS book_id, books.author, books.publication_date, books.page_length, books.genre AS books_genre,
+  restaurants.id AS restaurant_id, restaurants.street_address, restaurants.city, restaurants.province_state, restaurants.country, restaurants.google_map_url,
+  movies_tv.id AS movie_id, movies_tv.year, movies_tv.runtime, movies_tv.actors, movies_tv.genre AS movietv_genre,
+  to_do_user_specifics.note, to_do_user_specifics.rate, to_do_user_specifics.rating_comment
+  FROM todo_items
+  JOIN to_do_user_specifics ON todo_items.id = to_do_user_specifics.todo_item_id
+  LEFT OUTER JOIN movies_tv ON todo_items.id = movies_tv.todo_item_id
+  LEFT OUTER JOIN restaurants ON todo_items.id = restaurants.todo_item_id
+  LEFT OUTER JOIN products ON todo_items.id = products.todo_item_id
+  LEFT OUTER JOIN books ON todo_items.id = books.todo_item_id
+  WHERE to_do_user_specifics.archived = 'false'
+  AND to_do_user_specifics.user_id = 1
+  ORDER BY userid
+  ;`
+
+    return db
+    .query(allItems)
+    .then(res => res.rows)
+    .catch((err) => {
+      console.error(err);
+    });
+  };
+
+  const getCompleted = function(user) {
     const allItems =
+<<<<<<< HEAD
     `SELECT *
     FROM todo_items
     JOIN to_do_user_specifics ON todo_items.id = todo_item_id
@@ -9,6 +41,11 @@ module.exports = (db) => {
     LEFT OUTER JOIN products ON todo_items.id = products.todo_item_id
     LEFT OUTER JOIN books ON todo_items.id = books.todo_item_id
     WHERE user_id = ${user}`;
+=======
+    `SELECT * FROM todo_items
+     JOIN to_do_user_specifics ON todo_items.id = todo_item_id
+     WHERE user_id = ${user} AND to_do_user_specifics.archived;`;
+>>>>>>> 439f83948606f23098fa734e26a683f39778da96
 
     return db
     .query(allItems)
@@ -22,6 +59,21 @@ module.exports = (db) => {
     const archive = `
     UPDATE to_do_user_specifics
     SET archived = true, date_archived = now()::date
+    WHERE user_id = $1 AND id = $2
+    ;`;
+
+    return db
+    .query(archive, [user, todo])
+    .then(res => res.rows)
+    .catch((err) => {
+      console.error(err);
+    });
+  }
+
+  const unarchiveItem = function(user, todo) {
+    const archive = `
+    UPDATE to_do_user_specifics
+    SET archived = false
     WHERE user_id = $1 AND id = $2
     ;`;
 
@@ -77,6 +129,7 @@ module.exports = (db) => {
     })
   }
 
+<<<<<<< HEAD
   const addMovie = function(movie) {
     const newMovie = `
     WITH new_todo AS (
@@ -139,4 +192,7 @@ module.exports = (db) => {
 
   return { addBook, getItems, addRestaurant, addMovie, addTvShow, addProduct };
 
+=======
+  return { addBook, getItems, addRestaurant, archiveItem, getCompleted, unarchiveItem };
+>>>>>>> 439f83948606f23098fa734e26a683f39778da96
 };

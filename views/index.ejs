@@ -8,22 +8,28 @@
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
     <!-- JS -->
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script type="text/javascript" src="/scripts/client.js"></script>
-
   </head>
 
   <body>
-    <nav><i class="material-icons">list</i> To-do List
+    <nav><i class="fas fa-check-circle"></i> To-do List
     <% if(locals.user) { %>
       <form action="/logout" method="POST">
-        <button type="submit" class="logout btn-floating btn-large waves-effect waves-light" name="logout" value="<%= user %>">
-          <i class="material-icons">
-          Logout</i></button>
+        <button type="submit" class="logout waves-effect waves-light btn" name="logout" value="<%= user %>">
+          Logout
+        </button>
+      </form>
+    <% } else { %>
+      <form>
+        <button type="submit" class="logout waves-effect waves-light btn">
+          Log In
+        </button>
       </form>
     <% }; %>
     </nav>
@@ -35,9 +41,23 @@
       </form>
     </div>
 
+    <div class="input-field col s12">
+      <select id="views">
+        <option value="1" id="view-todo">To-do</option>
+        <option value="2" id="view-completed">Completed</option>
+      </select>
+      <label>View:</label>
+    </div>
+
     <ul class="collapsible popout">
       <li>
-        <div class="collapsible-header">To Read</div>
+        <div class="collapsible-header category">
+          <h2><i class="fa fa-glasses"></i><i class="fas fa-book-open"></i>To Read</h2>
+            <a class="arrow-icon">
+              <span class="left-bar"></span>
+              <span class="right-bar"></span>
+            </a>
+        </div>
         <div class="collapsible-body">
           <ul class="collapsible popout to_read_list">
           </ul>
@@ -45,7 +65,13 @@
       </li>
 
       <li>
-        <div class="collapsible-header">To Watch</div>
+        <div class="collapsible-header category">
+          <h2><i class="fas fa-desktop"></i>To Watch</h2>
+          <a class="arrow-icon">
+            <span class="left-bar"></span>
+            <span class="right-bar"></span>
+          </a>
+        </div>
         <div class="collapsible-body">
           <ul class="collapsible popout to_watch_list">
 
@@ -54,7 +80,13 @@
       </li>
 
       <li>
-        <div class="collapsible-header">To Eat</div>
+        <div class="collapsible-header category">
+          <h2><i class="fas fa-utensils"></i>To Eat</h2>
+          <a class="arrow-icon">
+            <span class="left-bar"></span>
+            <span class="right-bar"></span>
+          </a>
+        </div>
         <div class="collapsible-body">
           <ul class="collapsible popout to_eat_list">
               <li>
@@ -64,7 +96,13 @@
         </li>
 
         <li>
-        <div class="collapsible-header">To Buy</div>
+        <div class="collapsible-header category">
+          <h2><i class="fas fa-shopping-bag"></i>To Buy</h2>
+          <a class="arrow-icon">
+            <span class="left-bar"></span>
+            <span class="right-bar"></span>
+          </a>
+        </div>
         <div class="collapsible-body">
           <ul class="collapsible popout to_buy_list">
           </ul>
@@ -72,7 +110,13 @@
       </li>
 
       <li>
-        <div class="collapsible-header">Miscellaneous</div>
+        <div class="collapsible-header category">
+          <h2><i class="fas fa-list-ul"></i>Miscellaneous</h2>
+          <a class="arrow-icon">
+            <span class="left-bar"></span>
+            <span class="right-bar"></span>
+          </a>
+        </div>
         <div class="collapsible-body">
           <ul class="collapsible popout misc_list">
 

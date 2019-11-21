@@ -62,6 +62,7 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+<<<<<<< HEAD
 
 // getAPIToDo.getBook("war and peace", (search,objObj) => {
 //   let book = {};
@@ -75,3 +76,5 @@ getAPIToDo.getAPIToDo("war and peace", "13.233,-123.213", (search, location,objO
   getAPIToDo.addToDB(search, objObj);
 });
 
+=======
+>>>>>>> 439f83948606f23098fa734e26a683f39778da96
