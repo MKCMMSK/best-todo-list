@@ -2,9 +2,13 @@ $(document).ready(function(){
 
   loadItems();
 
+  $('li').click(function() {
+    $(this).children('.collapsible-header').children('.arrow-icon').toggleClass("open");
+  });
+
   // submit form with ajax
   $('#newToDo').submit((event) => {
-    event.preventDefault();
+    // event.preventDefault();
     const query = $('#compose').val();
     getPosition()
     .then((latlong) => {
@@ -32,6 +36,22 @@ $(document).ready(function(){
 
   // collapsible functionality for index
   $('.collapsible').collapsible();
+
+
+  // view todo/completed items
+  $('#views')
+  .formSelect()
+  .change(function() {
+    let view = '';
+    $('#views option:selected').each(function() {
+      view += $(this).text();
+      if (view === 'To-do') {
+        loadItems();
+      } else if (view === 'Completed') {
+        loadCompleted();
+      }
+    })
+  })
 
 });
 
@@ -118,9 +138,9 @@ const createMiscSection = function(wrap) {
   return misc;
 };
 
-
-const checkboxClickHandler = function(event) {
-  // ajax request to archive item
+// ajax request to archive item
+const checkCompleted = function(event) {
+  event.stopPropagation();
   const todoId = $(this).parent().parent().parent().parent().attr('id')
   $.ajax({
     url: '/',
@@ -129,6 +149,16 @@ const checkboxClickHandler = function(event) {
   })
   .then(setTimeout(() => { loadItems() }, 500))
 };
+
+// ajax request to unarchive item
+const checkToDo = function(event) {
+  const todoId = $(this).parent().parent().parent().parent().attr('id')
+  $.ajax({
+    url: '/completed',
+    method: 'PUT'
+  })
+  .then(setTimeout(() => { loadCompleted(), 500}))
+}
 
 //prepends the database so that the top is the newest
 const renderList = function(arr) {
@@ -152,8 +182,8 @@ const renderList = function(arr) {
         $(".misc_list").prepend(createMiscSection(wrapAround));
     }
   }
-  $('div.checkbox input').on('click', checkboxClickHandler);
-};
+  $('div.checkbox input').on('click', checkCompleted);
+}
 
 
 const loadItems = function() {
@@ -165,6 +195,17 @@ const loadItems = function() {
     renderList(itemList);
   });
 };
+
+const loadCompleted = function() {
+  $.ajax({
+    method: 'GET',
+    url: '/completed'
+  })
+  .done((itemList) => {
+    renderList(itemList);
+  });
+}
+
 
 const getPosition = function() {
   return new Promise (function(resolve, reject){

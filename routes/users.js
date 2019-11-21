@@ -23,6 +23,37 @@ module.exports = (helpers) => {
       })
   });
 
+  router.put('/', (req, res) => {
+    const userId = req.session.user_id;
+    const todo = req.body.archiveId;
+    if (!todo) {
+      res.send('400');
+    }
+    helpers.archiveItem(userId, todo)
+    .then(() => { res.send('deleted') })
+  });
+
+  router.get('/completed', (req, res) => {
+    let currentUser = null;
+    if (req.session.user_id) {
+      currentUser = req.session.user_id;
+    }
+    helpers.getCompleted(currentUser)
+      .then((products) => {
+        res.send(products)
+      })
+  });
+
+  router.put('/completed', (req, res) => {
+    const userId = req.session.user_id;
+    const todo = req.body.archiveId;
+    if (!todo) {
+      res.send('400');
+    }
+    helpers.unarchiveItem(userId, todo)
+      .then(() => { res.send('moved to to-do') })
+  });
+
 
   router.get("/users/:id", (req, res) => {
 
@@ -47,16 +78,6 @@ module.exports = (helpers) => {
       .then(() => { res.json(query) });
     })
   });
-
-  router.put('/', (req, res) => {
-    const userId = req.session.user_id;
-    const todo = req.body.archiveId;
-    if (!todo) {
-      res.send('400');
-    }
-    helpers.archiveItem(userId, todo)
-    .then(() => { res.send('deleted') })
-  })
 
   router.post('/logout', (req, res) => {
     req.session.user_id = null;
