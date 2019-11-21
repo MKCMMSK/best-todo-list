@@ -36,35 +36,55 @@ $(document).ready(function(){
 
 });
 
+//creates simple list item need to implement overload for different categories
+function createListElement(object) {
+  const top = `
+   <li>
+      <div class="collapsible-header">${object.title}</div>
+      <div class="collapsible-body">
+      <a href=${object.url} target=_blank><img src=${object.img}></a>
+      <p>${object.description}</p>
+      `;
+  const bottom = `
+      <p>Note: <span class="note">${object.note}</span></p>
+      </div>
+   </li>`;
+  const wrapAround = [top, bottom];
+  return wrapAround;
+};
+
+
 // create the book-specific elements of the listElement
-const createBookSection = function(object) {
+const createBookSection = function(object, wrap) {
   const bookDetails = `
   <p>
-  Author: <span class="author">${object.author}</span> </br>
-  <span class="publication_date">Published: ${object.publication_date} </span> </br>
+  <span class="author">by ${object.author}</span> </br>
   <span class="genre">${object.books_genre}, </span>
+  <span class="publication_date">published in ${object.publication_date} </span> </br>
   <span class="page_length">${object.page_length} pages</span>
   </p>
   `;
-  return bookDetails;
+  const book = `${wrap[0]}${bookDetails}${wrap[1]}`;
+  return book;
 };
 
 // create the tv/movie-specific elements of the listElement
-const createMediaSection = function(object) {
+const createMediaSection = function(object, wrap) {
   const mediaDetails = `
   <p>
   <span class="year">${object.year}</span> </br>
   <span class="genre">${object.movietv_genre}, </span>
   <span class="runtime">${object.runtime} minutes</span> </br>
-  <span class="director">Director: ${object.director}</span> </br>
-  <span class="actors">Actors: ${object.actors}</span>
+  <span class="actors">Actors: ${object.actors}</span></br>
+  <a href=${object.url} class="watch_now" target=_blank>Watch Now</a>
   </p>
   `;
-  return mediaDetails;
+  const media = `${wrap[0]}${mediaDetails}${wrap[1]}`
+  return media;
 };
 
 // create the product-specific elements of the listElement
-const createProductSection = function(object) {
+const createProductSection = function(object, wrap) {
   const productDetails = `
   <p>
   <span class="brand">${object.brand}</span></br>
@@ -72,79 +92,53 @@ const createProductSection = function(object) {
   <a href=${object.url} class="vendor" target=_blank>${object.vendor}</a>
   </p>
   `;
-  return productDetails;
-
+  const product = `${wrap[0]}${productDetails}${wrap[1]}`
+  return product;
 };
 
 // create the restaurant-specific elements of the listElement
-const createRestaurantSection = function(object) {
+const createRestaurantSection = function(object, wrap) {
   const restaurantDetails = `
   <p>
   <span class="address">${object.street_address}<br>${object.city}, ${object.province_state} ${object.country}</span> </br>
   <a href=${object.google_map_url} class="get_directions" target=_blank>Get Directions</a>
   </p>
   `;
-
-  return restaurantDetails;
+  const restaurant = `${wrap[0]}${restaurantDetails}${wrap[1]}`;
+  return restaurant;
 };
 
-function createListElement(object) { //creates simple list item need to implement overload for different categories
-  let item = `
-   <li>
-      <div class="collapsible-header">${object.title}</div>
-      <div class="collapsible-body">
-      <a href=${object.url} target=_blank><img src=${object.img}></a>
-      <p>${object.description}</p>
-      `
-  switch (object.category_id) {
-    case 1:
-      item += createBookSection(object);
-      break;
-    case 2:
-      item += createMediaSection(object);
-      break;
-    case 3:
-      item += createProductSection(object);
-      break;
-    case 4:
-      item += createRestaurantSection(object);
-      break;
-  };
+// create the restaurant-specific elements of the listElement
+const createMiscSection = function(wrap) {
+  let misc = `${wrap[0]}${wrap[1]}`;
+  return misc;
+};
 
-  item += `
-      <p>Note: <span class="note">${object.note}</span></p>
-      </div>
-   </li>`;
-
-  return item;
-}
-
-
-
-
-function renderList(arr) { //prepends the database so that the top is the newest
+//prepends the database so that the top is the newest
+function renderList(arr) {
   for (let item of arr) {
+    let wrapAround = createListElement(item);
     switch (item.category_id) {
       case 1:
-        $(".to_read_list").prepend(createListElement(item));
+        $(".to_read_list").prepend(createBookSection(item, wrapAround));
         break;
       case 2:
-        $(".to_watch_list").prepend(createListElement(item));
+        $(".to_watch_list").prepend(createMediaSection(item, wrapAround));
         break;
       case 3:
-        $(".to_eat_list").prepend(createListElement(item));
+        $(".to_eat_list").prepend(createProductSection(item, wrapAround));
         break;
       case 4:
-        $(".to_buy_list").prepend(createListElement(item));
+        $(".to_buy_list").prepend(createRestaurantSection(item, wrapAround));
         break;
       case 5:
-        $(".misc_list").prepend(createListElement(item));
-    }
-  }
-}
+        $(".misc_list").prepend(createMiscSection(wrapAround));
+    };
+  };
+};
 
 
-const loadItems = function () {
+const loadItems = function() {
   $.ajax({
     method: "GET",
     url: "/items"
