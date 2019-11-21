@@ -33,10 +33,6 @@ $(document).ready(function(){
   // collapsible functionality for index
   $('.collapsible').collapsible();
 
-  getMovie('Vikings').then((media) => { //media is the structured object we created
-    console.log(media);
-  });
-
 
 });
 

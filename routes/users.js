@@ -32,11 +32,10 @@ module.exports = (helpers) => {
   router.post('/', (req, res) => {
     const query = req.body.todo;
     const location = req.body.location;
-    console.log('query', query, 'locatin', location);
-    getBook(query, (err, book) => {
-      helpers.addBook(book)
-        .then(() => { res.json(query) });
-    })
+    // getBook(query, (err, book) => {
+    //   helpers.addBook(book)
+    //     .then(() => { res.json(query) });
+    // })
     getRestaurant(query, location, (a, b, restaurant) => {
       helpers.addRestaurant(restaurant)
       .then(() => { res.json(query) });
