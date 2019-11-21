@@ -47,18 +47,12 @@ $(document).ready(function(){
     $('#views option:selected').each(function() {
       view += $(this).text();
       if (view === 'To-do') {
-        alert('To-do items');
+        loadItems();
       } else if (view === 'Completed') {
-        alert('completed items');
+        loadCompleted();
       }
     })
   })
-
-  // $.ajax({
-  //   method: 'GET',
-  //   url: '/completed'
-  // })
-
 
 });
 
@@ -125,6 +119,17 @@ const loadItems = function () {
     renderList(itemList);
   });
 };
+
+const loadCompleted = function() {
+  $.ajax({
+    method: 'GET',
+    url: '/completed'
+  })
+  .done((itemList) => {
+    renderList(itemList);
+  });
+}
+
 
 const getPosition = function() {
   return new Promise (function(resolve, reject){
