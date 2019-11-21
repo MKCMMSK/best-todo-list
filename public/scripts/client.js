@@ -65,6 +65,14 @@ const createMediaSection = function(object) {
 
 // create the product-specific elements of the listElement
 const createProductSection = function(object) {
+  const createProductSection = `
+  <p>
+  <span class="brand">${object.brand}</span></br>
+  <span class="cost">${object.cost} at </span>
+  <a href=${object.url} class="vendor" target=_blank>${object.vendor}</a>
+  </p>
+  `
+  return createProductSection;
 
 };
 
@@ -90,8 +98,10 @@ function createListElement(object) { //creates simple list item need to implemen
       break;
     case 3:
       item += createProductSection(object);
+      break;
     case 4:
       item += createRestaurantSection(object);
+      break;
   };
 
   item += `
