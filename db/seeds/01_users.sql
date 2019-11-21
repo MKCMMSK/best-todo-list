@@ -94,9 +94,3 @@ VALUES (9, 'Alan Taylor', 2011, 57, 'Emilia Clarke, Peter Dinklage, Kit Harringt
 INSERT INTO restaurants (todo_item_id, street_address, city, province_state, country, google_map_url)
 VALUES (1, 'Blue Water Cafe', 'Vancouver', 'BC', 'Canada', 'https://goo.gl/maps/FMbDEfj7uAAaYrhG8'),
 (2, '108 W Hastings St', 'Vancouver', 'BC', 'Canada', 'https://goo.gl/maps/q6CwqpMqgMdGPtiz9');
-
-ALTER TABLE books
-RENAME COLUMN genre TO books_genre;
-
-ALTER TABLE movies_tv
-RENAME COLUMN genre TO movietv_genre;
