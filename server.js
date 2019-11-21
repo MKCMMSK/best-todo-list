@@ -63,6 +63,3 @@ app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
 
-
-// getToDo('harry potter', (err, endProduct)=>{console.log(endProduct)});
-getAPIToDo('happiness advantage',"49.2812368,-123.1171883", (err,loc,toDo) => {console.log(toDo)});

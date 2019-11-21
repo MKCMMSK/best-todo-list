@@ -7,7 +7,7 @@
 
 const express = require('express');
 const router = express.Router();
-const { getBook, getRestaurant, getMovie, getTvShow } = require('../lib/util/api_helpers');
+const { getAPIToDo } = require('../lib/util/api_helpers');
 
 module.exports = (helpers) => {
 
@@ -42,10 +42,15 @@ module.exports = (helpers) => {
     //     .then(() => { res.json(query) });
     // })
 
-    getRestaurant(query, location, (a, b, restaurant) => {
-      helpers.addRestaurant(restaurant)
-      .then(() => { res.json(query) });
+    getAPIToDo(query, location, (a, b, response) => {
+      console.log(response);
+      res.json(response);
     })
+
+    // getRestaurant(query, location, (a, b, restaurant) => {
+    //   helpers.addRestaurant(restaurant)
+    //   .then(() => { res.json(query) });
+    // })
   });
 
   router.put('/', (req, res) => {

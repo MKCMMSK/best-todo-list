@@ -34,14 +34,6 @@ $(document).ready(function(){
   $('.collapsible').collapsible();
 
 
-  // on click of item checkbox
-  // $('div.checkbox input').on('click', checkboxClickHandler);
-
-  getMovie('Vikings').then((media) => { //media is the structured object we created
-    console.log(media);
-  });
-
-
 });
 
 function createListElement(object) { //creates simple list item need to implement overload for different categories
@@ -49,7 +41,7 @@ function createListElement(object) { //creates simple list item need to implemen
     <li class="item" id=${object.id}>
       <div class="collapsible-header">
 
-        <div class="checkbox" style="border: 1px solid red"><label><input type="checkbox"><span ></span></label></div>
+        <div class="checkbox"><label><input type="checkbox"><span ></span></label></div>
 
         ${object.title}
       </div>
