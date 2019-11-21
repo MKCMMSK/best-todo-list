@@ -46,19 +46,19 @@ $easing: cubic-bezier(.25,1.7,.35,.8);
 .left-bar {
   position: absolute;
   background-color: transparent;
-  top: 15px;
+  top: 18px;
   left: -8px;
   width: 35px;
   height: 5px;
   display: block;
-  transform: rotate(35deg);
+  transform: rotate(45deg);
   float: right;
   border-radius: 2px;
   &:after {
     content:"";
     background-color: $medium-dark;
     width: 25px;
-    height: 3px;
+    height: 4px;
     display: block;
     float: right;
     border-radius: 6px 10px 10px 6px;
@@ -70,19 +70,19 @@ $easing: cubic-bezier(.25,1.7,.35,.8);
 .right-bar {
   position: absolute;
   background-color: transparent;
-  top: 21px;
-  left: 12px;
+  top: 25px;
+  left: 9px;
   width: 35px;
-  height: 5px;
+  height: 4px;
   display: block;
-  transform: rotate(-35deg);
+  transform: rotate(-45deg);
   float: right;
   border-radius: 2px;
   &:after {
     content:"";
     background-color: $medium-dark;
     width: 25px;
-    height: 3px;
+    height: 4px;
     display: block;
     float: right;
     border-radius: 10px 6px 6px 10px;
@@ -94,11 +94,11 @@ $easing: cubic-bezier(.25,1.7,.35,.8);
 .open {
     .left-bar:after {
     transform-origin: center center;
-    transform: rotate(-70deg);
+    transform: rotate(-90deg);
   }
   .right-bar:after {
     transform-origin: center center;
-    transform: rotate(70deg);
+    transform: rotate(90deg);
   }
 
 }
