@@ -89,8 +89,10 @@ const checkCompleted = function(event) {
 const checkToDo = function(event) {
   const todoId = $(this).parent().parent().parent().parent().attr('id')
   $.ajax({
-    url: ''
+    url: '/completed',
+    method: 'PUT'
   })
+  .then(setTimeout(() => { loadCompleted(), 500}))
 }
 
 function renderList(arr) { //prepends the database so that the top is the newest
