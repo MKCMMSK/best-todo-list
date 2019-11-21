@@ -38,10 +38,15 @@ $(document).ready(function(){
 
 function createListElement(object) { //creates simple list item need to implement overload for different categories
   let item = `
-   <li>
-      <div class="collapsible-header">${object.title}</div>
+    <li class="item" id=${object.id}>
+      <div class="collapsible-header">
+
+        <div class="checkbox"><label><input type="checkbox"><span ></span></label></div>
+
+        ${object.title}
+      </div>
       <div class="collapsible-body">
-      <a href=${object.url} target=_blank><img src=${object.img}></a>
+      <a href="${object.url}" target=_blank><img src="${object.img}"></a>
       <p>${object.description}</p>
       </div>
    </li>`;
@@ -49,7 +54,19 @@ function createListElement(object) { //creates simple list item need to implemen
   return item;
 }
 
+function checkboxClickHandler(event) {
+  // ajax request to archive item
+  const todoId = $(this).parent().parent().parent().parent().attr('id')
+  $.ajax({
+    url: '/',
+    method: 'PUT',
+    data: { archiveId: todoId }
+  })
+  .then(setTimeout(() => { loadItems() }, 500))
+}
+
 function renderList(arr) { //prepends the database so that the top is the newest
+  $('li.item').remove()
   for (let item of arr) {
     switch (item.category_id) {
       case 1:
@@ -68,6 +85,7 @@ function renderList(arr) { //prepends the database so that the top is the newest
         $(".misc_list").prepend(createListElement(item));
     }
   }
+  $('div.checkbox input').on('click', checkboxClickHandler);
 }
 
 
@@ -75,8 +93,9 @@ const loadItems = function () {
   $.ajax({
     method: "GET",
     url: "/items"
-  }).done((product) => {
-    renderList(product);
+  })
+  .done((itemList) => {
+    renderList(itemList);
   });
 };
 

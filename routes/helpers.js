@@ -1,6 +1,7 @@
 module.exports = (db) => {
   const getItems = function(user) {
     const allItems =
+<<<<<<< HEAD
     `SELECT *
     FROM todo_items
     JOIN to_do_user_specifics ON todo_items.id = todo_item_id
@@ -9,6 +10,11 @@ module.exports = (db) => {
     LEFT OUTER JOIN products ON todo_items.id = products.todo_item_id
     LEFT OUTER JOIN books ON todo_items.id = books.todo_item_id
     WHERE user_id = ${user}`;
+=======
+    `SELECT * FROM todo_items
+     JOIN to_do_user_specifics ON todo_items.id = todo_item_id
+     WHERE user_id = ${user} AND NOT to_do_user_specifics.archived;`;
+>>>>>>> 11d6e63fdc66a56123334debc16bd9010714acf4
 
     return db
     .query(allItems)
@@ -19,7 +25,25 @@ module.exports = (db) => {
   };
   const checkItem(query) {
 
+<<<<<<< HEAD
   }
+=======
+  const archiveItem = function(user, todo) {
+    const archive = `
+    UPDATE to_do_user_specifics
+    SET archived = true, date_archived = now()::date
+    WHERE user_id = $1 AND id = $2
+    ;`;
+
+    return db
+    .query(archive, [user, todo])
+    .then(res => res.rows)
+    .catch((err) => {
+      console.error(err);
+    });
+  }
+
+>>>>>>> 11d6e63fdc66a56123334debc16bd9010714acf4
   const addBook = function(book) {
     const newBook = `
     WITH new_todo AS (

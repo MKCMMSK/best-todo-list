@@ -63,5 +63,3 @@ app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
 
-
-// getToDo('harry potter', (err, endProduct)=>{console.log(endProduct)});
