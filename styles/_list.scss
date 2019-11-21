@@ -16,7 +16,7 @@ ul.collapsible {
 .collapsible.popout>li {
   display: block;
   overflow: auto;
-  margin-bottom: 7px;
+  margin: 0px 45px 12px 45px;
   background-color: $light;
   .active {
     background-color: $light;
@@ -41,7 +41,6 @@ $easing: cubic-bezier(.25,1.7,.35,.8);
   width: 2.8em;
   display: block;
   padding: 0.5em;
-  // margin: 1em auto;
   position: relative;
   cursor: pointer;
   border-radius: 4px;
@@ -65,7 +64,7 @@ $easing: cubic-bezier(.25,1.7,.35,.8);
     height: 4px;
     display: block;
     float: right;
-    border-radius: 6px 10px 10px 6px;
+    border-radius: 20px;
     transition: all $duration $easing;
     z-index: -1;
   }
@@ -75,7 +74,7 @@ $easing: cubic-bezier(.25,1.7,.35,.8);
   position: absolute;
   background-color: transparent;
   top: 25px;
-  left: 9px;
+  left: 8px;
   width: 35px;
   height: 4px;
   display: block;
@@ -89,7 +88,7 @@ $easing: cubic-bezier(.25,1.7,.35,.8);
     height: 4px;
     display: block;
     float: right;
-    border-radius: 10px 6px 6px 10px;
+    border-radius: 20px;
     transition: all $duration $easing;
     z-index: -1;
   }
