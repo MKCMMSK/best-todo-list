@@ -43,14 +43,14 @@ const getItems = function(user) {
       WHERE NOT EXISTS (SELECT * FROM todo_items WHERE url = $4::varchar)
       RETURNING id
     )
-    INSERT INTO books (todo_item_id, author, publication_date, page_length, books_genre)
+    INSERT INTO books (todo_item_id, author, publication_date, page_length, genre)
     SELECT (SELECT id FROM new_todo), $6, $7, $8, $9
     WHERE EXISTS (SELECT * FROM new_todo)
 
     ;`;
 
     return db
-    .query(newBook, [book.category_id, `${book.title}`, `${book.description}`, `${book.url}`, `${book.img}`, `${book.author}`, `${book.publication_date}`, book.page_length, `${book.books_genre}`])
+    .query(newBook, [book.category_id, `${book.title}`, `${book.description}`, `${book.url}`, `${book.img}`, `${book.author}`, `${book.publication_date}`, book.page_length, `${book.genre}`])
     .then(res => res.rows[0])
     .catch((err) => {
       console.error(err);
