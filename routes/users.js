@@ -23,13 +23,9 @@ module.exports = (helpers) => {
       })
   });
 
-  // this is an insane hack that should not be kept.  see "ABCD" below
-  router.get("/null", (req, res) => {
-    res.sendStatus(404);
-  });
 
-  // ABCD: this should be changed to /users/:id , probably by changing the app.use in server.js
-  router.get("/:id", (req, res) => {
+  router.get("/users/:id", (req, res) => {
+
     const userID = req.params.id;
     // set session cookie
     req.session.user_id = userID;
