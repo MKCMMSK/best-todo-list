@@ -8,6 +8,7 @@
 const express = require('express');
 const router = express.Router();
 const { getAPIToDo } = require('../lib/util/api_helpers');
+const { addBook, getItems, addRestaurant, archiveItem } = require('../routes/helpers');
 
 module.exports = (helpers) => {
 
@@ -37,14 +38,14 @@ module.exports = (helpers) => {
   router.post('/', (req, res) => {
     const query = req.body.todo;
     const location = req.body.location;
-    // getBook(query, (err, book) => {
-    //   helpers.addBook(book)
-    //     .then(() => { res.json(query) });
-    // })
+    getBook(query, (err, book) => {
+      helpers.addBook(book)
+        .then(() => { res.json(query) });
+    })
 
     getAPIToDo(query, location, (a, b, response) => {
       console.log(response);
-      res.json(response);
+      res.send(response);
     })
 
     // getRestaurant(query, location, (a, b, restaurant) => {
