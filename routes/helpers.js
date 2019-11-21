@@ -3,7 +3,7 @@ module.exports = (db) => {
     const allItems =
     `SELECT * FROM todo_items
      JOIN to_do_user_specifics ON todo_items.id = todo_item_id
-     WHERE user_id = ${user};`;
+     WHERE user_id = ${user} AND NOT to_do_user_specifics.archived;`;
 
     return db
     .query(allItems)
@@ -13,16 +13,15 @@ module.exports = (db) => {
     });
   };
 
-  const archiveItem = function(todo) {
+  const archiveItem = function(user, todo) {
     const archive = `
-    UPDATE archived FROM to_do_user_specifics
-    JOIN to_do_user_specifics ON todo_items.id = todo_item_id
-    SET archived = true
-    WHERE to_do_user_specifics.id = $1
+    UPDATE to_do_user_specifics
+    SET archived = true, date_archived = now()::date
+    WHERE user_id = $1 AND id = $2
     ;`;
 
     return db
-    .query(archive, [todo])
+    .query(archive, [user, todo])
     .then(res => res.rows)
     .catch((err) => {
       console.error(err);

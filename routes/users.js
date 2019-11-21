@@ -41,10 +41,11 @@ module.exports = (helpers) => {
   router.post('/', (req, res) => {
     const query = req.body.todo;
     const location = req.body.location;
-    getBook(query, (err, book) => {
-      helpers.addBook(book)
-        .then(() => { res.json(query) });
-    })
+    // getBook(query, (err, book) => {
+    //   helpers.addBook(book)
+    //     .then(() => { res.json(query) });
+    // })
+
     getRestaurant(query, location, (a, b, restaurant) => {
       helpers.addRestaurant(restaurant)
       .then(() => { res.json(query) });
@@ -52,11 +53,12 @@ module.exports = (helpers) => {
   });
 
   router.put('/', (req, res) => {
+    const userId = req.session.user_id;
     const todo = req.body.archiveId;
     if (!todo) {
       res.send('400');
     }
-    helpers.archiveItem(todo)
+    helpers.archiveItem(userId, todo)
   })
 
   router.post('/logout', (req, res) => {

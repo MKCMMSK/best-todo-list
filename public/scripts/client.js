@@ -33,9 +33,6 @@ $(document).ready(function(){
   // collapsible functionality for index
   $('.collapsible').collapsible();
 
-  console.log("hello");
-  const myBoxes = $('div.checkbox');
-  console.log(myBoxes.length);
 
   // on click of item checkbox
   // $('div.checkbox input').on('click', checkboxClickHandler);
@@ -49,7 +46,7 @@ $(document).ready(function(){
 
 function createListElement(object) { //creates simple list item need to implement overload for different categories
   let item = `
-    <li id=${object.id}>
+    <li class="item" id=${object.id}>
       <div class="collapsible-header">
 
         <div class="checkbox" style="border: 1px solid red"><label><input type="checkbox"><span ></span></label></div>
@@ -73,7 +70,7 @@ function checkboxClickHandler(event) {
     method: 'PUT',
     data: { archiveId: todoId }
   })
-  .then(loadItems);
+  .then(console.log('successm'));
 
 }
 
@@ -102,11 +99,12 @@ function renderList(arr) { //prepends the database so that the top is the newest
 
 
 const loadItems = function () {
-  console.log("doing loadItems");
   $.ajax({
     method: "GET",
     url: "/items"
-  }).done((itemList) => {
+  })
+  .then($('li.item').remove())
+  .done((itemList) => {
     renderList(itemList);
   });
 };
