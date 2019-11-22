@@ -6,9 +6,25 @@ $(document).ready(function(){
     $(this).children('.collapsible-header').children('.arrow-icon').toggleClass("open");
   });
 
+  // register new user
+  $('#register').submit((event) => {
+    $.ajax({
+      url: '/register',
+      method: 'POST',
+      data: {
+        full_name: $('#full_name').val(),
+        email: $('#email').val(),
+        pw: $('#pw').val()
+      },
+      success: function(data) {
+        window.location = '/';
+      }
+    })
+    .then(loadItems);
+  })
+
   // submit form with ajax
   $('#newToDo').submit((event) => {
-    // event.preventDefault();
     const query = $('#compose').val();
     getPosition()
     .then((latlong) => {
@@ -226,3 +242,4 @@ const getPosition = function() {
     });
   });
 };
+
