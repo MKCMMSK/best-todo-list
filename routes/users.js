@@ -22,6 +22,9 @@ module.exports = (helpers) => {
       .then((products) => {
         res.send(products)
       })
+      .catch((err) => {
+        console.error(`get /items err = ${err}`)
+      });
   });
 
   router.put('/', (req, res) => {
@@ -32,6 +35,9 @@ module.exports = (helpers) => {
     }
     helpers.archiveItem(userId, todo)
     .then(() => { res.send('deleted') })
+    .catch((err) => {
+      console.error(`put / err @ archiveItem = ${err}`)
+    });
   });
 
   router.get('/completed', (req, res) => {
@@ -43,6 +49,9 @@ module.exports = (helpers) => {
       .then((products) => {
         res.send(products)
       })
+      .catch((err) => {
+        console.error(`get /completed @ getCompleted = ${err}`)
+      });
   });
 
   router.put('/completed', (req, res) => {
@@ -53,37 +62,47 @@ module.exports = (helpers) => {
     }
     helpers.unarchiveItem(userId, todo)
       .then(() => { res.send('moved to to-do') })
+      .catch((err) => {
+        console.error(`put /completed err @ unarchiveItem = ${err}`)
+      });
   });
 
   router.post(('/login'), (req, res) => {
     const email = req.body.email;
-    const userID = helpers.getUserId(email);
-    console.log(req.body);
-    if (userID) {
-      req.session.user_id = userID;
-      console.log("session cookie set to user id", req.session.user_id);
-      res.send('logged in');
-    };
-  });
+    //const userID;
+    helpers.getUserId(email)
+    //.then((id) => id)
+    .then(id => req.session.user_id = id)
+    .then (() => res.send('logged in'))
+    //console.log(`POST /login userID: ${userID}`)
+    //console.log(`post /login req.body.email: ${req.body.email}`);
+    // if (userID) {
+    //   req.session.user_id = userID;
+    //   console.log("session cookie set to user id", req.session.user_id);
+
+    });
 
   router.post('/', (req, res) => {
     const query = req.body.todo;
     const location = req.body.location;
     getBook(query, (err, book) => {
       helpers.addBook(book)
-        .then(() => { res.json(query) });
-    })
+        .then(() => { res.json(query) })
+        .catch((err) => {
+          console.error(`post / err @ addBook = ${err}`)
+        });
+    });
 
     getAPIToDo(query, location, (a, b, response) => {
-      console.log(response);
+      console.log(`getAPIToDo response ${response}`);
       res.send(response);
-    })
+    });
+  });
 
     // getRestaurant(query, location, (a, b, restaurant) => {
     //   helpers.addRestaurant(restaurant)
     //   .then(() => { res.json(query) });
     // })
-  });
 
   router.post('/logout', (req, res) => {
     req.session.user_id = null;
@@ -97,12 +116,9 @@ module.exports = (helpers) => {
     .then((user) => userId = helpers.getUserId(user.email))
     .then((userId) => req.session.user_id = userId)
     .then(() => res.send('created'))
-  })
-
-  return router;
+    .catch((err) => {
+      console.error(`post /register err @ register = ${err}`)
+    });
+  });
+   return router;
 };
-
-
-
-
-
