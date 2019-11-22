@@ -84,6 +84,15 @@ module.exports = (helpers) => {
     res.redirect('/');
   });
 
+  router.post('/register', (req, res) => {
+    let userId = null;
+    const user = req.body;
+    helpers.register(user)
+    .then((user) => userId = helpers.getUserId(user.email))
+    .then((userId) => req.session.user_id = userId)
+    .then(() => res.send('created'))
+  })
+
   return router;
 };
 

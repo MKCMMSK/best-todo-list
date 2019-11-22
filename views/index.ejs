@@ -35,6 +35,48 @@
     <% }; %>
     </nav>
 
+    <% if(!locals.user) { %>
+      <div id="login-register">
+
+        <div>
+          <form></form>
+        </div>
+
+        <div>
+          <h2>Register</h2>
+          <div class="row">
+            <form id="register" method="POST" action="/register" class="col s12">
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="full_name" type="text" class="validate">
+                  <label for="full_name">Full Name</label>
+                </div>
+              </div>
+              <div class="row"></div>
+                <div class="input-field col s12">
+                  <input id="email" type="email" class="validate">
+                  <label for="email">E-mail</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s6">
+                  <input id="pw" type="password" class="validate">
+                  <label for="pw">Password</label>
+                </div>
+                <div class="input-field col s6">
+                  <input type="password" class="validate">
+                  <label for="pw">Re-enter Password</label>
+                </div>
+              </div>
+              <button type="submit" class="waves-effect waves-light btn-large">Register</button>
+
+            </form>
+          </div>
+
+        </div>
+      </div>
+    <% } else { %>
+
     <div>
       <form id="newToDo">
         <textarea name="compose" id="compose" placeholder="Add new to-do"></textarea>
@@ -53,7 +95,7 @@
     <ul class="collapsible popout">
       <li>
         <div class="collapsible-header category">
-          <h2><i class="fa fa-glasses"></i><i class="fas fa-book-open"></i>To Read</h2>
+          <div><i class="fa fa-glasses"></i><i class="fas fa-book-open"></i><h2 id="read">To Read</h2></div>
             <a class="arrow-icon">
               <span class="left-bar"></span>
               <span class="right-bar"></span>
@@ -67,7 +109,7 @@
 
       <li>
         <div class="collapsible-header category">
-          <h2><i class="fas fa-desktop"></i>To Watch</h2>
+          <div><i class="fas fa-desktop"></i><h2 id="watch">To Watch</h2></div>
           <a class="arrow-icon">
             <span class="left-bar"></span>
             <span class="right-bar"></span>
@@ -82,7 +124,7 @@
 
       <li>
         <div class="collapsible-header category">
-          <h2><i class="fas fa-utensils"></i>To Eat</h2>
+          <div><i class="fas fa-utensils"></i><h2 id="eat">To Eat</h2></div>
           <a class="arrow-icon">
             <span class="left-bar"></span>
             <span class="right-bar"></span>
@@ -98,7 +140,7 @@
 
         <li>
         <div class="collapsible-header category">
-          <h2><i class="fas fa-shopping-bag"></i>To Buy</h2>
+          <div><i class="fas fa-shopping-bag"></i><h2 id="buy">To Buy</h2></div>
           <a class="arrow-icon">
             <span class="left-bar"></span>
             <span class="right-bar"></span>
@@ -110,24 +152,10 @@
         </div>
       </li>
 
-      <li>
-        <div class="collapsible-header category">
-          <h2><i class="fas fa-list-ul"></i>Miscellaneous</h2>
-          <a class="arrow-icon">
-            <span class="left-bar"></span>
-            <span class="right-bar"></span>
-          </a>
-        </div>
-        <div class="collapsible-body">
-          <ul class="collapsible popout misc_list">
-
-          </ul>
-        </div>
-      </li>
     </ul>
 
-    <footer>
-      Footer
-    </footer>
+    <% }; %>
+
+
   </body>
 </html>
