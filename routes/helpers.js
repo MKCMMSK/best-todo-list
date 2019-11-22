@@ -10,9 +10,9 @@ module.exports = (db) => {
     .query(createUser, [`${user.full_name}`, `${user.email}`, `${user.pw}`])
     .then(res => res.rows[0])
     .catch((err) => {
-      console.error(err);
+      console.error(`Error from createUser: ${err}`);
     });
-  }
+  };
 
   const getItems = function(user) {
     const allItems =
@@ -38,40 +38,40 @@ module.exports = (db) => {
   ;`
 
     return db
-    .query(allItems, [user.id])
-    .then((res) => {res.rows})
+    .query(allItems, [user])
+    .then(res => res.rows)
     .catch((err) => {
-      console.error(err);
+      console.error(`Error from getItems: ${err}`);
     });
   };
 
   const getCompleted = function(user) {
-    const completedItems =
-    `SELECT
+    const completedItems = `
+    SELECT
     to_do_user_specifics.user_id AS userid, todo_items.id AS todo_id, todo_items.category_id, to_do_user_specifics.id AS user_specific_item_id,
-     to_do_user_specifics.position AS user_specified_position, to_do_user_specifics.archived,
-     todo_items.title, todo_items.description, todo_items.url, todo_items.img,
-     products.id AS product_id, products.brand, products.vendor, products.cost,
-     books.id AS book_id, books.author, books.publication_date, books.page_length, books.genre AS books_genre,
-     restaurants.id AS restaurant_id, restaurants.street_address, restaurants.city, restaurants.province_state, restaurants.country, restaurants.google_map_url,
-     movies_tv.id AS movie_id, movies_tv.year, movies_tv.runtime, movies_tv.actors, movies_tv.genre AS movietv_genre,
-     to_do_user_specifics.note, to_do_user_specifics.rate, to_do_user_specifics.rating_comment
-  FROM todo_items
-  JOIN to_do_user_specifics ON todo_items.id = to_do_user_specifics.todo_item_id
-  LEFT OUTER JOIN movies_tv ON todo_items.id = movies_tv.todo_item_id
-  LEFT OUTER JOIN restaurants ON todo_items.id = restaurants.todo_item_id
-  LEFT OUTER JOIN products ON todo_items.id = products.todo_item_id
-  LEFT OUTER JOIN books ON todo_items.id = books.todo_item_id
-  WHERE to_do_user_specifics.archived = true
-  AND to_do_user_specifics.user_id = $1
-  ORDER BY userid
-  ;`;
+    to_do_user_specifics.position AS user_specified_position, to_do_user_specifics.archived,
+    todo_items.title, todo_items.description, todo_items.url, todo_items.img,
+    products.id AS product_id, products.brand, products.vendor, products.cost,
+    books.id AS book_id, books.author, books.publication_date, books.page_length, books.genre AS books_genre,
+    restaurants.id AS restaurant_id, restaurants.street_address, restaurants.city, restaurants.province_state, restaurants.country, restaurants.google_map_url,
+    movies_tv.id AS movie_id, movies_tv.year, movies_tv.runtime, movies_tv.actors, movies_tv.genre AS movietv_genre,
+    to_do_user_specifics.note, to_do_user_specifics.rate, to_do_user_specifics.rating_comment
+    FROM todo_items
+    JOIN to_do_user_specifics ON todo_items.id = to_do_user_specifics.todo_item_id
+    LEFT OUTER JOIN movies_tv ON todo_items.id = movies_tv.todo_item_id
+    LEFT OUTER JOIN restaurants ON todo_items.id = restaurants.todo_item_id
+    LEFT OUTER JOIN products ON todo_items.id = products.todo_item_id
+    LEFT OUTER JOIN books ON todo_items.id = books.todo_item_id
+    WHERE to_do_user_specifics.archived = true
+    AND to_do_user_specifics.user_id = $1
+    ORDER BY userid
+    ;`;
 
     return db
     .query(completedItems, [user])
     .then(res => res.rows)
     .catch((err) => {
-      console.error(err);
+      console.error(`Error from getCompleted: ${err}`);
     });
   };
 
@@ -86,7 +86,7 @@ module.exports = (db) => {
     .query(archive, [user, todo])
     .then(res => res.rows)
     .catch((err) => {
-      console.error(err);
+      console.error(`Error from archiveItem: ${err}`);
     });
   }
 
@@ -101,7 +101,7 @@ module.exports = (db) => {
     .query(archive, [user, todo])
     .then(res => res.rows)
     .catch((err) => {
-      console.error(err);
+      console.error(`Error from unarchiveItem: ${err}`);
     });
   }
 
@@ -123,7 +123,7 @@ module.exports = (db) => {
     .query(newBook, [book.category_id, `${book.title}`, `${book.description}`, `${book.url}`, `${book.img}`, `${book.author}`, `${book.publication_date}`, book.page_length, `${book.genre}`])
     .then(res => res.rows[0])
     .catch((err) => {
-      console.error(err);
+      console.error(`Error from addBook: ${err}`);
     });
 
   }
@@ -145,7 +145,7 @@ module.exports = (db) => {
     .query(newRestaurant, [restaurant.category_id, `${restaurant.title}`, `${restaurant.description}`, `${restaurant.url}`, `${restaurant.img}`, `${restaurant.street_address}`, `${restaurant.city}`, `${restaurant.province_state}`, `${restaurant.country}`, `${restaurant.google_map_url}`])
     .then(res => res.rows[0])
     .catch((err) => {
-      console.error(err);
+      console.error(`Error from addRestaurant: ${err}`);
     })
   }
 
@@ -165,7 +165,7 @@ module.exports = (db) => {
     .query(newMovie, [movie.category_id, `${movie.title}`, `${movie.description}`, `${movie.url}`, `${movie.img}`, `${movie.genre}`, movie.year])
     .then(res => res.rows[0])
     .catch((err) => {
-      console.error(err);
+      console.error(`Error from addMovie: ${err}`);
     })
   }
 
@@ -185,7 +185,7 @@ module.exports = (db) => {
     .query(newTvShow, [tv.category_id, `${tv.title}`, `${tv.description}`, `${tv.url}`, `${tv.img}`, `${tv.genre}`, tv.year])
     .then(res => res.rows[0])
     .catch((err) => {
-      console.error(err);
+      console.error(`Error from addTvShow: ${err}`);
     })
   }
 
@@ -206,20 +206,21 @@ module.exports = (db) => {
     .query(newProduct, [product.category_id, `${product.title}`, `${product.description}`, `${product.url}`, `${product.img}`, product.cost, `${product.brand}`])
     .then(res => res.rows[0])
     .catch((err) => {
-      console.error(err);
+      console.error(`Error from addProduct: ${err}`);
     })
   }
 
   const getUserId = function(email) {
     const userFromDatabase = `
-    SELECT id
+    SELECT *
     FROM users
-    WHERE email = $1;
+    WHERE email = $1::text
+    ;
     `;
     return db
-    .query(userFromDatabase, [email])
-    .then(res => res.rows[0])
-    .catch((err) => console.log(err))
+    .query(userFromDatabase, [`${email}`])
+    .then(res => res.rows[0].id)
+    .catch((err) => console.error(`Error from getUserId: ${err}`))
   };
 
 

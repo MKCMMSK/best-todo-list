@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
     <!-- JS -->
@@ -18,18 +19,15 @@
   </head>
 
   <body>
-    <nav><i class="fas fa-check-circle"></i><span class="text-logo">To-do List</span>
+    <nav>
+      <div>
+        <img src="https://img.icons8.com/clouds/64/000000/todo-list.png">
+        <h1>to-doℓist</h1>
+      </div>
     <% if(locals.user) { %>
       <form action="/logout" method="POST">
         <button type="submit" class="logout waves-effect waves-light btn" name="logout" value="<%= user %>">
           Logout
-        </button>
-      </form>
-    <% } else { %>
-      <form class="login-form" id="login-form" action="/login" method="POST">
-        <input id="login" class="email-login" type="email" name="email" placeholder="Email"></input>
-        <button type="submit" class="login-button waves-effect waves-light btn" name="login-button">
-          Log In
         </button>
       </form>
     <% }; %>
@@ -39,7 +37,22 @@
       <div id="login-register">
 
         <div>
-          <form></form>
+          <h2>Log In</h2>
+          <div class="row">
+            <form class="col s12" id="login-form" action="/login" method="POST">
+              <div class="input-field col s12">
+                <input id="login" type="email" name="email"></input>
+                <label for="login">Email</label>
+              </div>
+              <div class="input-field col s12">
+                <input type="password">
+                <label for="loginpw">Password</label>
+              </div>
+              <button type="submit" class="waves-effect waves-light btn-large btn" name="login-button">
+                Log In
+              </button>
+            </form>
+          </div>
         </div>
 
         <div>
@@ -48,27 +61,27 @@
             <form id="register" method="POST" action="/register" class="col s12">
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="full_name" type="text" class="validate">
+                  <input id="full_name" type="text">
                   <label for="full_name">Full Name</label>
                 </div>
               </div>
               <div class="row"></div>
                 <div class="input-field col s12">
-                  <input id="email" type="email" class="validate">
+                  <input id="email" type="email">
                   <label for="email">E-mail</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s6">
-                  <input id="pw" type="password" class="validate">
+                  <input id="pw" type="password">
                   <label for="pw">Password</label>
                 </div>
                 <div class="input-field col s6">
-                  <input type="password" class="validate">
+                  <input type="password">
                   <label for="pw">Re-enter Password</label>
                 </div>
               </div>
-              <button type="submit" class="waves-effect waves-light btn-large">Register</button>
+              <button type="submit" class="waves-effect waves-light btn-large btn">Register</button>
 
             </form>
           </div>
@@ -85,17 +98,17 @@
     </div>
 
     <div class="input-field col s12">
+      <p>View:</p>
       <select id="views">
         <option value="1" id="view-todo">To-do</option>
         <option value="2" id="view-completed">Completed</option>
       </select>
-      <label>View:</label>
     </div>
 
     <ul class="collapsible popout">
       <li>
         <div class="collapsible-header category">
-          <div><i class="fa fa-glasses"></i><i class="fas fa-book-open"></i><h2 id="read">To Read</h2></div>
+          <div><i class="fa fa-glasses"></i><h2 id="read">To Read</h2></div>
             <a class="arrow-icon">
               <span class="left-bar"></span>
               <span class="right-bar"></span>
@@ -124,7 +137,7 @@
 
       <li>
         <div class="collapsible-header category">
-          <div><i class="fas fa-utensils"></i><h2 id="eat">To Eat</h2></div>
+          <div><i class="fas fa-shopping-bag"></i><h2 id="buy">To Buy</h2></div>
           <a class="arrow-icon">
             <span class="left-bar"></span>
             <span class="right-bar"></span>
@@ -140,7 +153,7 @@
 
         <li>
         <div class="collapsible-header category">
-          <div><i class="fas fa-shopping-bag"></i><h2 id="buy">To Buy</h2></div>
+          <div><i class="fas fa-utensils"></i><h2 id="eat">To Eat</h2></div>
           <a class="arrow-icon">
             <span class="left-bar"></span>
             <span class="right-bar"></span>
