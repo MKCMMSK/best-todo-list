@@ -4,26 +4,22 @@
  *   these routes are mounted onto /users
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
-
 const express = require('express');
 const router = express.Router();
-const { getAPIToDo } = require('../lib/util/api_helpers');
-const { addBook, getItems, addRestaurant, archiveItem } = require('../routes/helpers');
 
 module.exports = (helpers) => {
+  const { getAPIToDo, addToDB, changeCategory } = require('../lib/util/api_helpers')(helpers);
 
   router.get('/items', (req, res) => {
     let currentUser = null;
     if (req.session.user_id) {
       currentUser = req.session.user_id;
     };
-    //console.log(`current user: ${currentUser}`);
     helpers.getItems(currentUser)
       .then((products) => {
         res.send(products)
       })
   });
-
   router.put('/', (req, res) => {
     const userId = req.session.user_id;
     const todo = req.body.archiveId;
@@ -33,7 +29,6 @@ module.exports = (helpers) => {
     helpers.archiveItem(userId, todo)
     .then(() => { res.send('deleted') })
   });
-
   router.get('/completed', (req, res) => {
     let currentUser = null;
     if (req.session.user_id) {
@@ -44,7 +39,6 @@ module.exports = (helpers) => {
         res.send(products)
       })
   });
-
   router.put('/completed', (req, res) => {
     const userId = req.session.user_id;
     const todo = req.body.archiveId;
@@ -54,7 +48,6 @@ module.exports = (helpers) => {
     helpers.unarchiveItem(userId, todo)
       .then(() => { res.send('moved to to-do') })
   });
-
   router.post(('/login'), (req, res) => {
     const email = req.body.email;
     const userID = helpers.getUserId(email);
@@ -65,31 +58,24 @@ module.exports = (helpers) => {
       res.send('logged in');
     };
   });
-
   router.post('/', (req, res) => {
     const query = req.body.todo;
     const location = req.body.location;
-    getBook(query, (err, book) => {
-      helpers.addBook(book)
-        .then(() => { res.json(query) });
-    })
+    getAPIToDo(query, location, (search, b, item) => {
+      addToDB(search, item, (remainingObj) => {
 
-    getAPIToDo(query, location, (a, b, response) => {
-      console.log(response);
-      res.send(response);
-    })
+        res.json(remainingObj);
 
-    // getRestaurant(query, location, (a, b, restaurant) => {
-    //   helpers.addRestaurant(restaurant)
-    //   .then(() => { res.json(query) });
-    // })
+      });
+    });
+
   });
+
 
   router.post('/logout', (req, res) => {
     req.session.user_id = null;
     res.redirect('/');
   });
-
   router.post('/register', (req, res) => {
     let userId = null;
     const user = req.body;
@@ -98,7 +84,6 @@ module.exports = (helpers) => {
     .then((userId) => req.session.user_id = userId)
     .then(() => res.send('created'))
   })
-
   return router;
 };
 

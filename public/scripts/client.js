@@ -1,3 +1,4 @@
+let tempData;
 $(document).ready(function(){
 
   loadItems();
@@ -37,7 +38,12 @@ $(document).ready(function(){
         }
       })
     })
-    .then(loadItems);
+    .then((res) => {
+      loadItems();
+      tempData = res;
+      console.log(tempData)
+    });
+
   });
 
   // submit login with ajax
