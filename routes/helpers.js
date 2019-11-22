@@ -140,7 +140,7 @@ module.exports = (db) => {
     })
   }
 
-  const addMovie = function(movie) {
+  const addMovie = function(movie, user) {
     const newMovie = `
     WITH new_todo AS (
       INSERT INTO todo_items (category_id, title, description, url, img, user_id)
@@ -180,7 +180,7 @@ module.exports = (db) => {
     })
   }
 
-  const addProduct = function(product) {
+  const addProduct = function(product, user) {
     const newProduct = `
     WITH new_todo AS (
       INSERT INTO todo_items (category_id, title, description, url, img, user_id)

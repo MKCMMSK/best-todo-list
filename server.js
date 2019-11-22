@@ -39,6 +39,7 @@ app.use(express.static("public"));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
+// const userID = req.session.user_id;
 const widgetsRoutes = require("./routes/widgets");
 const helpers = require('./routes/helpers')(db);
 const api = require("./lib/util/api_helpers.js")(helpers);

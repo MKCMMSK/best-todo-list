@@ -72,7 +72,7 @@ module.exports = (helpers) => {
     const query = req.body.todo;
     const location = req.body.location;
     getAPIToDo(query, location, (search, b, item) => {
-      addToDB(search, item, (search, err, remainingObj) => {
+      addToDB(search, item, userId, (search, err, remainingObj) => {
         res.json(remainingObj);
       });
     });

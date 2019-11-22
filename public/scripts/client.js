@@ -189,7 +189,7 @@ const checkCompleted = function(event) {
     method: 'PUT',
     data: { archiveId: todoId }
   })
-  .then(setTimeout(() => { loadItems() }, 500))
+  .then(setTimeout(() => { loadItems() }, 200))
 };
 
 // ajax request to unarchive item
@@ -200,7 +200,7 @@ const checkToDo = function(event) {
     method: 'PUT',
     data: { archiveId: todoId }
   })
-  .then(setTimeout(() => { loadCompleted(), 500}))
+  .then(setTimeout(() => { loadCompleted(), 200}))
 }
 
 //prepends the database so that the top is the newest
