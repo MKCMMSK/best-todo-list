@@ -18,7 +18,11 @@
   </head>
 
   <body>
-    <nav><i class="fas fa-check-circle"></i> To-do List
+    <nav>
+      <div>
+        <img src="https://img.icons8.com/clouds/64/000000/todo-list.png">
+        To-do List
+      </div>
     <% if(locals.user) { %>
       <form action="/logout" method="POST">
         <button type="submit" class="logout waves-effect waves-light btn" name="logout" value="<%= user %>">
@@ -94,7 +98,7 @@
     <ul class="collapsible popout">
       <li>
         <div class="collapsible-header category">
-          <div><i class="fa fa-glasses"></i><i class="fas fa-book-open"></i><h2 id="read">To Read</h2></div>
+          <div><i class="fa fa-glasses"></i><h2 id="read">To Read</h2></div>
             <a class="arrow-icon">
               <span class="left-bar"></span>
               <span class="right-bar"></span>
@@ -123,7 +127,7 @@
 
       <li>
         <div class="collapsible-header category">
-          <div><i class="fas fa-utensils"></i><h2 id="eat">To Eat</h2></div>
+          <div><i class="fas fa-shopping-bag"></i><h2 id="buy">To Buy</h2></div>
           <a class="arrow-icon">
             <span class="left-bar"></span>
             <span class="right-bar"></span>
@@ -139,7 +143,7 @@
 
         <li>
         <div class="collapsible-header category">
-          <div><i class="fas fa-shopping-bag"></i><h2 id="buy">To Buy</h2></div>
+          <div><i class="fas fa-utensils"></i><h2 id="eat">To Eat</h2></div>
           <a class="arrow-icon">
             <span class="left-bar"></span>
             <span class="right-bar"></span>

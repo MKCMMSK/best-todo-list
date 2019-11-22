@@ -81,12 +81,11 @@ function createListElement(object) {
     <li class="item" id=${object.user_specific_item_id}>
       <div class="collapsible-header">
         <div class="checkbox"><label><input type="checkbox"><span></span></label></div>
-
         ${object.title}
       </div>
       <div class="collapsible-body">
       <a href="${object.url}" target=_blank><img src="${object.img}"></a>
-      <p>${object.description}</p>
+      <div class="description">${object.description}</div>
       `;
   const bottom = `
       <p>Note: <span class="note">${object.note}</span></p>
@@ -101,9 +100,9 @@ function createListElement(object) {
 const createBookSection = function(object, wrap) {
   const bookDetails = `
   <p>
-  <span class="author">by ${object.author}</span> </br>
-  <span class="genre">${object.books_genre}, </span>
-  <span class="publication_date">published in ${object.publication_date} </span> </br>
+  <span class="author">Author: ${object.author}</span> </br>
+  <span class="genre">Category: ${object.books_genre}, </span>
+  <span class="publication_date">Year: ${object.publication_date} </span> </br>
   <span class="page_length">${object.page_length} pages</span>
   </p>
   `;
@@ -119,7 +118,7 @@ const createMediaSection = function(object, wrap) {
   <span class="genre">${object.movietv_genre}, </span>
   <span class="runtime">${object.runtime} minutes</span> </br>
   <span class="actors">Actors: ${object.actors}</span></br>
-  <a href=${object.url} class="watch_now" target=_blank>Watch Now</a>
+  <a href="${object.url}" class="watch_now" target=_blank>Watch Now</a>
   </p>
   `;
   const media = `${wrap[0]}${mediaDetails}${wrap[1]}`
