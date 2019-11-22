@@ -118,5 +118,18 @@ const getItems = function(user) {
     })
   }
 
-  return { addBook, getItems, addRestaurant, archiveItem, getCompleted, unarchiveItem };
+
+  const getUserId = function(email) {
+    const userFromDatabase = `
+    SELECT id
+    FROM users
+    WHERE email = $1;
+    `;
+    return db
+    .query(userFromDatabase, [email])
+    .then(res => res.rows[0])
+    .catch((err) => console.log(err))
+  };
+
+  return { addBook, getItems, addRestaurant, archiveItem, getCompleted, unarchiveItem, getUserId };
 };
