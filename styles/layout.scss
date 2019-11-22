@@ -2,21 +2,26 @@
 // https://coolors.co/333533-fbf2c0-656256-b6c8a9-f5f8de
 
 // declare variables
-$light: #F5F8DE;
-$medium-light: #FBF2C0;
-$medium: #B6C8A9;
-$medium-dark: #656256;
-$dark: #333533;
-$font: 'Helvetica', sans-serif;
+$light: #F4F4F9;
+$medium-light: #B8DBD9;
+$medium: #586F7C;
+$medium-dark: #2F4550;
+$dark: #191919;
+$font: 'Montserrat', sans-serif;
 
 body {
-  background-color: $medium;
+  background-color: $medium-light;
   font-family: $font;
   // background-color: rgba(50, 52, 50, 0.48);
   // background-image: url("../public/images/light-honeycomb.png");
 
   h1 {
-    color: #244751;
+    color: $light;
+    font-family: $font;
+    position: absolute;
+    top: -26px;
+    left: 90px;
+    font-size: 35px;
   }
 
   h2 {
@@ -25,6 +30,21 @@ body {
     margin: auto 0;
     text-transform: uppercase;
     display: inline-block;
+    font-family: $font;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  .btn {
+    border-radius: 10px;
+    background-color: $medium-dark;
+    cursor: pointer;
+  }
+
+  .btn:hover {
+    background-color: $medium;
   }
 }
 

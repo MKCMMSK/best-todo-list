@@ -38,7 +38,7 @@ module.exports = (db) => {
   ;`
 
     return db
-    .query(allItems, [user])
+    .query(allItems, [user.id])
     .then(res => res.rows)
     .catch((err) => {
       console.error(`Error from getItems: ${err}`);
@@ -201,8 +201,6 @@ module.exports = (db) => {
     SELECT (SELECT id FROM new_todo), $6, $7
     WHERE EXISTS (SELECT * FROM new_todo)
     ;`;
-
-    console.log(product, "THIS IS INSIDE DB");
 
     return db
     .query(newProduct, [product.category_id, `${product.title}`, `${product.description}`, `${product.url}`, `${product.img}`, product.cost, `${product.brand}`])

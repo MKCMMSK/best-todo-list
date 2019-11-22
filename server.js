@@ -11,6 +11,7 @@ const sass       = require("node-sass-middleware");
 const app        = express();
 const morgan     = require('morgan');
 
+
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
@@ -38,10 +39,10 @@ app.use(express.static("public"));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
 const helpers = require('./routes/helpers')(db);
-const getAPIToDo = require("./lib/util/api_helpers.js")(helpers);
+const api = require("./lib/util/api_helpers.js")(helpers);
+const usersRoutes = require("./routes/users");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -62,3 +63,4 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
