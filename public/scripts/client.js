@@ -245,7 +245,7 @@ const loadCompleted = function() {
   })
   .then(() => {
     $('input[type=checkbox]').prop('checked', true)
-    $('li.item').addClass('completed')
+    $('div.collapsible-header').addClass('completed')
     $('#read').text('Read')
     $('#watch').text('Watched')
     $('#eat').text('Ate')
