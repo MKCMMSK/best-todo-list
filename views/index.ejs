@@ -18,7 +18,7 @@
   </head>
 
   <body>
-    <nav><i class="fas fa-check-circle"></i> To-do List
+    <nav><i class="fas fa-check-circle"></i><span class="text-logo">To-do List</span>
     <% if(locals.user) { %>
       <form action="/logout" method="POST">
         <button type="submit" class="logout waves-effect waves-light btn" name="logout" value="<%= user %>">
@@ -26,8 +26,9 @@
         </button>
       </form>
     <% } else { %>
-      <form>
-        <button type="submit" class="logout waves-effect waves-light btn">
+      <form class="login-form" id="login-form" action="/login" method="POST">
+        <input id="login" class="email-login" type="email" name="email" placeholder="Email"></input>
+        <button type="submit" class="login-button waves-effect waves-light btn" name="login-button">
           Log In
         </button>
       </form>
