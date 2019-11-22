@@ -35,14 +35,14 @@
     </nav>
 
     <% if(!locals.user) { %>
-      <div>
+      <div id="login-register">
 
         <div id="login">
           <form></form>
         </div>
 
         <div id="register">
-
+          <h2>Register</h2>
           <div class="row">
             <form class="col s12">
               <div class="row">
@@ -59,12 +59,12 @@
               </div>
               <div class="row">
                 <div class="input-field col s6">
-                  <input id="password" type="password" class="validate">
-                  <label for="password">Password</label>
+                  <input id="pw" type="password" class="validate">
+                  <label for="pw">Password</label>
                 </div>
                 <div class="input-field col s6">
-                  <input id="password" type="password" class="validate">
-                  <label for="password">Re-enter Password</label>
+                  <input id="pw" type="password" class="validate">
+                  <label for="pw">Re-enter Password</label>
                 </div>
               </div>
               <button type="submit" class="waves-effect waves-light btn-large">Register</button>
