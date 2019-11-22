@@ -51,6 +51,7 @@ $(document).ready(function(){
       })
     })
     .then((res) => {
+      $("#compose").val("")
       tempData = res;
       loadItems();
     })
