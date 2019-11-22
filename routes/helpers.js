@@ -39,7 +39,7 @@ module.exports = (db) => {
 
     return db
     .query(allItems, [user.id])
-    .then(res => res.rows)
+    .then((res) => {res.rows})
     .catch((err) => {
       console.error(err);
     });

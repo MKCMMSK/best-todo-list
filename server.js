@@ -64,3 +64,7 @@ app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
 
+
+api.getAPIToDo("starbucks", "49.2812368,-123.1171883", (search, err, item) => {
+
+} )

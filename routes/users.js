@@ -17,6 +17,7 @@ module.exports = (helpers) => {
     };
     helpers.getItems(currentUser)
       .then((products) => {
+        console.log(products);
         res.send(products)
       })
   });
@@ -62,10 +63,10 @@ module.exports = (helpers) => {
     const query = req.body.todo;
     const location = req.body.location;
     getAPIToDo(query, location, (search, b, item) => {
-      addToDB(search, item, (remainingObj) => {
-
+      addToDB(search, item, (search, err, remainingObj) => {
+        console.log("THIS IS A TEST");
+        console.log(remainingObj);
         res.json(remainingObj);
-
       });
     });
 
