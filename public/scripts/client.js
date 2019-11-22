@@ -232,6 +232,12 @@ const loadItems = function() {
   .then((itemList) => {
     renderList(itemList);
   })
+  .then(() => {
+    $('#read').siblings('i').addClass('fa-glasses').removeClass('fa-check-square')
+    $('#watch').siblings('i').addClass('fa-desktop').removeClass('fa-check-square')
+    $('#eat').siblings('i').addClass('fa-utensils').removeClass('fa-check-square')
+    $('#buy').siblings('i').addClass('fa-shopping-bag').removeClass('fa-check-square')
+  })
   .then(() => $('div.checkbox input').on('click', checkCompleted));
 };
 
@@ -247,9 +253,13 @@ const loadCompleted = function() {
     $('input[type=checkbox]').prop('checked', true)
     $('div.collapsible-header').addClass('completed')
     $('#read').text('Read')
+    $('#read').siblings('i').removeClass('fa-glasses').addClass('fa-check-square')
     $('#watch').text('Watched')
+    $('#watch').siblings('i').removeClass('fa-desktop').addClass('fa-check-square')
     $('#eat').text('Ate')
+    $('#eat').siblings('i').removeClass('fa-utensils').addClass('fa-check-square')
     $('#buy').text('Bought')
+    $('#buy').siblings('i').removeClass('fa-shopping-bag').addClass('fa-check-square')
     $('div.checkbox input').on('click', checkToDo)
   })
 }
