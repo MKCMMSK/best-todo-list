@@ -68,6 +68,7 @@ module.exports = (helpers) => {
   });
 
   router.post('/', (req, res) => {
+    const userId = req.session.user_id;
     const query = req.body.todo;
     const location = req.body.location;
     getAPIToDo(query, location, (search, b, item) => {

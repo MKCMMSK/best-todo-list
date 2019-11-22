@@ -111,7 +111,7 @@ module.exports = (db) => {
     ;`;
 
     return db
-    .query(newBook, [book.category_id, `${book.title}`, `${book.description}`, `${book.url}`, `${book.img}`, `${book.author}`, `${book.publication_date}`, book.page_length, `${book.genre}`, 1])
+    .query(newBook, [book.category_id, `${book.title}`, `${book.description}`, `${book.url}`, `${book.img}`, `${book.author}`, `${book.publication_date}`, book.page_length, `${book.genre}`, user])
     .then(res => res.rows[0])
     .catch((err) => {
       console.error(`Error from addBook: ${err}`);
@@ -119,11 +119,11 @@ module.exports = (db) => {
 
   }
 
-  const addRestaurant = function(restaurant) {
+  const addRestaurant = function(restaurant, user) {
     const newRestaurant = `
     WITH new_todo AS (
-      INSERT INTO todo_items (category_id, title, description, url, img)
-      SELECT $1, $2, $3, $4, $5
+      INSERT INTO todo_items (category_id, title, description, url, img, user_id)
+      SELECT $1, $2, $3, $4, $5, $11
       WHERE NOT EXISTS (SELECT * FROM todo_items WHERE url = $4::varchar)
       RETURNING id
     )
@@ -133,7 +133,7 @@ module.exports = (db) => {
     ;`;
 
     return db
-    .query(newRestaurant, [restaurant.category_id, `${restaurant.title}`, `${restaurant.description}`, `${restaurant.url}`, `${restaurant.img}`, `${restaurant.street_address}`, `${restaurant.city}`, `${restaurant.province_state}`, `${restaurant.country}`, `${restaurant.google_map_url}`])
+    .query(newRestaurant, [restaurant.category_id, `${restaurant.title}`, `${restaurant.description}`, `${restaurant.url}`, `${restaurant.img}`, `${restaurant.street_address}`, `${restaurant.city}`, `${restaurant.province_state}`, `${restaurant.country}`, `${restaurant.google_map_url}`, user])
     .then(res => res.rows[0])
     .catch((err) => {
       console.error(`Error from addRestaurant: ${err}`);
@@ -143,8 +143,8 @@ module.exports = (db) => {
   const addMovie = function(movie) {
     const newMovie = `
     WITH new_todo AS (
-      INSERT INTO todo_items (category_id, title, description, url, img)
-      SELECT $1, $2, $3, $4, $5
+      INSERT INTO todo_items (category_id, title, description, url, img, user_id)
+      SELECT $1, $2, $3, $4, $5, $8
       WHERE NOT EXISTS (SELECT * FROM todo_items WHERE url = $4::varchar)
       RETURNING id
     )
@@ -153,18 +153,18 @@ module.exports = (db) => {
     WHERE EXISTS (SELECT * FROM new_todo)
     ;`;
     return db
-    .query(newMovie, [movie.category_id, `${movie.title}`, `${movie.description}`, `${movie.url}`, `${movie.img}`, `${movie.genre}`, movie.year])
+    .query(newMovie, [movie.category_id, `${movie.title}`, `${movie.description}`, `${movie.url}`, `${movie.img}`, `${movie.genre}`, movie.year, user])
     .then(res => res.rows[0])
     .catch((err) => {
       console.error(`Error from addMovie: ${err}`);
     })
   }
 
-  const addTvShow = function(tv) {
+  const addTvShow = function(tv, user) {
     const newTvShow = `
     WITH new_todo AS (
-      INSERT INTO todo_items (category_id, title, description, url, img)
-      SELECT $1, $2, $3, $4, $5
+      INSERT INTO todo_items (category_id, title, description, url, img, user_id)
+      SELECT $1, $2, $3, $4, $5, $8
       WHERE NOT EXISTS (SELECT * FROM todo_items WHERE url = $4::varchar)
       RETURNING id
     )
@@ -173,7 +173,7 @@ module.exports = (db) => {
     WHERE EXISTS (SELECT * FROM new_todo)
     ;`;
     return db
-    .query(newTvShow, [tv.category_id, `${tv.title}`, `${tv.description}`, `${tv.url}`, `${tv.img}`, `${tv.genre}`, tv.year])
+    .query(newTvShow, [tv.category_id, `${tv.title}`, `${tv.description}`, `${tv.url}`, `${tv.img}`, `${tv.genre}`, tv.year, user])
     .then(res => res.rows[0])
     .catch((err) => {
       console.error(`Error from addTvShow: ${err}`);
@@ -183,8 +183,8 @@ module.exports = (db) => {
   const addProduct = function(product) {
     const newProduct = `
     WITH new_todo AS (
-      INSERT INTO todo_items (category_id, title, description, url, img)
-      SELECT $1, $2, $3, $4, $5
+      INSERT INTO todo_items (category_id, title, description, url, img, user_id)
+      SELECT $1, $2, $3, $4, $5, $8
       WHERE NOT EXISTS (SELECT * FROM todo_items WHERE url = $4::varchar)
       RETURNING id
     )
@@ -194,7 +194,7 @@ module.exports = (db) => {
     ;`;
 
     return db
-    .query(newProduct, [product.category_id, `${product.title}`, `${product.description}`, `${product.url}`, `${product.img}`, product.cost, `${product.brand}`])
+    .query(newProduct, [product.category_id, `${product.title}`, `${product.description}`, `${product.url}`, `${product.img}`, product.cost, `${product.brand}`, user])
     .then(res => res.rows[0])
     .catch((err) => {
       console.error(`Error from addProduct: ${err}`);
