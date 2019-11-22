@@ -149,6 +149,68 @@ module.exports = (db) => {
     })
   }
 
+  const addMovie = function(movie) {
+    const newMovie = `
+    WITH new_todo AS (
+      INSERT INTO todo_items (category_id, title, description, url, img)
+      SELECT $1, $2, $3, $4, $5
+      WHERE NOT EXISTS (SELECT * FROM todo_items WHERE url = $4::varchar)
+      RETURNING id
+    )
+    INSERT INTO movies_tv (todo_item_id, genre, year)
+    SELECT (SELECT id FROM new_todo), $6, $7
+    WHERE EXISTS (SELECT * FROM new_todo)
+    ;`;
+    return db
+    .query(newMovie, [movie.category_id, `${movie.title}`, `${movie.description}`, `${movie.url}`, `${movie.img}`, `${movie.genre}`, movie.year])
+    .then(res => res.rows[0])
+    .catch((err) => {
+      console.error(err);
+    })
+  }
+
+  const addTvShow = function(tv) {
+    const newTvShow = `
+    WITH new_todo AS (
+      INSERT INTO todo_items (category_id, title, description, url, img)
+      SELECT $1, $2, $3, $4, $5
+      WHERE NOT EXISTS (SELECT * FROM todo_items WHERE url = $4::varchar)
+      RETURNING id
+    )
+    INSERT INTO movies_tv (todo_item_id, genre, year)
+    SELECT (SELECT id FROM new_todo), $6, $7
+    WHERE EXISTS (SELECT * FROM new_todo)
+    ;`;
+    return db
+    .query(newTvShow, [tv.category_id, `${tv.title}`, `${tv.description}`, `${tv.url}`, `${tv.img}`, `${tv.genre}`, tv.year])
+    .then(res => res.rows[0])
+    .catch((err) => {
+      console.error(err);
+    })
+  }
+
+  const addProduct = function(product) {
+    const newProduct = `
+    WITH new_todo AS (
+      INSERT INTO todo_items (category_id, title, description, url, img)
+      SELECT $1, $2, $3, $4, $5
+      WHERE NOT EXISTS (SELECT * FROM todo_items WHERE url = $4::varchar)
+      RETURNING id
+    )
+    INSERT INTO products (todo_item_id, cost, brand)
+    SELECT (SELECT id FROM new_todo), $6, $7
+    WHERE EXISTS (SELECT * FROM new_todo)
+    ;`;
+
+    console.log(product, "THIS IS INSIDE DB");
+
+    return db
+    .query(newProduct, [product.category_id, `${product.title}`, `${product.description}`, `${product.url}`, `${product.img}`, product.cost, `${product.brand}`])
+    .then(res => res.rows[0])
+    .catch((err) => {
+      console.error(err);
+    })
+  }
 
   const getUserId = function(email) {
     const userFromDatabase = `
@@ -163,5 +225,5 @@ module.exports = (db) => {
   };
 
 
-  return { addBook, getItems, addRestaurant, archiveItem, getCompleted, unarchiveItem, register, getUserId };
+  return { addBook, getItems, addRestaurant, archiveItem, getCompleted, unarchiveItem, register, getUserId, addProduct, addTvShow, addMovie };
 };
