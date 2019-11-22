@@ -2,7 +2,7 @@ module.exports = (db) => {
   const register = function(user) {
     const createUser = `
     INSERT INTO users (full_name, email, pw)
-    VALUES ($1, $2, $3)
+    VALUES $1, $2, $3
     ;`;
 
     return db
