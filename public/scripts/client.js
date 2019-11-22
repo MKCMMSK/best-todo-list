@@ -40,6 +40,24 @@ $(document).ready(function(){
     .then(loadItems);
   });
 
+  // submit login with ajax
+  $(function () {
+    $('.login-form').submit((event) => {
+      const email = $('#login').val();
+      $.ajax({
+        method: "POST",
+        url: "/login",
+        data: {
+          email: email
+        },
+        success: function(data){
+          window.location = "http://localhost:8080/";
+         },
+      })
+      .then(loadItems);
+    });
+  });
+
   // submit logout with ajax
   $(function () {
     $('.logout').submit((event) => {

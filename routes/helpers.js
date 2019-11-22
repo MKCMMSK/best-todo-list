@@ -149,13 +149,13 @@ module.exports = (db) => {
     })
   }
 
+
   const getUserId = function(email) {
     const userFromDatabase = `
     SELECT id
     FROM users
     WHERE email = $1;
     `;
-    console.log(`userid from database: ${userFromDatabase}`)
     return db
     .query(userFromDatabase, [email])
     .then(res => res.rows[0])
