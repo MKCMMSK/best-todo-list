@@ -37,14 +37,14 @@
     <% if(!locals.user) { %>
       <div id="login-register">
 
-        <div id="login">
+        <div>
           <form></form>
         </div>
 
-        <div id="register">
+        <div>
           <h2>Register</h2>
           <div class="row">
-            <form class="col s12">
+            <form id="register" method="POST" action="/register" class="col s12">
               <div class="row">
                 <div class="input-field col s12">
                   <input id="full_name" type="text" class="validate">
@@ -63,7 +63,7 @@
                   <label for="pw">Password</label>
                 </div>
                 <div class="input-field col s6">
-                  <input id="pw" type="password" class="validate">
+                  <input type="password" class="validate">
                   <label for="pw">Re-enter Password</label>
                 </div>
               </div>

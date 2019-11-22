@@ -84,6 +84,12 @@ module.exports = (helpers) => {
     res.redirect('/');
   });
 
+  router.post('/register', (req, res) => {
+    const user = req.body;
+    console.log('server', user);
+    res.send(user);
+  })
+
   return router;
 };
 

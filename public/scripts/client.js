@@ -6,9 +6,22 @@ $(document).ready(function(){
     $(this).children('.collapsible-header').children('.arrow-icon').toggleClass("open");
   });
 
+  // register new user
+  $('#register').submit((event) => {
+    $.ajax({
+      url: '/register',
+      method: 'POST',
+      data: {
+        full_name: $('#full_name').val(),
+        email: $('#email').val(),
+        pw: $('#pw').val()
+      }
+    })
+    .then(() => console.log(res))
+  })
+
   // submit form with ajax
   $('#newToDo').submit((event) => {
-    // event.preventDefault();
     const query = $('#compose').val();
     getPosition()
     .then((latlong) => {
@@ -227,10 +240,3 @@ const getPosition = function() {
   });
 };
 
-const register = function() {
-  $.ajax({
-    url: '/register',
-    method: 'POST',
-    data: form.serialize()
-  })
-}
