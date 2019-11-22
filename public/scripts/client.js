@@ -100,7 +100,7 @@ $(document).ready(function(){
 //creates simple list item need to implement overload for different categories
 function createListElement(object) {
   const top = `
-    <li class="item" id=${object.user_specific_item_id}>
+    <li class="item" id=${object.todo_id}>
       <div class="collapsible-header">
         <div class="checkbox"><label><input type="checkbox"><span></span></label></div>
         ${object.title}

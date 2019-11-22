@@ -18,23 +18,19 @@ module.exports = (db) => {
     const allItems =
     `
     SELECT
-    to_do_user_specifics.user_id AS userid, todo_items.id AS todo_id, todo_items.category_id, to_do_user_specifics.id AS user_specific_item_id,
-    to_do_user_specifics.position AS user_specified_position, to_do_user_specifics.archived,
+    todo_items.id AS todo_id, todo_items.category_id,
     todo_items.title, todo_items.description, todo_items.url, todo_items.img,
     products.id AS product_id, products.brand, products.vendor, products.cost,
     books.id AS book_id, books.author, books.publication_date, books.page_length, books.genre AS books_genre,
     restaurants.id AS restaurant_id, restaurants.street_address, restaurants.city, restaurants.province_state, restaurants.country, restaurants.google_map_url,
-    movies_tv.id AS movie_id, movies_tv.year, movies_tv.runtime, movies_tv.actors, movies_tv.genre AS movietv_genre,
-    to_do_user_specifics.note, to_do_user_specifics.rate, to_do_user_specifics.rating_comment
+    movies_tv.id AS movie_id, movies_tv.year, movies_tv.runtime, movies_tv.actors, movies_tv.genre AS movietv_genre
   FROM todo_items
-  JOIN to_do_user_specifics ON todo_items.id = to_do_user_specifics.todo_item_id
   LEFT OUTER JOIN movies_tv ON todo_items.id = movies_tv.todo_item_id
   LEFT OUTER JOIN restaurants ON todo_items.id = restaurants.todo_item_id
   LEFT OUTER JOIN products ON todo_items.id = products.todo_item_id
   LEFT OUTER JOIN books ON todo_items.id = books.todo_item_id
-  WHERE to_do_user_specifics.archived = false
-  AND to_do_user_specifics.user_id = $1
-  ORDER BY userid
+  WHERE todo_items.archived = false
+  AND todo_items.user_id = $1
   ;`
 
     return db
@@ -48,24 +44,20 @@ module.exports = (db) => {
   const getCompleted = function(user) {
     const completedItems = `
     SELECT
-    to_do_user_specifics.user_id AS userid, todo_items.id AS todo_id, todo_items.category_id, to_do_user_specifics.id AS user_specific_item_id,
-    to_do_user_specifics.position AS user_specified_position, to_do_user_specifics.archived,
+    todo_items.id AS todo_id, todo_items.category_id,
     todo_items.title, todo_items.description, todo_items.url, todo_items.img,
     products.id AS product_id, products.brand, products.vendor, products.cost,
     books.id AS book_id, books.author, books.publication_date, books.page_length, books.genre AS books_genre,
     restaurants.id AS restaurant_id, restaurants.street_address, restaurants.city, restaurants.province_state, restaurants.country, restaurants.google_map_url,
-    movies_tv.id AS movie_id, movies_tv.year, movies_tv.runtime, movies_tv.actors, movies_tv.genre AS movietv_genre,
-    to_do_user_specifics.note, to_do_user_specifics.rate, to_do_user_specifics.rating_comment
-    FROM todo_items
-    JOIN to_do_user_specifics ON todo_items.id = to_do_user_specifics.todo_item_id
-    LEFT OUTER JOIN movies_tv ON todo_items.id = movies_tv.todo_item_id
-    LEFT OUTER JOIN restaurants ON todo_items.id = restaurants.todo_item_id
-    LEFT OUTER JOIN products ON todo_items.id = products.todo_item_id
-    LEFT OUTER JOIN books ON todo_items.id = books.todo_item_id
-    WHERE to_do_user_specifics.archived = true
-    AND to_do_user_specifics.user_id = $1
-    ORDER BY userid
-    ;`;
+    movies_tv.id AS movie_id, movies_tv.year, movies_tv.runtime, movies_tv.actors, movies_tv.genre AS movietv_genre
+  FROM todo_items
+  LEFT OUTER JOIN movies_tv ON todo_items.id = movies_tv.todo_item_id
+  LEFT OUTER JOIN restaurants ON todo_items.id = restaurants.todo_item_id
+  LEFT OUTER JOIN products ON todo_items.id = products.todo_item_id
+  LEFT OUTER JOIN books ON todo_items.id = books.todo_item_id
+  WHERE todo_items.archived = true
+  AND todo_items.user_id = $1
+  ;`;
 
     return db
     .query(completedItems, [user])
@@ -77,8 +69,8 @@ module.exports = (db) => {
 
   const archiveItem = function(user, todo) {
     const archive = `
-    UPDATE to_do_user_specifics
-    SET archived = true, date_archived = now()::date
+    UPDATE todo_items
+    SET archived = true
     WHERE user_id = $1 AND id = $2
     ;`;
 
@@ -92,7 +84,7 @@ module.exports = (db) => {
 
   const unarchiveItem = function(user, todo) {
     const archive = `
-    UPDATE to_do_user_specifics
+    UPDATE todo_items
     SET archived = false
     WHERE user_id = $1 AND id = $2
     ;`;
@@ -105,22 +97,21 @@ module.exports = (db) => {
     });
   }
 
-  const addBook = function(book) {
+  const addBook = function(book, user) {
     const newBook = `
     WITH new_todo AS (
-      INSERT INTO todo_items (category_id, title, description, url, img)
-      SELECT $1, $2, $3, $4, $5
+      INSERT INTO todo_items (category_id, title, description, url, img, user_id)
+      SELECT $1, $2, $3, $4, $5, $10
       WHERE NOT EXISTS (SELECT * FROM todo_items WHERE url = $4::varchar)
       RETURNING id
     )
     INSERT INTO books (todo_item_id, author, publication_date, page_length, genre)
     SELECT (SELECT id FROM new_todo), $6, $7, $8, $9
     WHERE EXISTS (SELECT * FROM new_todo)
-
     ;`;
 
     return db
-    .query(newBook, [book.category_id, `${book.title}`, `${book.description}`, `${book.url}`, `${book.img}`, `${book.author}`, `${book.publication_date}`, book.page_length, `${book.genre}`])
+    .query(newBook, [book.category_id, `${book.title}`, `${book.description}`, `${book.url}`, `${book.img}`, `${book.author}`, `${book.publication_date}`, book.page_length, `${book.genre}`, 1])
     .then(res => res.rows[0])
     .catch((err) => {
       console.error(`Error from addBook: ${err}`);
