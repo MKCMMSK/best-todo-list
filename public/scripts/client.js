@@ -15,9 +15,12 @@ $(document).ready(function(){
         full_name: $('#full_name').val(),
         email: $('#email').val(),
         pw: $('#pw').val()
+      },
+      success: function(data) {
+        window.location = '/';
       }
     })
-    .then(() => console.log(res))
+    .then(loadItems);
   })
 
   // submit form with ajax

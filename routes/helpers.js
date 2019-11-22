@@ -1,8 +1,9 @@
 module.exports = (db) => {
   const register = function(user) {
     const createUser = `
-    INSERT INTO users (full_name, email, pw)
-    VALUES $1, $2, $3
+    INSERT INTO users (full_name, email, pw, signup_date)
+    VALUES ($1, $2, $3, now()::date)
+    RETURNING *
     ;`;
 
     return db
@@ -148,5 +149,19 @@ module.exports = (db) => {
     })
   }
 
-  return { addBook, getItems, addRestaurant, archiveItem, getCompleted, unarchiveItem, register };
+  const getUserId = function(email) {
+    const userFromDatabase = `
+    SELECT id
+    FROM users
+    WHERE email = $1;
+    `;
+    console.log(`userid from database: ${userFromDatabase}`)
+    return db
+    .query(userFromDatabase, [email])
+    .then(res => res.rows[0])
+    .catch((err) => console.log(err))
+  };
+
+
+  return { addBook, getItems, addRestaurant, archiveItem, getCompleted, unarchiveItem, register, getUserId };
 };
