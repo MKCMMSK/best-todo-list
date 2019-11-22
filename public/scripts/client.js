@@ -40,6 +40,24 @@ $(document).ready(function(){
     .then(loadItems);
   });
 
+  // submit login with ajax
+  $(function () {
+    $('.login-form').submit((event) => {
+      const email = $('#login').val();
+      $.ajax({
+        method: "POST",
+        url: "/login",
+        data: {
+          email: email
+        },
+        success: function(data){
+          window.location = "http://localhost:8080/";
+         },
+      })
+      .then(loadItems);
+    });
+  });
+
   // submit logout with ajax
   $(function () {
     $('.logout').submit((event) => {
@@ -85,7 +103,7 @@ function createListElement(object) {
       </div>
       <div class="collapsible-body">
       <a href="${object.url}" target=_blank><img src="${object.img}"></a>
-      <div class="description">${object.description}</div>
+      <div class="description">Description: ${object.description}</div>
       `;
   const bottom = `
       <p>Note: <span class="note">${object.note}</span></p>

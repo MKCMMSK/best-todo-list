@@ -7,7 +7,8 @@
 
 const express = require('express');
 const router = express.Router();
-const { getBook, getRestaurant, getMovie, getTvShow } = require('../lib/util/api_helpers');
+const { getAPIToDo } = require('../lib/util/api_helpers');
+const { addBook, getItems, addRestaurant, archiveItem } = require('../routes/helpers');
 
 module.exports = (helpers) => {
 
@@ -54,29 +55,34 @@ module.exports = (helpers) => {
       .then(() => { res.send('moved to to-do') })
   });
 
-
-  router.get("/users/:id", (req, res) => {
-
-    const userID = req.params.id;
-    // set session cookie
-    req.session.user_id = userID;
-    console.log("just set s.user_id in /:id to", req.session.user_id);
-    res.redirect('/');
+  router.post(('/login'), (req, res) => {
+    const email = req.body.email;
+    const userID = helpers.getUserId(email);
+    console.log(req.body);
+    if (userID) {
+      req.session.user_id = userID;
+      console.log("session cookie set to user id", req.session.user_id);
+      res.send('logged in');
+    };
   });
-
 
   router.post('/', (req, res) => {
     const query = req.body.todo;
     const location = req.body.location;
-    // getBook(query, (err, book) => {
-    //   helpers.addBook(book)
-    //     .then(() => { res.json(query) });
-    // })
-
-    getRestaurant(query, location, (a, b, restaurant) => {
-      helpers.addRestaurant(restaurant)
-      .then(() => { res.json(query) });
+    getBook(query, (err, book) => {
+      helpers.addBook(book)
+        .then(() => { res.json(query) });
     })
+
+    getAPIToDo(query, location, (a, b, response) => {
+      console.log(response);
+      res.send(response);
+    })
+
+    // getRestaurant(query, location, (a, b, restaurant) => {
+    //   helpers.addRestaurant(restaurant)
+    //   .then(() => { res.json(query) });
+    // })
   });
 
   router.post('/logout', (req, res) => {

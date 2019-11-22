@@ -11,3 +11,27 @@ nav {
     background-color: $medium;
   }
 }
+
+.text-logo {
+  position: absolute;
+  left: 50%
+}
+
+.login-form {
+  position: absolute;
+  height: auto;
+  top: 0;
+  right: 7em
+}
+
+.email-login {
+  color: lavender;
+  padding-right: 1em;
+}
+
+.login-button {
+  position: absolute;
+  top: 1em;
+  right: -6em;
+  display: inline-block
+}
