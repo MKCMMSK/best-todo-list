@@ -36,7 +36,6 @@ ul.collapsible {
 }
 
 .desc-body {
-  // border: 1px solid blue;
   display: flex;
   justify-content: space-around;
   img {
@@ -46,13 +45,12 @@ ul.collapsible {
   }
   div {
     width: 50%;
-    // border: 1px solid red;
+  }
+  a {
+    margin-top: 20px;
   }
 }
 
-// .description {
-//   border: 1px solid red;
-// }
 
 $duration: 0.5s;
 $easing: cubic-bezier(.25,1.7,.35,.8);
