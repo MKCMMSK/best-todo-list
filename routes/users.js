@@ -54,16 +54,16 @@ module.exports = (helpers) => {
       .then(() => { res.send('moved to to-do') })
   });
 
-
-  router.get("/users/:id", (req, res) => {
-
-    const userID = req.params.id;
-    // set session cookie
-    req.session.user_id = userID;
-    console.log("just set s.user_id in /:id to", req.session.user_id);
-    res.redirect('/');
+  router.post(('/login'), (req, res) => {
+    const email = req.body.email;
+    const userID = helpers.getUserId(email);
+    console.log(req.body);
+    if (userID) {
+      req.session.user_id = userID;
+      console.log("session cookie set to user id", req.session.user_id);
+      res.send('logged in');
+    };
   });
-
 
   router.post('/', (req, res) => {
     const query = req.body.todo;
