@@ -7,7 +7,7 @@ $medium-light: #B8DBD9;
 $medium: #586F7C;
 $medium-dark: #2F4550;
 $dark: #191919;
-$font: 'Helvetica', sans-serif;
+$font: sans-serif;
 
 body {
   background-color: $medium-light;
@@ -16,7 +16,12 @@ body {
   // background-image: url("../public/images/light-honeycomb.png");
 
   h1 {
-    color: #244751;
+    color: $light;
+    font-family: 'Montserrat', sans-serif;
+    position: absolute;
+    top: -26px;
+    left: 90px;
+    font-size: 35px;
   }
 
   h2 {

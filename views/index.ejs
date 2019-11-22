@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
     <!-- JS -->
@@ -21,7 +22,7 @@
     <nav>
       <div>
         <img src="https://img.icons8.com/clouds/64/000000/todo-list.png">
-        To-do List
+        <h1>to-doℓist</h1>
       </div>
     <% if(locals.user) { %>
       <form action="/logout" method="POST">
@@ -89,11 +90,11 @@
     </div>
 
     <div class="input-field col s12">
+      <p>View:</p>
       <select id="views">
         <option value="1" id="view-todo">To-do</option>
         <option value="2" id="view-completed">Completed</option>
       </select>
-      <label>View:</label>
     </div>
 
     <ul class="collapsible popout">
