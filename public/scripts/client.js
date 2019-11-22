@@ -41,7 +41,8 @@ $(document).ready(function(){
     .then((res) => {
       tempData = res;
       loadItems();
-    });
+    })
+    .then(() => M.toast({html: 'Your item has been added'}))
     return false;
   });
 
@@ -277,3 +278,15 @@ const getPosition = function() {
   });
 };
 
+const category = function(obj, arr) {
+  const keys = Object.keys(obj);
+  keys.sort();
+  arr.sort();
+  for (let i = 0; i < arr.length; i++) {
+    for (let k = 0; k < keys.length; k++) {
+      if (keys[i] !== arr[i]) {
+        return arr[i];
+      }
+    }
+  }
+}

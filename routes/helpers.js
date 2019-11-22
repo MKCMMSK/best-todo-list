@@ -18,6 +18,7 @@ module.exports = (db) => {
     const allItems =
     `
     SELECT
+    todo_items.user_id AS userid,
     todo_items.id AS todo_id, todo_items.category_id,
     todo_items.title, todo_items.description, todo_items.url, todo_items.img,
     products.id AS product_id, products.brand, products.vendor, products.cost,
@@ -44,6 +45,7 @@ module.exports = (db) => {
   const getCompleted = function(user) {
     const completedItems = `
     SELECT
+    todo_items.user_id AS userid,
     todo_items.id AS todo_id, todo_items.category_id,
     todo_items.title, todo_items.description, todo_items.url, todo_items.img,
     products.id AS product_id, products.brand, products.vendor, products.cost,
