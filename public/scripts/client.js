@@ -98,24 +98,17 @@ function createListElement(object) {
   const top = `
     <li class="item" id=${object.user_specific_item_id}>
       <div class="collapsible-header">
-<<<<<<< HEAD
-
-<<<<<<< HEAD
-        <div class="checkbox"><label><input type="checkbox"><span ></span></label></div>
-=======
-=======
->>>>>>> b6dea6972d479b8eb0b643ba7bb05084d07757d3
         <div class="checkbox"><label><input type="checkbox"><span></span></label></div>
->>>>>>> 439f83948606f23098fa734e26a683f39778da96
-
         ${object.title}
       </div>
       <div class="collapsible-body">
+      <div class="desc-body">
       <a href="${object.url}" target=_blank><img src="${object.img}"></a>
-      <p>${object.description}</p>
+      <div><p><b>Description:</b> ${object.description}</p>
       `;
   const bottom = `
-      <p>Note: <span class="note">${object.note}</span></p>
+      </div>
+      </div>
       </div>
    </li>`;
   const wrapAround = [top, bottom];
@@ -127,10 +120,11 @@ function createListElement(object) {
 const createBookSection = function(object, wrap) {
   const bookDetails = `
   <p>
-  <span class="author">by ${object.author}</span> </br>
-  <span class="genre">${object.books_genre}, </span>
-  <span class="publication_date">published in ${object.publication_date} </span> </br>
-  <span class="page_length">${object.page_length} pages</span>
+  <span class="author"><b>Author:</b> ${object.author}</span> </br>
+  <span class="genre"><b>Category:</b> ${object.books_genre}, </span><br>
+  <span class="publication_date"><b>Year:</b> ${object.publication_date} </span> </br>
+  <span class="page_length">${object.page_length} pages</span><br>
+  <a href="${object.url}" class="waves-effect waves-light btn">Buy Now</a>
   </p>
   `;
   const book = `${wrap[0]}${bookDetails}${wrap[1]}`;
@@ -141,11 +135,11 @@ const createBookSection = function(object, wrap) {
 const createMediaSection = function(object, wrap) {
   const mediaDetails = `
   <p>
-  <span class="year">${object.year}</span> </br>
+  <span class="year"><b>Year:</b> ${object.year}</span> </br>
   <span class="genre">${object.movietv_genre}, </span>
   <span class="runtime">${object.runtime} minutes</span> </br>
-  <span class="actors">Actors: ${object.actors}</span></br>
-  <a href=${object.url} class="watch_now" target=_blank>Watch Now</a>
+  <span class="actors"><b>Actors: </b>${object.actors}</span></br>
+  <a href="${object.url}" class="waves-effect waves-light btn" target=_blank>Watch Now</a>
   </p>
   `;
   const media = `${wrap[0]}${mediaDetails}${wrap[1]}`
@@ -156,9 +150,9 @@ const createMediaSection = function(object, wrap) {
 const createProductSection = function(object, wrap) {
   const productDetails = `
   <p>
-  <span class="brand">${object.brand}</span></br>
-  <span class="cost">${object.cost} at </span>
-  <a href=${object.url} class="vendor" target=_blank>${object.vendor}</a>
+  <span class="brand"><b>Brand:</b> ${object.brand}</span></br>
+  <span class="cost"><b>Price:</b> ${object.cost}</span><br>
+  <a href=${object.url} class="waves-effect waves-light btn" target=_blank>Buy from ${object.vendor}</a>
   </p>
   `;
   const product = `${wrap[0]}${productDetails}${wrap[1]}`
@@ -169,8 +163,8 @@ const createProductSection = function(object, wrap) {
 const createRestaurantSection = function(object, wrap) {
   const restaurantDetails = `
   <p>
-  <span class="address">${object.street_address}<br>${object.city}, ${object.province_state} ${object.country}</span> </br>
-  <a href=${object.google_map_url} class="get_directions" target=_blank>Get Directions</a>
+  <span class="address"><b>Address: </b>${object.street_address}<br>${object.city}, ${object.province_state} ${object.country}</span> </br>
+  <a href=${object.google_map_url} class="waves-effect waves-light btn" target=_blank>Get Directions</a>
   </p>
   `;
   const restaurant = `${wrap[0]}${restaurantDetails}${wrap[1]}`;
@@ -251,7 +245,7 @@ const loadCompleted = function() {
   })
   .then(() => {
     $('input[type=checkbox]').prop('checked', true)
-    $('li.item').addClass('completed')
+    $('div.collapsible-header').addClass('completed')
     $('#read').text('Read')
     $('#watch').text('Watched')
     $('#eat').text('Ate')
