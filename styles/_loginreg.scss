@@ -2,4 +2,14 @@
   background-color: $light;
   padding: 20px;
   margin: 50px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 500px;
+  div {
+    margin-top: auto;
+    margin-bottom: auto;
+    // width: 50%;
+  }
 }

@@ -30,13 +30,6 @@
           Logout
         </button>
       </form>
-    <% } else { %>
-      <form class="login-form" id="login-form" action="/login" method="POST">
-        <input id="login" class="email-login" type="email" name="email" placeholder="Email"></input>
-        <button type="submit" class="login-button waves-effect waves-light btn" name="login-button">
-          Log In
-        </button>
-      </form>
     <% }; %>
     </nav>
 
@@ -44,7 +37,22 @@
       <div id="login-register">
 
         <div>
-          <form></form>
+          <h2>Log In</h2>
+          <div class="row">
+            <form class="col s12" id="login-form" action="/login" method="POST">
+              <div class="input-field col s12">
+                <input id="login" type="email" name="email"></input>
+                <label for="login">Email</label>
+              </div>
+              <div class="input-field col s12">
+                <input type="password">
+                <label for="loginpw">Password</label>
+              </div>
+              <button type="submit" class="waves-effect waves-light btn-large btn" name="login-button">
+                Log In
+              </button>
+            </form>
+          </div>
         </div>
 
         <div>
@@ -53,23 +61,23 @@
             <form id="register" method="POST" action="/register" class="col s12">
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="full_name" type="text" class="validate">
+                  <input id="full_name" type="text">
                   <label for="full_name">Full Name</label>
                 </div>
               </div>
               <div class="row"></div>
                 <div class="input-field col s12">
-                  <input id="email" type="email" class="validate">
+                  <input id="email" type="email">
                   <label for="email">E-mail</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s6">
-                  <input id="pw" type="password" class="validate">
+                  <input id="pw" type="password">
                   <label for="pw">Password</label>
                 </div>
                 <div class="input-field col s6">
-                  <input type="password" class="validate">
+                  <input type="password">
                   <label for="pw">Re-enter Password</label>
                 </div>
               </div>
