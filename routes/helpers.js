@@ -1,9 +1,16 @@
 module.exports = (db) => {
   const register = function(user) {
     const createUser = `
-    INSERT INTO users (full_name, email, phone, img, pw, signup_date, permissions)
-    VALUES ($1, $2, $3, $4, $5, $6, $7)
+    INSERT INTO users (full_name, email, pw)
+    VALUES ($1, $2, $3)
     ;`;
+
+    return db
+    .query(createUser, [`${user.full_name}`, `${user.email}`, `${user.pw}`])
+    .then(res => res.rows[0])
+    .catch((err) => {
+      console.error(err);
+    });
   }
 
   const getItems = function(user) {
@@ -141,5 +148,5 @@ module.exports = (db) => {
     })
   }
 
-  return { addBook, getItems, addRestaurant, archiveItem, getCompleted, unarchiveItem };
+  return { addBook, getItems, addRestaurant, archiveItem, getCompleted, unarchiveItem, register };
 };
