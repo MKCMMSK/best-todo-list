@@ -62,19 +62,33 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
-<<<<<<< HEAD
 
-// getAPIToDo.getBook("war and peace", (search,objObj) => {
-//   let book = {};
-//   book.book = objObj;
-//   console.log(book.book, " this it the book");
+
+// getAPIToDo.getAPIToDo("pears", "13.233,-123.213", (search, location,objObj)=> {
+//   getAPIToDo.addToDB(search, objObj);
 // });
 
+// getAPIToDo.getAPIToDo("", "13.233,-123.213", (search, location,objObj)=> {
+//   getAPIToDo.addToDB(search, objObj);
+// });
 
-getAPIToDo.getAPIToDo("war and peace", "13.233,-123.213", (search, location,objObj)=> {
+// getAPIToDo.getAPIToDo("laptop", "13.233,-123.213", (search, location,objObj)=> {
+//   getAPIToDo.addToDB(search, objObj);
+// });
 
-  getAPIToDo.addToDB(search, objObj);
-});
+// getAPIToDo.getAPIToDo("javascript", "13.233,-123.213", (search, location,objObj)=> {
+//   getAPIToDo.addToDB(search, objObj);
+// });
 
-=======
->>>>>>> 439f83948606f23098fa734e26a683f39778da96
+// getAPIToDo.getAPIToDo("batman v superman", "13.233,-123.213", (search, location,objObj)=> {
+//   getAPIToDo.addToDB(search, objObj);
+// });
+
+// getAPIToDo.getAPIToDo("chairs", "13.233,-123.213", (search, location,objObj)=> {
+//     getAPIToDo.addToDB(search, objObj);
+//   });
+
+
+  getAPIToDo.getAPIToDo("coffee", "49.2812368,-123.1171883,17", (search, location,objObj)=> {
+    getAPIToDo.addToDB(search, objObj);
+  });
