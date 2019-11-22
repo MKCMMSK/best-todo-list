@@ -19,6 +19,9 @@ module.exports = (helpers) => {
       .then((products) => {
         res.send(products)
       })
+      .catch((err) => {
+        console.error(`get /items err = ${err}`)
+      });
   });
   router.put('/', (req, res) => {
     const userId = req.session.user_id;
@@ -28,6 +31,9 @@ module.exports = (helpers) => {
     }
     helpers.archiveItem(userId, todo)
     .then(() => { res.send('deleted') })
+    .catch((err) => {
+      console.error(`put / err @ archiveItem = ${err}`)
+    });
   });
   router.get('/completed', (req, res) => {
     let currentUser = null;
@@ -38,6 +44,9 @@ module.exports = (helpers) => {
       .then((products) => {
         res.send(products)
       })
+      .catch((err) => {
+        console.error(`get /completed @ getCompleted = ${err}`)
+      });
   });
   router.put('/completed', (req, res) => {
     const userId = req.session.user_id;
@@ -47,17 +56,17 @@ module.exports = (helpers) => {
     }
     helpers.unarchiveItem(userId, todo)
       .then(() => { res.send('moved to to-do') })
+      .catch((err) => {
+        console.error(`put /completed err @ unarchiveItem = ${err}`)
+      });
   });
   router.post(('/login'), (req, res) => {
     const email = req.body.email;
-    const userID = helpers.getUserId(email);
-    console.log(req.body);
-    if (userID) {
-      req.session.user_id = userID;
-      console.log("session cookie set to user id", req.session.user_id);
-      res.send('logged in');
-    };
+    helpers.getUserId(email)
+    .then(id => req.session.user_id = id)
+    .then (() => res.send('logged in'))
   });
+
   router.post('/', (req, res) => {
     const query = req.body.todo;
     const location = req.body.location;
@@ -76,6 +85,7 @@ module.exports = (helpers) => {
     req.session.user_id = null;
     res.redirect('/');
   });
+
   router.post('/register', (req, res) => {
     let userId = null;
     const user = req.body;
@@ -83,11 +93,9 @@ module.exports = (helpers) => {
     .then((user) => userId = helpers.getUserId(user.email))
     .then((userId) => req.session.user_id = userId)
     .then(() => res.send('created'))
-  })
-  return router;
+    .catch((err) => {throw err})
+    });
+
+   return router;
+
 };
-
-
-
-
-

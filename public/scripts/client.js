@@ -96,7 +96,6 @@ $(document).ready(function(){
       }
     })
   })
-
 });
 
 //creates simple list item need to implement overload for different categories
