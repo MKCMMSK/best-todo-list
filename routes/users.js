@@ -79,6 +79,12 @@ module.exports = (helpers) => {
 
   });
 
+  router.post("/change", (req, res) => {
+    api.changeCategory(req.body, (err, (categoryAdded) => {
+      console.log(categoryAdded);
+      res.JSON(categoryAdded);
+    }))
+  });
 
   router.post('/logout', (req, res) => {
     req.session.user_id = null;

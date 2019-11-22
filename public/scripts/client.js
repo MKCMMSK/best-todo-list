@@ -24,6 +24,18 @@ $(document).ready(function(){
     .then(loadItems);
   })
 
+  const changeCategory = function(num) {
+    $.ajax({
+      url: '/change',
+      method: 'POST',
+      data: {
+        tempData,
+        selected: Object.keys(tempdata)[num]
+      }
+    })
+    .then((cat) => M.toast({html: `Item added to ${cat}`}, 3000))
+  }
+
   // submit form with ajax
   $('#newToDo').submit((event) => {
     const query = $('#compose').val();
@@ -43,9 +55,15 @@ $(document).ready(function(){
       loadItems();
     })
     .then(() => category(tempData, ['book', 'movie', 'restaurant', 'tv', 'product']))
-    .then((cat) => M.toast({html: `Item added to ${cat}`}))
+    .then((cat) => M.toast({html: `Item added to ${cat}`}, 3000))
+    .then(() => M.toast({html: `Change to <button class="btn-flat toast-action" value=${Object.keys(tempData)[0]} onclick="changeCategory(0)">${Object.keys(tempData)[0]}</button>`}))
+    .then(() => M.toast({html: `Change to <button class="btn-flat toast-action" value=${Object.keys(tempData)[1]} onclick="${changeCategory(1)}">${Object.keys(tempData)[1]}</button>`}))
+    .then(() => M.toast({html: `Change to <button class="btn-flat toast-action" value=${Object.keys(tempData)[2]} onclick="${changeCategory(2)}">${Object.keys(tempData)[2]}</button>`}))
+    .then(() => M.toast({html: `Change to <button class="btn-flat toast-action" value=${Object.keys(tempData)[3]} onclick="${changeCategory(3)}">${Object.keys(tempData)[3]}</button>`}))
     return false;
   });
+
+
 
   // submit login with ajax
   $(function () {
