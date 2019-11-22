@@ -62,33 +62,3 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
-
-
-// getAPIToDo.getAPIToDo("pears", "13.233,-123.213", (search, location,objObj)=> {
-//   getAPIToDo.addToDB(search, objObj);
-// });
-
-// getAPIToDo.getAPIToDo("", "13.233,-123.213", (search, location,objObj)=> {
-//   getAPIToDo.addToDB(search, objObj);
-// });
-
-// getAPIToDo.getAPIToDo("laptop", "13.233,-123.213", (search, location,objObj)=> {
-//   getAPIToDo.addToDB(search, objObj);
-// });
-
-// getAPIToDo.getAPIToDo("javascript", "13.233,-123.213", (search, location,objObj)=> {
-//   getAPIToDo.addToDB(search, objObj);
-// });
-
-// getAPIToDo.getAPIToDo("batman v superman", "13.233,-123.213", (search, location,objObj)=> {
-//   getAPIToDo.addToDB(search, objObj);
-// });
-
-// getAPIToDo.getAPIToDo("chairs", "13.233,-123.213", (search, location,objObj)=> {
-//     getAPIToDo.addToDB(search, objObj);
-//   });
-
-
-  getAPIToDo.getAPIToDo("coffee", "49.2812368,-123.1171883,17", (search, location,objObj)=> {
-    getAPIToDo.addToDB(search, objObj);
-  });
