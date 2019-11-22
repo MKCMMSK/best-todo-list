@@ -90,7 +90,6 @@ $(document).ready(function(){
       }
     })
   })
-
 });
 
 //creates simple list item need to implement overload for different categories
@@ -98,15 +97,8 @@ function createListElement(object) {
   const top = `
     <li class="item" id=${object.user_specific_item_id}>
       <div class="collapsible-header">
-<<<<<<< HEAD
 
-<<<<<<< HEAD
-        <div class="checkbox"><label><input type="checkbox"><span ></span></label></div>
-=======
-=======
->>>>>>> b6dea6972d479b8eb0b643ba7bb05084d07757d3
         <div class="checkbox"><label><input type="checkbox"><span></span></label></div>
->>>>>>> 439f83948606f23098fa734e26a683f39778da96
 
         ${object.title}
       </div>
