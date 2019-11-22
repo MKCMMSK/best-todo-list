@@ -42,7 +42,8 @@ $(document).ready(function(){
       tempData = res;
       loadItems();
     })
-    .then(() => M.toast({html: 'Your item has been added'}))
+    .then(() => category(tempData, ['book', 'movie', 'restaurant', 'tv', 'product']))
+    .then((cat) => M.toast({html: `Item added to ${cat}`}))
     return false;
   });
 
