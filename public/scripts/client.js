@@ -102,11 +102,13 @@ function createListElement(object) {
         ${object.title}
       </div>
       <div class="collapsible-body">
+      <div class="desc-body">
       <a href="${object.url}" target=_blank><img src="${object.img}"></a>
-      <div class="description">Description: ${object.description}</div>
+      <div><p>Description: ${object.description}</p>
       `;
   const bottom = `
-      <p>Note: <span class="note">${object.note}</span></p>
+      </div>
+      </div>
       </div>
    </li>`;
   const wrapAround = [top, bottom];

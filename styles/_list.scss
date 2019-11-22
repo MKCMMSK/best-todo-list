@@ -25,10 +25,6 @@ ul.collapsible {
   .active {
     background-color: $light;
   }
-  img {
-    float: left;
-    max-height: 140px;
-  }
 }
 
 .completed {
@@ -38,6 +34,25 @@ ul.collapsible {
 .collapsible-body {
   border: none;
 }
+
+.desc-body {
+  // border: 1px solid blue;
+  display: flex;
+  justify-content: space-around;
+  img {
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
+  }
+  div {
+    width: 50%;
+    // border: 1px solid red;
+  }
+}
+
+// .description {
+//   border: 1px solid red;
+// }
 
 $duration: 0.5s;
 $easing: cubic-bezier(.25,1.7,.35,.8);
