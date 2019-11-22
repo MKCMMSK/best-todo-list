@@ -6,9 +6,25 @@ $(document).ready(function(){
     $(this).children('.collapsible-header').children('.arrow-icon').toggleClass("open");
   });
 
+  // register new user
+  $('#register').submit((event) => {
+    $.ajax({
+      url: '/register',
+      method: 'POST',
+      data: {
+        full_name: $('#full_name').val(),
+        email: $('#email').val(),
+        pw: $('#pw').val()
+      },
+      success: function(data) {
+        window.location = '/';
+      }
+    })
+    .then(loadItems);
+  })
+
   // submit form with ajax
   $('#newToDo').submit((event) => {
-    // event.preventDefault();
     const query = $('#compose').val();
     getPosition()
     .then((latlong) => {
@@ -22,6 +38,24 @@ $(document).ready(function(){
       })
     })
     .then(loadItems);
+  });
+
+  // submit login with ajax
+  $(function () {
+    $('.login-form').submit((event) => {
+      const email = $('#login').val();
+      $.ajax({
+        method: "POST",
+        url: "/login",
+        data: {
+          email: email
+        },
+        success: function(data){
+          window.location = "http://localhost:8080/";
+         },
+      })
+      .then(loadItems);
+    });
   });
 
   // submit logout with ajax
@@ -38,8 +72,6 @@ $(document).ready(function(){
   $('.collapsible').collapsible();
 
 
-<<<<<<< HEAD
-=======
   // view todo/completed items
   $('#views')
   .formSelect()
@@ -48,6 +80,10 @@ $(document).ready(function(){
     $('#views option:selected').each(function() {
       view += $(this).text();
       if (view === 'To-do') {
+        $('#read').text('To Read')
+        $('#watch').text('To Watch')
+        $('#eat').text('To Eat')
+        $('#buy').text('To Buy')
         loadItems();
       } else if (view === 'Completed') {
         loadCompleted();
@@ -55,7 +91,6 @@ $(document).ready(function(){
     })
   })
 
->>>>>>> 439f83948606f23098fa734e26a683f39778da96
 });
 
 //creates simple list item need to implement overload for different categories
@@ -63,10 +98,13 @@ function createListElement(object) {
   const top = `
     <li class="item" id=${object.user_specific_item_id}>
       <div class="collapsible-header">
+<<<<<<< HEAD
 
 <<<<<<< HEAD
         <div class="checkbox"><label><input type="checkbox"><span ></span></label></div>
 =======
+=======
+>>>>>>> b6dea6972d479b8eb0b643ba7bb05084d07757d3
         <div class="checkbox"><label><input type="checkbox"><span></span></label></div>
 >>>>>>> 439f83948606f23098fa734e26a683f39778da96
 
@@ -147,7 +185,6 @@ const createMiscSection = function(wrap) {
 
 // ajax request to archive item
 const checkCompleted = function(event) {
-  event.stopPropagation();
   const todoId = $(this).parent().parent().parent().parent().attr('id')
   $.ajax({
     url: '/',
@@ -162,7 +199,8 @@ const checkToDo = function(event) {
   const todoId = $(this).parent().parent().parent().parent().attr('id')
   $.ajax({
     url: '/completed',
-    method: 'PUT'
+    method: 'PUT',
+    data: { archiveId: todoId }
   })
   .then(setTimeout(() => { loadCompleted(), 500}))
 }
@@ -189,7 +227,6 @@ const renderList = function(arr) {
         $(".misc_list").prepend(createMiscSection(wrapAround));
     }
   }
-  $('div.checkbox input').on('click', checkCompleted);
 }
 
 
@@ -198,9 +235,10 @@ const loadItems = function() {
     method: "GET",
     url: "/items"
   })
-  .done((itemList) => {
+  .then((itemList) => {
     renderList(itemList);
-  });
+  })
+  .then(() => $('div.checkbox input').on('click', checkCompleted));
 };
 
 const loadCompleted = function() {
@@ -208,9 +246,18 @@ const loadCompleted = function() {
     method: 'GET',
     url: '/completed'
   })
-  .done((itemList) => {
+  .then((itemList) => {
     renderList(itemList);
-  });
+  })
+  .then(() => {
+    $('input[type=checkbox]').prop('checked', true)
+    $('li.item').addClass('completed')
+    $('#read').text('Read')
+    $('#watch').text('Watched')
+    $('#eat').text('Ate')
+    $('#buy').text('Bought')
+    $('div.checkbox input').on('click', checkToDo)
+  })
 }
 
 
@@ -221,3 +268,4 @@ const getPosition = function() {
     });
   });
 };
+
