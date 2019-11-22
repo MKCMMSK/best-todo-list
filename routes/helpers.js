@@ -38,7 +38,7 @@ module.exports = (db) => {
   ;`
 
     return db
-    .query(allItems, [user.id])
+    .query(allItems, [user])
     .then(res => res.rows)
     .catch((err) => {
       console.error(`Error from getItems: ${err}`);
