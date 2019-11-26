@@ -68,18 +68,23 @@ module.exports = (helpers) => {
   });
 
   router.post('/', (req, res) => {
+    const userId = req.session.user_id;
     const query = req.body.todo;
     const location = req.body.location;
     getAPIToDo(query, location, (search, b, item) => {
-      addToDB(search, item, (remainingObj) => {
-
+      addToDB(search, item, userId, (search, err, remainingObj) => {
         res.json(remainingObj);
-
       });
     });
 
   });
 
+  router.post("/change", (req, res) => {
+    api.changeCategory(req.body, (err, (categoryAdded) => {
+      console.log(categoryAdded);
+      res.JSON(categoryAdded);
+    }))
+  });
 
   router.post('/logout', (req, res) => {
     req.session.user_id = null;

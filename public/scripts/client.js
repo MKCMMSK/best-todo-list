@@ -24,6 +24,18 @@ $(document).ready(function(){
     .then(loadItems);
   })
 
+  const changeCategory = function(num) {
+    $.ajax({
+      url: '/change',
+      method: 'POST',
+      data: {
+        tempData,
+        selected: Object.keys(tempdata)[num]
+      }
+    })
+    .then((cat) => M.toast({html: `Item added to ${cat}`}, 3000))
+  }
+
   // submit form with ajax
   $('#newToDo').submit((event) => {
     const query = $('#compose').val();
@@ -39,12 +51,20 @@ $(document).ready(function(){
       })
     })
     .then((res) => {
-      loadItems();
+      $("#compose").val("")
       tempData = res;
-      console.log(tempData)
-    });
-
+      loadItems();
+    })
+    .then(() => category(tempData, ['book', 'movie', 'restaurant', 'tv', 'product']))
+    .then((cat) => M.toast({html: `Item added to ${cat}`}, 5000))
+    .then(() => M.toast({html: `Change to <button class="btn-flat toast-action" value=${Object.keys(tempData)[0]} onclick="changeCategory(0)">${Object.keys(tempData)[0]}</button>`}))
+    .then(() => M.toast({html: `Change to <button class="btn-flat toast-action" value=${Object.keys(tempData)[1]} onclick="changeCategory(1)">${Object.keys(tempData)[1]}</button>`}))
+    .then(() => M.toast({html: `Change to <button class="btn-flat toast-action" value=${Object.keys(tempData)[2]} onclick="changeCategory(2)">${Object.keys(tempData)[2]}</button>`}))
+    .then(() => M.toast({html: `Change to <button class="btn-flat toast-action" value=${Object.keys(tempData)[3]} onclick="changeCategory(3)">${Object.keys(tempData)[3]}</button>`}))
+    return false;
   });
+
+
 
   // submit login with ajax
   $(function () {
@@ -101,7 +121,7 @@ $(document).ready(function(){
 //creates simple list item need to implement overload for different categories
 function createListElement(object) {
   const top = `
-    <li class="item" id=${object.user_specific_item_id}>
+    <li class="item" id=${object.todo_id}>
       <div class="collapsible-header">
         <div class="checkbox"><label><input type="checkbox"><span></span></label></div>
         ${object.title}
@@ -190,7 +210,7 @@ const checkCompleted = function(event) {
     method: 'PUT',
     data: { archiveId: todoId }
   })
-  .then(setTimeout(() => { loadItems() }, 500))
+  .then(setTimeout(() => { loadItems() }, 200))
 };
 
 // ajax request to unarchive item
@@ -201,7 +221,7 @@ const checkToDo = function(event) {
     method: 'PUT',
     data: { archiveId: todoId }
   })
-  .then(setTimeout(() => { loadCompleted(), 500}))
+  .then(setTimeout(() => { loadCompleted(), 200}))
 }
 
 //prepends the database so that the top is the newest
@@ -278,3 +298,15 @@ const getPosition = function() {
   });
 };
 
+const category = function(obj, arr) {
+  const keys = Object.keys(obj);
+  keys.sort();
+  arr.sort();
+  for (let i = 0; i < arr.length; i++) {
+    for (let k = 0; k < keys.length; k++) {
+      if (keys[i] !== arr[i]) {
+        return arr[i];
+      }
+    }
+  }
+}

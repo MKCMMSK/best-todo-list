@@ -28,6 +28,8 @@ CREATE TABLE categories (
 
 CREATE TABLE todo_items (
   id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  archived BOOLEAN NOT NULL DEFAULT false,
   category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
   title VARCHAR(140) NOT NULL,
   description TEXT,
